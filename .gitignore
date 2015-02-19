@@ -14,7 +14,9 @@ Rplots.pdf
 # RStudio files
 .Rproj.user/
 
+# Emacs files.
 *~
+vignettes/auto/
 
 # inst/doc is auto-generated
 inst/doc
