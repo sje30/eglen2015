@@ -299,7 +299,7 @@ plot.hnopar <- function(arr, xs, p=0.05) {
 ## taken from attach("~/mosaics/data/bivariate_mosaics.Rda")
 
 
-## ---- w81s1-compute-mosaics
+## ---- w81s1-define-h
 w81s1.on.par <- c(15.000000, 67.944693,  7.814627)
 w81s1.of.par <- c(15.000000, 66.270221,  5.395813)
 
@@ -307,6 +307,8 @@ h11.x <- seq(from=0, to=160, by=5); h22.x <- h11.x
 h11.y <- hpar(h11.x, w81s1.on.par)
 h22.y <- hpar(h22.x, w81s1.of.par)
 
+
+## ---- w81s1-compute-mosaics
 
 n1 <- nrow(rgc.on); n2 <- nrow(rgc.of)
 

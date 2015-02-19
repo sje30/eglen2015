@@ -74,6 +74,9 @@ have similar spatial properties (which will be quantified later).
 <<setup-betamap,echo=FALSE>>=
 @ 
 
+<<w81s1-define-h>>=
+@ 
+
 <<compute-univariate-betamap>>=
 @ 
 
