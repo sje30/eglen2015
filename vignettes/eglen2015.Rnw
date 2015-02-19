@@ -1,0 +1,325 @@
+%\VignetteIndexEntry{eglen2015}
+%\VignetteKeywords{retina,mosaics,reproducible-research}
+%\VignettePackage{eglen2015}
+%\VignetteEngine{knitr::knitr}
+\documentclass{article}
+\usepackage{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,left=2cm,right=4cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{verbatim}
+
+\usepackage{xspace,amsmath}
+\newcommand{\um}{\ensuremath{\mu \text{m}}\xspace}
+\usepackage{url}
+\usepackage[authoryear]{natbib}
+
+%% Place all figures at end of paper?
+%%\usepackage[noheads,nomarkers]{endfloat}
+
+\begin{document}
+
+\onehalfspacing
+
+\title{Bivariate spatial point patterns in the visual system: A reproducible review}
+
+\author{S. J. Eglen}
+\date{\today}
+
+\maketitle
+
+<<setup-knitr,eval=TRUE,include=TRUE>>=
+require(knitr)
+require(xtable)
+require(splancs)
+require(sjedmin)
+options(width=60)
+opts_chunk$set(cache=FALSE)
+opts_chunk$set(echo=TRUE)
+opts_chunk$set(dev='pdf')
+read_chunk('w81s1_sims.R') #$
+read_chunk('betamaps.R')
+@
+
+
+\section{Introduction}
+
+
+The retina is the neural structure located at the back of the eye.
+Light passes through the eye and is converted into electrical activity
+by the photoreceptors.  The retina then performs sophisticated
+processing of the visual scene before transmitting this information to
+the brain for further processing.  See Wassle2004 for an overview of
+this processing.  Estimates vary, but there are thought to be 70--100
+types of retinal neuron that perform unique computations to transform
+the visual scene into a neural code.  Each of the types of neurons
+typically occupies one of three layers (TODO describe layers).
+
+One organisational feature of the retina found in many species is that
+of ``retinal mosaics'': neurons are typically positioned within a
+layer in a semi-regular manner.  Figure~\ref{fig:univ} shows a typical
+example from cat retina.  These patterns can be simulated effectively
+by assuming that cells are positioned randomly, subject to a local
+exclusion zone -- no two cells come too close together.  Figure 1B
+shows the result of one such simulation.  These patterns appear to
+have similar spatial properties (which will be quantified later).
+
+
+<<get-rgc-data>>=
+@ 
+
+<<setup-betamap,echo=FALSE>>=
+@ 
+
+<<compute-univariate-betamap>>=
+@ 
+
+<<plot-univariate-betamap,include=FALSE>>=
+@
+
+\begin{figure}
+  \centering
+  \fbox{\includegraphics{beta_univ.pdf}}
+  \caption{Example retinal mosaic.  Beta on-cells from Wassle 1981.}
+  \label{fig:univ}
+\end{figure}
+
+
+
+Figure 2 shows an example of a bivariate point pattern from cat
+retina.  Figure 2A shows the position of neurons taken from cat
+retina, and Figure 2B is from a stochastic model, based on exclusion
+zones (to be described later).  How do we decide what structure might
+be present in the data, and whether the model is a good fit for the
+data?  In particular, a key question to explore is whether neurons of
+different type interact to generate these spatial patterns.  To answer
+these questions, we can use the framework established by Peter Diggle
+nearly thirty years ago \citep{Diggle1986-df}.  This framework
+examined two hypotheses in detail:
+
+\begin{description}
+\item[H1] neurons of different types do not interact.
+\item[H2] neurons are initially created in a single population, and
+  then differentiate into two populations.
+\end{description}
+
+In this review we consider evidence from different neuronal types in
+the retina collected over the last thirty to forty years that suggests
+different pairs of neuronal types obey different rules.  In this
+review we use the phrase coined in \cite{Diggle1986-df} of ``bivariate
+spatial point patterns'' to refer to the spatial arrangement of two
+types of retinal neuron within the same sample window.
+
+
+
+<<w81s1-compute-mosaics,echo=FALSE,results='hide'>>=
+@ 
+
+\begin{figure}[h]
+  \centering
+  <<plot-w81s1-real-sim,echo=FALSE,fig.width=6,fig.height=4>>=
+@ 
+\caption{Bivariate spatial point pattern.  A: observed field; B:
+  simulation using PIPP rule.}
+\label{w81}
+\end{figure}
+
+
+\subsection{Evidence for functional independence}
+
+
+With multiple types of neurons present in the retina, it is possible
+that neurons of different types constrain each other in their spatial
+positioning.  Interactions between two types of neurons are termed
+\textit{heterotypic interactions}, to be compared with interactions
+between neurons of the same type, called \textit{homotypic
+  interactions}.  In the case where there are 
+
+\textit{Statistical independence} between two spatial point patterns
+means that the spatial location of one type of neurons is completely
+unaffected by the spatial location of another type of neurons.
+Statistical independence between type of neurons occupying different
+layers of the retina was reported for cholinergic amacrine cells
+\citep{Diggle1986-df} and for several other pairs of neuron in rabbits
+\citep{Rockhill2000-bb}.
+
+Full statistical independence between pairs of neurons can be shown
+only when the two types of neurons occupy different layers of the
+retina.  When both types of neurons are in the same layer, their
+physical size constraints need to be taken into account as neurons
+cannot occupy the same physical space.  The cell bodies of retinal
+neurons are typically at least 10 \um for example, which introduce
+steric hindrance effects [Cook2003 Visual Neurosciences] between all
+neurons, irrespective of their type.
+
+To account for these physical effects, we devised the term
+\textit{functional independence} to describe the case when two spatial
+point patterns do not interact, except for these short-range steric
+hindrance effects [Eglen2005 VNS].  An example of a bivariate point
+pattern simulated under the case where the only interaction between
+types is that cells cannot closer than some minimal distance (here XXX
+\um) between each other.
+
+
+Beta RGCs, Chat, Horizontal cells.  
+
+
+
+
+Extends beyond N=2 types [Kram2010]
+
+\begin{figure}
+  \centering
+<<>>=
+##kram.dn4.file = "~/papers/2015/stat_neuro/eglen2015/inst/extdata/kram/dn4.csv"
+kram.dn4.file = system.file("extdata/kram/dn4.csv", package="eglen2015")
+  kram.data = read.csv(kram.dn4.file, skip=1)
+  cols = scan(kram.dn4.file, what="character", nlines=1, sep=',')
+  cols[9] = "black"
+  xcol = 1;
+  ##plot(NA, xlim=c(0,450), ylim=c(0,330), asp=1)
+  plot(NA, xlim=c(100,200), ylim=c(100,200), asp=1)
+  for (i in 1:5) {
+    x = kram.data[,xcol]; y=kram.data[,xcol+1]
+    col = cols[xcol]
+    ##points(x, y, pch=19, col=col, cex=0.3)
+    symbols(x, y, circles=rep(1.1, length(x)),
+    inches=FALSE, add=TRUE, bg=col, cex=0.3)
+    xcol = xcol + 2                       #get ready for next type
+  }
+@ 
+  \caption{Kram plot.  Color of each neuron represents the type of
+    neuron (red, green, blue, violet) except double-cones are coloured
+    black here.  Radii of cells (1.1 um) estimated from Figure 5A of
+    \protect \citep{Kram2010-bb6}.
+    TODO: check how to cite/include the data.  PLOS permissions?
+    State file from where it came.  (DN field 4).
+  }
+  \label{fig:kram}
+\end{figure}
+
+\subsection*{Evidence for random labelling}
+
+The random labelling hypothesis (H2) was rejected for the cholinergic
+amacrince cells Diggle1986; see also revisit with fuller model in
+Diggle2005(Springer).  However, in recent years, data consistent with
+random labelling has appeared in both ferret retina
+\cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.
+
+
+
+Different hypotheses from [Diggle 1986]
+\begin{itemize}
+
+\item random labelling \cite{Eglen2003-dc}.  Melanie Bell Drosophila \cite{Bell2007-507}
+
+\item independence (RGCs, horizontal cells) \cite{Eglen2008}
+
+\end{itemize}
+
+Lateral inhibition patterns seen in other parts of the nervous system?
+
+Physiological versus anatomical (soma vs dendrite) mosaics.  (Troy papers)
+
+
+\subsection{Future directions}
+
+Multivariate patterns: Corbo paper [Kram2010]; more expected as
+genetic markers may label multiple types within one retina.
+
+
+\section{Part two}
+
+The role of reproducible research...  Challenges for the compendium
+concept recently brought into neuroscience [Pouzat]
+
+R as most populor tool in statistics in 2014 \cite{Tippmann2015-sv}
+and has been at the leading edge of modern computational statistics
+for many years.
+
+Other journals encouraging data sharing beyond the paper \cite{Leng2014-uo}.
+
+
+Kitemarking editorials in Biostatistics [Diggle...] and review by
+\cite{Peng2011-75a}.  Hard to find examples.
+
+Some journals (quarterly journal of political science) now requires
+papers to be reproducible.  Science requires addendum
+e.g. \cite{Vogels2011-c8c}.
+
+Describe Docker for R (Rocker) \cite{Boettiger2014-sk}.  Check details
+with Dirk?
+
+\url{https://github.com/mgymrek/docker-reproducibility-example}
+
+
+\begin{itemize}
+\item computation time
+\item size of data
+\item Packaging
+\end{itemize}
+
+R Packaging/vignettes good for modest-sized datasets;
+
+Recent developments:  Nature have asked for code to be made available
+(Oct 2014).
+
+
+\section*{Installation}
+
+Hello; this is an Sweave document.  Copy this from
+\url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
+
+jneurosci bibliography style will need to be copied across.
+
+\bibliographystyle{jneurosci}
+\bibliography{eglen2015}
+
+
+\subsection*{Sources of data}
+
+Where does the data come from, and how to attribute it?
+
+Challenges: incorporating all the data from within one package (when
+large?)
+
+
+\clearpage
+
+\subsubsection*{Session information}
+
+<<session-info,results='asis'>>=
+toLatex(sessionInfo())
+date()
+@
+
+<<eval=FALSE,include=TRUE>>=
+require(knitr); knit2pdf('eglen2015.Rnw')
+@
+
+Or, using devtools, which puts the vignette into ../inst/doc/
+<<eval=FALSE>>=
+require(devtools)
+load_all()                              #to get package data
+build_vignettes()
+@ 
+
+Likewise, to simulate loading the package, just do the following
+within the package directory.
+
+<<eval=FALSE>>=
+load_all()
+@ 
+\end{document}
+
+%% ~/proj/carmen/waverepo/waverepo/paper/waverepo_paper.Rnw
+
+%% Likely dependencies
+%% CRAN
+%% spatstat, knitr, splancs
+%% 
+%% sjedmin, sjevor, sjedist sjedrp
+
