@@ -340,9 +340,10 @@ for (i in 1:nreps) {
 w81s1.sim.on <- sim.on; w81s1.sim.of <- sim.of
 
 w81s1.ci <- make.ci(w81s1.arr, c("l1", "l2", "l0", "l12", "g1", "g2") )
-w81s1.plot()
 
-save.image("bpipp_all_date.Rda", compress=TRUE)
+## Following lines made plots for journal article and saved data.
+## w81s1.plot()
+## save.image("bpipp_all_date.Rda", compress=TRUE)
 
 ## last good data sets: bpipp_w81s1_may20_1.Rda
 
