@@ -307,6 +307,9 @@ h11.x <- seq(from=0, to=160, by=5); h22.x <- h11.x
 h11.y <- hpar(h11.x, w81s1.on.par)
 h22.y <- hpar(h22.x, w81s1.of.par)
 
+h12.x <- seq(from=17.5, to=18.5, by=.05)
+h12.y <- ifelse(h12.x>18.0, 1, 0)
+
 vd.num <- 30                            #given less than 100 real pts
 w81s.bdpar <- list( steps=seq(from=1, to=150, length=100),
                    vd0.breaks=seq(from=0, to=12000, len=vd.num),
