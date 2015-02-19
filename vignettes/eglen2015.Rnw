@@ -316,6 +316,18 @@ within the package directory.
 <<eval=FALSE>>=
 load_all()
 @ 
+
+
+\subsubsection{Loading via github}
+
+This seems to work now:
+
+<<eval=FALSE>>=
+devtools::install_github("sje30/eglen2015")
+require(eglen2015)
+vignette("eglen2015")
+@ 
+
 \end{document}
 
 %% ~/proj/carmen/waverepo/waverepo/paper/waverepo_paper.Rnw
