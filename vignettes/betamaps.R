@@ -307,6 +307,19 @@ h11.x <- seq(from=0, to=160, by=5); h22.x <- h11.x
 h11.y <- hpar(h11.x, w81s1.on.par)
 h22.y <- hpar(h22.x, w81s1.of.par)
 
+vd.num <- 30                            #given less than 100 real pts
+w81s.bdpar <- list( steps=seq(from=1, to=150, length=100),
+                   vd0.breaks=seq(from=0, to=12000, len=vd.num),
+                   vd1.breaks=seq(from=0, to=20000, len=vd.num),
+                   ds0.breaks=seq(from=0, to=200, len=vd.num),
+                   ds1.breaks=seq(from=0, to=250, len=vd.num),
+                   distribs=list(g0=1, g1=1,g2=1,
+                     f0=1, f1=1,f2=1,
+                     l0=1, l1=1, l2=1, l12=1,
+                     ##ia0=1, ia1=1, ia2=1,
+                     vd0=1, vd1=1, vd2=1,
+                     ds0=1, ds1=1, ds2=1,
+                     opp=1, ri3=1))
 
 ## ---- w81s1-compute-mosaics
 
