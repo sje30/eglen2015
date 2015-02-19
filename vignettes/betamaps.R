@@ -3,6 +3,9 @@
 ## Analyse and model beta maps.
 ## This script should run by itself.
 
+## If a chunk does not have a name, then if there is an empty chunkname
+## read in, it will be included! (Bad explanation).  Giving the preamble above
+## a chunkname gets around this.
 
 ## ---- get-rgc-data
 ## load in data files.
@@ -319,7 +322,6 @@ w81s.bdpar <- list( steps=seq(from=1, to=150, length=100),
                    distribs=list(g0=1, g1=1,g2=1,
                      f0=1, f1=1,f2=1,
                      l0=1, l1=1, l2=1, l12=1,
-                     ##ia0=1, ia1=1, ia2=1,
                      vd0=1, vd1=1, vd2=1,
                      ds0=1, ds1=1, ds2=1,
                      opp=1, ri3=1))
@@ -404,7 +406,7 @@ univ.sim = pipp.lookup(rgc.w, pts, n1=n1, h = h11.y, d=h11.x)
 
 ## ---- plot-univariate-betamap
 pdf(file='beta_univ.pdf', width=6.5, height=4)
-par(mar=c(0.6,0.01,1.5,0.1))
+par(mar=c(0.6,0.01,0.5,0.1))
 rgc.soma.rad = 8
 par(mfrow=c(1,2), bty='n')
 plot(NA, asp=1, xaxs='i', yaxs='i',
@@ -415,7 +417,8 @@ symbols(rgc.on[,1], rgc.on[,2], circles=rep(rgc.soma.rad, nrow(rgc.on)),
 ## symbols(rgc.of[,1], rgc.of[,2], circles=rep(rgc.soma.rad, nrow(rgc.of)),
 ##         inches=FALSE, add=TRUE,bg='black')
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4]) 
-mtext(side=3, adj=0, 'A',cex=2)
+mtext(side=3, adj=0, 'A',cex=1.5, line=-1.25)
+segments(50, 0, 150, lend="butt", lwd=5,xpd=NA)
 ##
 ## Now show the simulation ##
 plot(NA, asp=1, xaxs='i', yaxs='i',
@@ -424,5 +427,5 @@ plot(NA, asp=1, xaxs='i', yaxs='i',
 symbols(univ.sim$x, univ.sim$y, circles=rep(rgc.soma.rad, n1),
         inches=FALSE, add=TRUE)
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
-mtext(side=3, adj=0, cex=2, 'B')
+mtext(side=3, adj=0, cex=1.5, 'B', line=-1.25)
 dev.off()
