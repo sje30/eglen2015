@@ -31,7 +31,7 @@
 
 \maketitle
 
-<<setup-knitr,eval=TRUE,include=TRUE>>=
+<<setup-knitr,eval=TRUE,echo=FALSE>>=
 require(knitr)
 require(xtable)
 require(splancs)
@@ -80,14 +80,20 @@ have similar spatial properties (which will be quantified later).
 <<compute-univariate-betamap>>=
 @ 
 
+%% This chunk creates beta_univ.pdf which is then 
+%% included in the following pdf.  This is useful when
+%% you wish to fine-tune the pdf() dimensions.
 <<plot-univariate-betamap,include=FALSE>>=
 @
 
 \begin{figure}
   \centering
   \fbox{\includegraphics{beta_univ.pdf}}
-  \caption{Example retinal mosaic.  Beta on-cells from Wassle 1981.}
-  \label{fig:univ}
+  \caption{Example retinal mosaic.  Beta on-cells from Wassle
+    1981.  On the left is the observed map, and the right is an
+    example univariate simulation with matching field and density of
+    points.  Scale bar is 100\,\um.
+    \label{fig:univ}}
 \end{figure}
 
 
@@ -161,10 +167,10 @@ neurons, irrespective of their type.
 To account for these physical effects, we devised the term
 \textit{functional independence} to describe the case when two spatial
 point patterns do not interact, except for these short-range steric
-hindrance effects [Eglen2005 VNS].  An example of a bivariate point
-pattern simulated under the case where the only interaction between
-types is that cells cannot closer than some minimal distance (here XXX
-\um) between each other.
+hindrance effects \citep{Eglen2006-nj}.  An example of a bivariate
+point pattern simulated under the case where the only interaction
+between types is that cells cannot closer than some minimal distance
+(here 18 \um -- about the diameter of an RGC soma) between each other.
 
 
 Beta RGCs, Chat, Horizontal cells.  
@@ -172,27 +178,29 @@ Beta RGCs, Chat, Horizontal cells.
 
 
 
-Extends beyond N=2 types [Kram2010]
+Extends beyond N=2 types \citep{Kram2010-bb6}.
+
+
+
 
 \begin{figure}
   \centering
-<<>>=
-##kram.dn4.file = "~/papers/2015/stat_neuro/eglen2015/inst/extdata/kram/dn4.csv"
+<<plot-r,echo=FALSE>>=
 kram.dn4.file = system.file("extdata/kram/dn4.csv", package="eglen2015")
-  kram.data = read.csv(kram.dn4.file, skip=1)
-  cols = scan(kram.dn4.file, what="character", nlines=1, sep=',')
-  cols[9] = "black"
-  xcol = 1;
-  ##plot(NA, xlim=c(0,450), ylim=c(0,330), asp=1)
-  plot(NA, xlim=c(100,200), ylim=c(100,200), asp=1)
-  for (i in 1:5) {
-    x = kram.data[,xcol]; y=kram.data[,xcol+1]
-    col = cols[xcol]
-    ##points(x, y, pch=19, col=col, cex=0.3)
-    symbols(x, y, circles=rep(1.1, length(x)),
-    inches=FALSE, add=TRUE, bg=col, cex=0.3)
-    xcol = xcol + 2                       #get ready for next type
-  }
+kram.data = read.csv(kram.dn4.file, skip=1)
+cols = scan(kram.dn4.file, what="character", nlines=1, sep=',')
+cols[9] = "black"
+xcol = 1;
+##plot(NA, xlim=c(0,450), ylim=c(0,330), asp=1)
+plot(NA, xlim=c(100,200), ylim=c(100,200), asp=1)
+for (i in 1:5) {
+  x = kram.data[,xcol]; y=kram.data[,xcol+1]
+  col = cols[xcol]
+  ##points(x, y, pch=19, col=col, cex=0.3)
+  symbols(x, y, circles=rep(1.1, length(x)),
+          inches=FALSE, add=TRUE, bg=col, cex=0.3)
+  xcol = xcol + 2                       #get ready for next type
+}
 @ 
   \caption{Kram plot.  Color of each neuron represents the type of
     neuron (red, green, blue, violet) except double-cones are coloured
@@ -204,13 +212,16 @@ kram.dn4.file = system.file("extdata/kram/dn4.csv", package="eglen2015")
   \label{fig:kram}
 \end{figure}
 
+
 \subsection*{Evidence for random labelling}
 
 The random labelling hypothesis (H2) was rejected for the cholinergic
 amacrince cells Diggle1986; see also revisit with fuller model in
 Diggle2005(Springer).  However, in recent years, data consistent with
 random labelling has appeared in both ferret retina
-\cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.
+\cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.  The random
+labelling hypothesis indicates that one population of cells divides
+into two by simple random labelling.
 
 
 
@@ -276,8 +287,6 @@ Recent developments:  Nature have asked for code to be made available
 Hello; this is an Sweave document.  Copy this from
 \url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
 
-jneurosci bibliography style will need to be copied across.
-
 \bibliographystyle{jneurosci}
 \bibliography{eglen2015}
 
@@ -299,12 +308,10 @@ toLatex(sessionInfo())
 date()
 @
 
-<<eval=FALSE,include=TRUE>>=
+Methods to compile the doc
+<<compile,eval=FALSE,include=TRUE>>=
 require(knitr); knit2pdf('eglen2015.Rnw')
-@
-
-Or, using devtools, which puts the vignette into ../inst/doc/
-<<eval=FALSE>>=
+## Or, using devtools, which puts the vignette into ../inst/doc/
 require(devtools)
 load_all()                              #to get package data
 build_vignettes()
@@ -313,7 +320,7 @@ build_vignettes()
 Likewise, to simulate loading the package, just do the following
 within the package directory.
 
-<<eval=FALSE>>=
+<<load-all,eval=FALSE>>=
 load_all()
 @ 
 
@@ -322,7 +329,7 @@ load_all()
 
 This seems to work now:
 
-<<eval=FALSE>>=
+<<github,eval=FALSE>>=
 devtools::install_github("sje30/eglen2015")
 require(eglen2015)
 vignette("eglen2015")
