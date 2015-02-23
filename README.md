@@ -27,6 +27,8 @@ you can download and run this package using:
 
     docker run -d -p 8787:8787 sje30/eglen2015
 
+View [sje30/eglen2015](https://registry.hub.docker.com/u/sje30/eglen2015/)
+to check the details of this Docker package.
 
 Then visit the web page to start R (username and password are "rstudio"):
 
