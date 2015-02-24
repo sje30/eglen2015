@@ -19,6 +19,10 @@ analysis for figure 5 taken from
 
 Note that in this script, rlabel is now renamed to rLabel (splancs fucntion).
 
-
+#+BEGIN_SRC sh
 cp ~/mosaics/ferret-th/data/f9942i.txt .
 cp ~/mosaics/ferret-th/data/f9942g.txt .
+#+END_SRC
+
+#+RESULTS:
+
