@@ -1,0 +1,25 @@
+# Data originally from 2003 paper.
+
+~/mosaics/ferret-th/FERRET_TH_NOTES
+
+field maps:
+
+A = 0102
+B = 0103
+C = 9942
+
+figure 5 was B.
+
+
+Figure 5 plot (with field B)
+~/mosaics/ferret-th/diggle-analysis/plot_fth_diggle.R
+
+analysis for figure 5 taken from
+~/mosaics/ferret-th/diggle-analysis/dmin_diggle.r
+
+Note that in this script, rlabel is now renamed to rLabel (splancs fucntion).
+
+
+cp ~/mosaics/ferret-th/data/f9942i.txt .
+cp ~/mosaics/ferret-th/data/f9942g.txt .
+
