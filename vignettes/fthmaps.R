@@ -110,8 +110,8 @@ dev.off()
 
 ## ---- fth-k12
 ## plot the K function
-pts1 = f9942.1
-pts2 = f9942.2
+pts1 = fth.1
+pts2 = fth.2
 steps = fth.steps
 datapoly = bboxx(bbox(matrix(fth.w,2,2)))
 nsims = 99
