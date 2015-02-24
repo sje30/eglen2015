@@ -238,7 +238,7 @@ of cells in each sub-type.
 
 \textbf{TODO scalebar for plot.}
 
-<<fth-init>>=
+<<fth-init,echo=FALSE>>=
 @ 
 
 %% This chunk creates fthmaps.pdf which is then 
@@ -347,8 +347,7 @@ Recent developments:  Nature have asked for code to be made available
 
 \section*{Installation}
 
-Hello; this is an Sweave document.  Copy this from
-\url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
+%% \url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
 
 \bibliographystyle{jneurosci}
 \bibliography{eglen2015}
