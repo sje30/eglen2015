@@ -42,6 +42,7 @@ opts_chunk$set(echo=TRUE)
 opts_chunk$set(dev='pdf')
 read_chunk('w81s1_sims.R') #$
 read_chunk('betamaps.R')
+read_chunk('fthmaps.R')
 @
 
 
@@ -223,6 +224,49 @@ random labelling has appeared in both ferret retina
 labelling hypothesis indicates that one population of cells divides
 into two by simple random labelling.
 
+For example, in the ferret retina, dopaminergic amacrine neurons are
+found in two separate layers of the retina \citep{Eglen2003-dc}.  It
+was unclear whether these cells in the two layers form two distinct
+types, or belong to one type of neuron.  One hypothesis tested was
+that simply they both belong to the same type, but that they randomly
+assigned different layers within the retina.  This corresponds to the
+``random labelling'' hypothesis of Diggle (1986).
+Figure~\ref{fig:fthmaps} demonstrates this hypothesis, showing one
+real field, along with five random realisations where the type of the
+cell is randomly switched, subject to preserving the overall numbers
+of cells in each sub-type.
+
+\textbf{TODO scalebar for plot.}
+
+<<fth-init>>=
+@ 
+
+%% This chunk creates fthmaps.pdf which is then 
+%% included in the following pdf.  This is useful when
+%% you wish to fine-tune the pdf() dimensions.
+<<plot-bivariate-fthmaps,echo=FALSE>>=
+@
+
+\begin{figure}
+  \centering
+  \fbox{\includegraphics{fthmaps.pdf}}
+  \caption{Dopaminergic amacrine neurons in ferret, showing one field
+    along with five simulated fields.  Which figure is the
+    experimental data? Scale bar is XXX\,\um.
+    \label{fig:fthmaps}}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  <<fth-k12,echo=FALSE,fig.width=6,fig.height=4>>=
+@ 
+\caption{K function for dopaminergic amacrine data set}
+\label{fig:fthk12}
+\end{figure}
+
+Figure~\ref{fig:fthk12} shows the goodness of fit under the hypothesis
+of random labelling.  TODO: explain ranking.
+
 
 
 Different hypotheses from [Diggle 1986]
@@ -268,6 +312,25 @@ Describe Docker for R (Rocker) \cite{Boettiger2014-sk}.  Check details
 with Dirk?
 
 \url{https://github.com/mgymrek/docker-reproducibility-example}
+
+The docker system provides a convenient way for the entire computing
+environment relating to a project to be efficiently captured and then
+run.  Docker runs on all major operating systems and provides
+lightweight linux virtual machines and hence a convenient way of
+getting software to run on different platforms.  Once installed, the
+entire environment required to generate this program can be downloaded
+and initialised using the command:
+
+\begin{verbatim}
+docker run -d -p 8787:8787 sje30/eglen2015
+\end{verbatim}
+
+Once this is complete, which typically takes a few minutes, the user
+can then open a web browser to view and edit this paper.  Further
+details on running the docker system are given at
+\url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
+\textbf{How stable is this link likely to be?}.
+
 
 
 \begin{itemize}
