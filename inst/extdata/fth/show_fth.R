@@ -1,7 +1,5 @@
 library(splancs)
-#library(sjedrp)
-#library(sjedmin)
-#library(sjevor)
+## This version requires splancs.
 myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
   ## This function based on Kenv.label from splancs library.
 
