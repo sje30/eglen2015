@@ -1,5 +1,19 @@
+## Compute Ferret TH maps (dopaminergic amacrines)
+## ---- fth-packages
+## To run standalone we need this initial chunk
 library(splancs)
+
+## ---- fth-init
 ## This version requires splancs.
+
+kl <- function(k, show.l=TRUE) {
+  ## Return K or L function for plotting.
+  if (show.l)
+    sqrt(k/pi)
+  else
+    k
+}
+
 myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
   ## This function based on Kenv.label from splancs library.
 
@@ -50,6 +64,7 @@ myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
 ######################################################################
 
 
+## TODO: get the data from the package, not from my homedir!!
 f9942.1 <- matrix(scan("~/mosaics/ferret-th/data/f9942i.txt"),
                   ncol=2, byrow=T)
 f9942.2 <- matrix(scan("~/mosaics/ferret-th/data/f9942g.txt"),
@@ -59,6 +74,8 @@ fth.1 <- f9942.1
 fth.2 <- f9942.2
 fth.w <- cbind(0, 2500, 0, 2500)
 fth.steps <- seq(from=0, to=2500/4, length=150)
+
+## ---- plot-bivariate-fthmaps
 
 plot.fth.maps = function(fth.1, fth.2, relabel=F) {
   fth.soma.rad = 22
@@ -93,6 +110,8 @@ for(i in 1:6) {
 dev.off()
 
 
+## ---- fth-k12
+## plot the K function
 pts1 = f9942.1
 pts2 = f9942.2
 steps = fth.steps
