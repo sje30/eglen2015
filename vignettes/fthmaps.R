@@ -65,13 +65,11 @@ myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
 
 
 ## TODO: get the data from the package, not from my homedir!!
-f9942.1 <- matrix(scan("~/mosaics/ferret-th/data/f9942i.txt"),
-                  ncol=2, byrow=T)
-f9942.2 <- matrix(scan("~/mosaics/ferret-th/data/f9942g.txt"),
-                  ncol=2, byrow=T)
+fth.1.file = system.file("extdata/fth/f9942i.txt", package="eglen2015")
+fth.2.file = system.file("extdata/fth/f9942g.txt", package="eglen2015")
+fth.1 <- matrix(scan(fth.1.file), ncol=2, byrow=T)
+fth.2 <- matrix(scan(fth.2.file), ncol=2, byrow=T)
 
-fth.1 <- f9942.1
-fth.2 <- f9942.2
 fth.w <- cbind(0, 2500, 0, 2500)
 fth.steps <- seq(from=0, to=2500/4, length=150)
 
