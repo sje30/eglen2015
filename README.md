@@ -1,5 +1,9 @@
-# eglen2015
-Eglen 2015 review article.  I plan to put the R package here.
+# Introduction
+
+This is the home for the review article by Stephen Eglen (2015).  The
+article is currently titled "Bivariate spatial point patterns in the
+visual system: A reproducible review" and is hopefully of relevance to
+the computational neuroscience and spatial statistics communities.
 
 
 ## Recompiling the paper
