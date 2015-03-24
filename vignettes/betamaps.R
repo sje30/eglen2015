@@ -413,7 +413,7 @@ plot(NA, asp=1, xaxs='i', yaxs='i',
      xlim=rgc.w[1:2], ylim=rgc.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(rgc.on[,1], rgc.on[,2], circles=rep(rgc.soma.rad, nrow(rgc.on)),
-        inches=FALSE, add=TRUE)
+        inches=FALSE, add=TRUE, bg='black')
 ## symbols(rgc.of[,1], rgc.of[,2], circles=rep(rgc.soma.rad, nrow(rgc.of)),
 ##         inches=FALSE, add=TRUE,bg='black')
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4]) 
@@ -425,7 +425,7 @@ plot(NA, asp=1, xaxs='i', yaxs='i',
      xlim=rgc.w[1:2], ylim=rgc.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(univ.sim$x, univ.sim$y, circles=rep(rgc.soma.rad, n1),
-        inches=FALSE, add=TRUE)
+        inches=FALSE, add=TRUE, bg='black')
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
 mtext(side=3, adj=0, cex=1.5, 'B', line=-1.25)
 dev.off()
