@@ -31,18 +31,19 @@
 
 \maketitle
 
-<<setup-knitr,eval=TRUE,echo=FALSE>>=
+<<setup-knitr,eval=TRUE,echo=FALSE,results='hide'>>=
 require(knitr)
 require(xtable)
 require(splancs)
 require(sjedmin)
 options(width=60)
 opts_chunk$set(cache=FALSE)
-opts_chunk$set(echo=TRUE)
+opts_chunk$set(echo=FALSE)
 opts_chunk$set(dev='pdf')
 read_chunk('w81s1_sims.R') #$
 read_chunk('betamaps.R')
 read_chunk('fthmaps.R')
+read_chunk('bcbp.R')
 @
 
 
@@ -69,16 +70,16 @@ shows the result of one such simulation.  These patterns appear to
 have similar spatial properties (which will be quantified later).
 
 
-<<get-rgc-data>>=
+<<get-rgc-data,echo=FALSE>>=
 @ 
 
 <<setup-betamap,echo=FALSE>>=
 @ 
 
-<<w81s1-define-h>>=
+<<w81s1-define-h,echo=FALSE>>=
 @ 
 
-<<compute-univariate-betamap>>=
+<<compute-univariate-betamap,echo=FALSE>>=
 @ 
 
 %% This chunk creates beta_univ.pdf which is then 
@@ -93,7 +94,8 @@ have similar spatial properties (which will be quantified later).
   \caption{Example retinal mosaic.  Beta on-cells from Wassle
     1981.  On the left is the observed map, and the right is an
     example univariate simulation with matching field and density of
-    points.  Scale bar is 100\,\um.
+    points.  Scale bar is 100\,\um; soma are drawn to scale with a
+    radius of 8\,\um.
     \label{fig:univ}}
 \end{figure}
 
@@ -214,7 +216,7 @@ for (i in 1:5) {
 \end{figure}
 
 
-\subsection*{Evidence for random labelling}
+\subsection{Evidence for random labelling}
 
 The random labelling hypothesis (H2) was rejected for the cholinergic
 amacrince cells Diggle1986; see also revisit with fuller model in
@@ -260,13 +262,16 @@ of cells in each sub-type.
   \centering
   <<fth-k12,echo=FALSE,fig.width=6,fig.height=4>>=
 @ 
-\caption{K function for dopaminergic amacrine data set}
+\caption{L function for dopaminergic amacrine data set.  TODO: asp=1 needed }
 \label{fig:fthk12}
 \end{figure}
 
 Figure~\ref{fig:fthk12} shows the goodness of fit under the hypothesis
 of random labelling.  TODO: explain ranking.
 
+
+
+TODO: maths for the L12 function.
 
 
 Different hypotheses from [Diggle 1986]
@@ -283,22 +288,57 @@ Lateral inhibition patterns seen in other parts of the nervous system?
 Physiological versus anatomical (soma vs dendrite) mosaics.  (Troy papers)
 
 
+\subsection{Evidence for functional dependence}
+
+Many researchers have tested for the existence of functional
+dependencies between two types of retinal neuron.  In particular, a
+systematic study examining ten pairs from five types of retinal neuron
+failed to reveal any cross-correlation [Rockland].  CAT.  The most
+prominent example found to date has been in macaque, comparing the
+spatial location of blue cone photoreceptors (BC) and their synaptic
+targets in an adjacent layer, the blue cone bipolar cells (BCBP).  An
+example of such a mosaic is shown in Figure~\ref{fig:BCBP}.
+
+
+<<bcbp-compute>>=
+@ 
+
+
+<<bcbp-draw>>=
+@ 
+
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics{bcbp-fig.pdf}}
+  \caption{BCBP / BC data set (left) and L function (right) for the
+    five fields? TODO: complete figure}
+\label{fig:BCBP}
+\end{figure}
+
+
+
 \subsection{Future directions}
 
 Multivariate patterns: Corbo paper [Kram2010]; more expected as
 genetic markers may label multiple types within one retina.
 
 
+Areas other than the retina.
+
+\clearpage
 \section{Part two}
 
 The role of reproducible research...  Challenges for the compendium
 concept recently brought into neuroscience [Pouzat]
 
-R as most populor tool in statistics in 2014 \cite{Tippmann2015-sv}
+R as most popular tool in statistics in 2014 \citep{Tippmann2015-sv}
 and has been at the leading edge of modern computational statistics
 for many years.
 
-Other journals encouraging data sharing beyond the paper \cite{Leng2014-uo}.
+Other journals encouraging data sharing beyond the paper
+\citep{Leng2014-uo}.  Recent developments: Nature have asked for code
+to be made available (Oct 2014).
+
 
 
 Kitemarking editorials in Biostatistics [Diggle...] and review by
@@ -336,13 +376,13 @@ details on running the docker system are given at
 \begin{itemize}
 \item computation time
 \item size of data
-\item Packaging
+\item Packaging.  Packages may be a good technical solution, but
+  perhaps are not always not a good fit, e.g. if several papers come
+  out of related bits of code, where should the code fit?
 \end{itemize}
 
 R Packaging/vignettes good for modest-sized datasets;
 
-Recent developments:  Nature have asked for code to be made available
-(Oct 2014).
 
 
 \section*{Installation}
@@ -392,7 +432,7 @@ load_all()
 This seems to work now:
 
 <<github,eval=FALSE>>=
-devtools::install_github("sje30/eglen2015")
+devtools::install_github("sje30/eglen2015", build_vignettes=TRUE)
 require(eglen2015)
 vignette("eglen2015")
 @ 
