@@ -24,7 +24,7 @@ bcbp.computek12 = function(smax) {
 ## ---- bcbp-draw
 
 pdf(file='bcbp-fig.pdf', width=6.8, height=3.5)
-par(mfrow=c(1,2), mar=c(4,3, 0.1, 0.5), mgp=c(2, 0.8, 0))
+par(mfrow=c(1,2), mar=c(4,1, 0.1, 1.5), mgp=c(2, 0.8, 0))
 plot(NA, asp=1, xaxs='i', yaxs='i', bty='n',
      xlim=bcbp.w[1:2], ylim=bcbp.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
@@ -35,10 +35,10 @@ symbols(bcbp[,1], bcbp[,2],
 rect(bcbp.w[1], bcbp.w[3], bcbp.w[2], bcbp.w[4])
 segments(50, 30, 150, lend="butt", lwd=3,xpd=NA)
 legend(x=250, y=20, legend=c('BCBP', 'BC'), xpd=NA, pch=19, col=c("red", "blue"))
-
+mtext(side=3, at=0, 'A')
 
 ## Now do the K function.
-
+par(mar=c(4,3, 0.1, 0.5))
 smax = 60
 bcbpf1.k12 = bcbp.computek12(smax)
 plot(bcbpf1.k12, type='l', asp=1, xlim=c(0,smax), ylim=c(0, smax),
@@ -47,7 +47,9 @@ plot(bcbpf1.k12, type='l', asp=1, xlim=c(0,smax), ylim=c(0, smax),
      ylab=expression(L[12]))
 segments(0, 0, smax, smax, lty=2)
 legend(5, 60, legend=c('data', 'CSR'), lty=c(1,2), col=c('red', 'black'))
-
+mtext(side=3, at=-97, 'A', cex=1.25, line=-1,xpd=NA)
+mtext(side=3, at=-15, 'B', cex=1.25, line=-1,xpd=NA)
 dev.off()
+
 
 
