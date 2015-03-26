@@ -109,7 +109,7 @@ model and data \citep{Diggle1986-df}.
 
 Note that many other methods for quantifying order in retinal mosaics
 have been proposed, ranging from simple nearest-neighbour methods
-[Wassle1978] to those based on Voronoi diagrams \citep{Keeley2014-dn}.
+\citep{Wassle1978-uo} to those based on Voronoi diagrams \citep{Keeley2014-dn}.
 Several of these measures have been empirically compared \cite{Cook1996}.
 In this review we focus on probably the single most useful measure,
 the K function.  It is worth noting that a closely related variant of
