@@ -1,5 +1,4 @@
 ## Plot the BCBP data sets.
-## David Marshak.
 ## 2015-03-24
 
 ## ---- bcbp-compute
@@ -29,7 +28,7 @@ plot(NA, asp=1, xaxs='i', yaxs='i', bty='n',
      xlim=bcbp.w[1:2], ylim=bcbp.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(bcbp[,1], bcbp[,2],
-        circles=ifelse(bcbp[,3]==1, 6, 4),
+        circles=ifelse(bcbp[,3]==1, 5, 4), # 10um for BC, 8um for BCBP
         bg=ifelse(bcbp[,3]==1, "red", "blue"),
         inches=FALSE, add=TRUE)
 rect(bcbp.w[1], bcbp.w[3], bcbp.w[2], bcbp.w[4])
