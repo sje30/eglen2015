@@ -300,6 +300,8 @@ targets in an adjacent layer, the blue cone bipolar cells (BCBP).  An
 example of such a mosaic is shown in Figure~\ref{fig:BCBP}.
 
 
+\citep{Kouyama1992-cf3,Kouyama1997-wm}
+
 <<bcbp-compute>>=
 @ 
 
