@@ -14,6 +14,7 @@
 
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\mu \text{m}}\xspace}
+\providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \usepackage{url}
 \usepackage[authoryear]{natbib}
 
@@ -31,11 +32,13 @@
 
 \maketitle
 
-<<setup-knitr,eval=TRUE,echo=FALSE,results='hide'>>=
+<<setup-knitr,eval=TRUE,echo=FALSE,results='hide',message=TRUE>>=
 require(knitr)
 require(xtable)
 require(splancs)
 require(sjedmin)
+require(sjedist)
+require(spatstat)
 options(width=60)
 opts_chunk$set(cache=FALSE)
 opts_chunk$set(echo=FALSE)
@@ -54,26 +57,75 @@ The retina is the neural structure located at the back of the eye.
 Light passes through the eye and is converted into electrical activity
 by the photoreceptors.  The retina then performs sophisticated
 processing of the visual scene before transmitting this information to
-the brain for further processing.  See Wassle2004 for an overview of
+the brain for further processing.  See \citet{Wassle2004-lt} for an overview of
 this processing.  Estimates vary, but there are thought to be 70--100
 types of retinal neuron that perform unique computations to transform
 the visual scene into a neural code.  Each of the types of neurons
-typically occupies one of three layers (TODO describe layers).
+typically occupies one of three layers (Figure~\ref{fig:layers}).
+
+
+\begin{figure}
+  \centering
+  \fbox{\includegraphics[width=8cm]{layers_csn2.pdf}}
+  \caption{Cross section of vertebrate retina.  Adapted from Figure 1
+    of \citep{Eglen2012}.  TODO: seek permission.}
+  \label{fig:layers}
+\end{figure}
 
 One organisational feature of the retina found in many species is that
 of ``retinal mosaics'': neurons are typically positioned within a
 layer in a semi-regular manner.  Figure~\ref{fig:univ} shows a typical
 example from cat retina.  These patterns can be simulated effectively
 by assuming that cells are positioned randomly, subject to a local
-exclusion zone -- no two cells come too close together.  Figure 1B
-shows the result of one such simulation.  These patterns appear to
-have similar spatial properties (which will be quantified later).
+exclusion zone -- no two cells come too close together.
+Figure~\ref{fig:univ}B shows the result of one such simulation.  These
+patterns appear to have similar spatial properties.
+
+The spatial organisation of point processes can be quantified using
+the K function \citep{Ripley1976-ic}, which quantifies the expected
+number of points within a given distance of any point.  It is defined
+as:
+
+[define K and L here]
+
+The L function is a common normalisation of the K function.  If for a
+range of distances $t$ we find that $L(t) \approx t$, this indicates
+that there is no spatial order in the point pattern.  This is commonly
+termed \textit{Complete Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If
+however $L(t) > t$, this would indicate \textit{spatial clustering}:
+points are positioned close to each other more often than chance.
+Finally, when $L(t) < t$ is evidence of \textit{spatial regularity}, whereby
+points avoid each other \citep{Diggle2002-db}.  
+
+As can be seen in Figure XXX, retinal mosaics normally show evidence
+of spatial regularity over small distances, in this case up to around
+XXX um.  One common approach used in spatial statistics to compare
+model and data is to compare their K or L functions (Figure XXXa).
+Informally, if the L function for the data falls within the envelope
+of the L functions from the model, then say that the model fits the
+data.  More formally, empirical p values can be computed to compare
+model and data \citep{Diggle1986-df}.
+
+
+Note that many other methods for quantifying order in retinal mosaics
+have been proposed, ranging from simple nearest-neighbour methods
+[Wassle1978] to those based on Voronoi diagrams \citep{Keeley2014-dn}.
+Several of these measures have been empirically compared \cite{Cook1996}.
+In this review we focus on probably the single most useful measure,
+the K function.  It is worth noting that a closely related variant of
+the K function, the density recovery profile, was proposed
+specifically for the analysis of retinal mosaics \citep{Rodieck1991}.
+However, as noted by its author, the density recovery profile is
+effectively the derivative of the K function computed with a given bin
+width, and has the disadvantage that the bin width must be specified.
+
+TODO: Explain exclusion zone, and its biological basis.
 
 
 <<get-rgc-data,echo=FALSE>>=
 @ 
 
-<<setup-betamap,echo=FALSE>>=
+<<setup-betamap,echo=FALSE,message=FALSE>>=
 @ 
 
 <<w81s1-define-h,echo=FALSE>>=
@@ -85,17 +137,17 @@ have similar spatial properties (which will be quantified later).
 %% This chunk creates beta_univ.pdf which is then 
 %% included in the following pdf.  This is useful when
 %% you wish to fine-tune the pdf() dimensions.
-<<plot-univariate-betamap,include=FALSE>>=
+<<plot-univariate-betamap,results='hide'>>=
 @
 
 \begin{figure}
   \centering
   \fbox{\includegraphics{beta_univ.pdf}}
-  \caption{Example retinal mosaic.  Beta on-cells from Wassle
-    1981.  On the left is the observed map, and the right is an
-    example univariate simulation with matching field and density of
-    points.  Scale bar is 100\,\um; soma are drawn to scale with a
-    radius of 8\,\um.
+  \caption{Example retinal mosaic.  Beta on-cells from
+    \citep{Wassle1981-beta}.  On the left is the observed map, and the
+    right is an example univariate simulation with matching field and
+    density of points.  Scale bar is 100\,\um; soma are drawn to scale
+    with a radius of 8\,\um.
     \label{fig:univ}}
 \end{figure}
 
@@ -164,8 +216,8 @@ retina.  When both types of neurons are in the same layer, their
 physical size constraints need to be taken into account as neurons
 cannot occupy the same physical space.  The cell bodies of retinal
 neurons are typically at least 10 \um for example, which introduce
-steric hindrance effects [Cook2003 Visual Neurosciences] between all
-neurons, irrespective of their type.
+steric hindrance effects \cite{Cook2003-116} between all neurons,
+irrespective of their type.
 
 To account for these physical effects, we devised the term
 \textit{functional independence} to describe the case when two spatial
@@ -174,16 +226,6 @@ hindrance effects \citep{Eglen2006-nj}.  An example of a bivariate
 point pattern simulated under the case where the only interaction
 between types is that cells cannot closer than some minimal distance
 (here 18 \um -- about the diameter of an RGC soma) between each other.
-
-
-Beta RGCs, Chat, Horizontal cells.  
-
-
-
-
-Extends beyond N=2 types \citep{Kram2010-bb6}.
-
-
 
 
 \begin{figure}
@@ -220,25 +262,35 @@ for (i in 1:5) {
 
 The random labelling hypothesis (H2) was rejected for the cholinergic
 amacrince cells Diggle1986; see also revisit with fuller model in
-Diggle2005(Springer).  However, in recent years, data consistent with
-random labelling has appeared in both ferret retina
+[Diggle2005(Springer)].  However, in recent years, data consistent
+with random labelling has appeared in both ferret retina
 \cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.  The random
 labelling hypothesis indicates that one population of cells divides
 into two by simple random labelling.
 
 For example, in the ferret retina, dopaminergic amacrine neurons are
-found in two separate layers of the retina \citep{Eglen2003-dc}.  It
-was unclear whether these cells in the two layers form two distinct
-types, or belong to one type of neuron.  One hypothesis tested was
-that simply they both belong to the same type, but that they randomly
-assigned different layers within the retina.  This corresponds to the
-``random labelling'' hypothesis of Diggle (1986).
-Figure~\ref{fig:fthmaps} demonstrates this hypothesis, showing one
-real field, along with five random realisations where the type of the
-cell is randomly switched, subject to preserving the overall numbers
-of cells in each sub-type.
+found in two separate layers of the retina, one set in the INL and the
+other in the GCL \citep{Eglen2003-dc}.  It was unclear whether these
+cells in the two layers form two distinct types, or belong to one type
+of neuron.  One hypothesis tested was that simply they both belong to
+the same type, but that they are randomly assigned into one of the two
+layers within the retina.  This corresponds to the ``random
+labelling'' hypothesis of Diggle (1986).  Figure~\ref{fig:fthmaps}
+demonstrates this hypothesis, showing one real field, along with five
+random realisations where for each cell, its location is preserved,
+but the type of the cell (GCL versus IPL) is randomly switched,
+subject to preserving the overall numbers of cells in each sub-type.
 
-\textbf{TODO scalebar for plot.}
+By visual inspection alone, it would appear that all six fields appear
+similar, which informally suggests that the data may be consistent
+with random labelling.  (The experimental data are shown as example 5
+in Figure~\ref{fig:fthmaps}; the other examples in
+Figure~\ref{fig:fthmaps} are five examples of random relabelling of
+the data.)  This is confirmed by calculating the L\ped{12} function
+for the experimental data and 99 realisations of random labelling.
+The L function for the data falls within the envelope formed by the 99
+simulations (Figure~\ref{fig:fthk12}).
+
 
 <<fth-init,echo=FALSE>>=
 @ 
@@ -246,7 +298,7 @@ of cells in each sub-type.
 %% This chunk creates fthmaps.pdf which is then 
 %% included in the following pdf.  This is useful when
 %% you wish to fine-tune the pdf() dimensions.
-<<plot-bivariate-fthmaps,echo=FALSE>>=
+<<plot-bivariate-fthmaps,echo=FALSE,results='hide'>>=
 @
 
 \begin{figure}
@@ -254,27 +306,30 @@ of cells in each sub-type.
   \fbox{\includegraphics{fthmaps.pdf}}
   \caption{Dopaminergic amacrine neurons in ferret, showing one field
     along with five simulated fields.  Which figure is the
-    experimental data? Scale bar is XXX\,\um.
-    \label{fig:fthmaps}}
+    experimental data? Scale bar is 1\,mm; soma are drawn to scale
+    with a radius of 22\,\um.\label{fig:fthmaps}}
 \end{figure}
+
+<<fth-k12,echo=FALSE,results='hide'>>=
+@ 
 
 \begin{figure}[h]
   \centering
-  <<fth-k12,echo=FALSE,fig.width=6,fig.height=4>>=
-@ 
-\caption{L function for dopaminergic amacrine data set.  TODO: asp=1 needed }
-\label{fig:fthk12}
+  \fbox{\includegraphics{fthk12.pdf}}
+  \caption{L\ped{12} function for dopaminergic amacrine data set shown
+    in Figure~\ref{fig:fthmaps}.  The L function for the observed data
+    (example 5 in Figure~\ref{fig:fthmaps}) is shown as a dotted red
+    line; black lines show the envelope from 99 simulations of random
+    relabelling.}
+  \label{fig:fthk12}
 \end{figure}
-
-Figure~\ref{fig:fthk12} shows the goodness of fit under the hypothesis
-of random labelling.  TODO: explain ranking.
 
 
 
 TODO: maths for the L12 function.
 
 
-Different hypotheses from [Diggle 1986]
+Different hypotheses from [Diggle1986]
 \begin{itemize}
 
 \item random labelling \cite{Eglen2003-dc}.  Melanie Bell Drosophila \cite{Bell2007-507}
@@ -306,7 +361,7 @@ example of such a mosaic is shown in Figure~\ref{fig:BCBP}.
 @ 
 
 
-<<bcbp-draw>>=
+<<bcbp-draw,results='hide'>>=
 @ 
 
 \begin{figure}[h]
@@ -391,6 +446,10 @@ R Packaging/vignettes good for modest-sized datasets;
 
 %% \url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
 
+
+\subsection*{Acknowledgements}
+I thank Professors Heinz W\"{a}ssle, David Marshak and Abbie Hughes
+for providing the retinal mosaics included in this paper.  DOCKER?
 \bibliographystyle{jneurosci}
 \bibliography{eglen2015}
 
