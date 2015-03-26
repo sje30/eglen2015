@@ -95,6 +95,7 @@ plot.fth.maps = function(fth.1, fth.2, relabel=F) {
   symbols(fth.2[,1], fth.2[,2], circles=rep(fth.soma.rad, nrow(fth.2)),
           inches=FALSE, add=TRUE,bg='black')
   rect(fth.w[1], fth.w[3], fth.w[2], fth.w[4])
+
 }
 
 pdf(file='fthmaps.pdf', width=6, height=4)
@@ -104,6 +105,11 @@ par(mfrow=c(2,3))
 for(i in 1:6) {
   plot.fth.maps(fth.1, fth.2, relabel= (i!=real.field))
   title(main=i)
+  if (i == 1) {
+    segments(50, -60, 1050, lend="butt", lwd=3,xpd=NA) #scalebar 1mm
+    legend( 1400, -60, c("INL", "GCL"), pch=c(1,19), xpd=NA, horiz=TRUE, cex=0.7)
+    
+  }
 }
 dev.off()
 
