@@ -49,6 +49,7 @@ myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
 
   if (plot) {
     plot(s, kl(k12.hat), type="l", col="red", lty=2,
+         asp=1,
          xlab=expression(paste("distance (", mu, "m)")), 
          ylab=expression(L[12]),
          ylim = range(s))
@@ -121,10 +122,13 @@ pts2 = fth.2
 steps = fth.steps
 datapoly = bboxx(bbox(matrix(fth.w,2,2)))
 nsims = 99
+pdf(file='fthk12.pdf', width=4, height=4)
 par(las=1, bty='n')
+par(mar=c(4, 4, 0.5, 0.5))
 klab <- myKenv.labelk(pts1, pts2, datapoly, nsims, steps,
                       quiet=T, plot=TRUE)
 rank = klab$rank
 pval = rank/(nsims+1)
-title(main=sprintf("rank %d p %.2f", rank, pval))
+##title(main=sprintf("rank %d p %.2f", rank, pval))
+dev.off()
 
