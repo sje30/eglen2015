@@ -135,7 +135,7 @@ However, as noted by its author, the density recovery profile is
 effectively the derivative of the K function computed with a given bin
 width, and has the disadvantage that the bin width must be specified.
 
-TODO: Explain exclusion zone, and its biological basis.
+TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
 
 
 <<get-rgc-data,echo=FALSE>>=
