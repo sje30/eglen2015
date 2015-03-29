@@ -3,7 +3,7 @@
 %\VignettePackage{eglen2015}
 %\VignetteEngine{knitr::knitr}
 \documentclass{article}
-\usepackage{mathpazo}
+\usepackage{mathpazo,booktabs}
 \renewcommand{\sfdefault}{lmss}
 \renewcommand{\ttdefault}{lmtt}
 \usepackage[T1]{fontenc}
@@ -14,6 +14,7 @@
 
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\mu \text{m}}\xspace}
+\newcommand{\Lcross}{L\ped{12}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \usepackage{url}
 \usepackage[authoryear]{natbib}
@@ -47,9 +48,22 @@ read_chunk('w81s1_sims.R') #$
 read_chunk('betamaps.R')
 read_chunk('fthmaps.R')
 read_chunk('bcbp.R')
+read_chunk('chickcones.R')
 @
 
 
+
+\subsection*{Table of abbreviations}
+\begin{tabular}{ll}
+  \toprule
+  Term & meaning \\
+  \midrule
+  BC & blue cone\\
+  BCBP & blue cone photoreceptor\\
+  RGC & retinal ganglion cell\\
+  
+  \bottomrule
+\end{tabular}
 \section{Introduction}
 
 
@@ -215,7 +229,7 @@ only when the two types of neurons occupy different layers of the
 retina.  When both types of neurons are in the same layer, their
 physical size constraints need to be taken into account as neurons
 cannot occupy the same physical space.  The cell bodies of retinal
-neurons are typically at least 10 \um for example, which introduce
+neurons are typically at least 10\,\um for example, which introduce
 steric hindrance effects \cite{Cook2003-116} between all neurons,
 irrespective of their type.
 
@@ -225,43 +239,14 @@ point patterns do not interact, except for these short-range steric
 hindrance effects \citep{Eglen2006-nj}.  An example of a bivariate
 point pattern simulated under the case where the only interaction
 between types is that cells cannot closer than some minimal distance
-(here 18 \um -- about the diameter of an RGC soma) between each other.
+(here 18\,\um -- about the diameter of an RGC soma) between each other.
 
-
-\begin{figure}
-  \centering
-<<plot-r,echo=FALSE>>=
-kram.dn4.file = system.file("extdata/kram/dn4.csv", package="eglen2015")
-kram.data = read.csv(kram.dn4.file, skip=1)
-cols = scan(kram.dn4.file, what="character", nlines=1, sep=',')
-cols[9] = "black"
-xcol = 1;
-##plot(NA, xlim=c(0,450), ylim=c(0,330), asp=1)
-plot(NA, xlim=c(100,200), ylim=c(100,200), asp=1)
-for (i in 1:5) {
-  x = kram.data[,xcol]; y=kram.data[,xcol+1]
-  col = cols[xcol]
-  ##points(x, y, pch=19, col=col, cex=0.3)
-  symbols(x, y, circles=rep(1.1, length(x)),
-          inches=FALSE, add=TRUE, bg=col, cex=0.3)
-  xcol = xcol + 2                       #get ready for next type
-}
-@ 
-  \caption{Kram plot.  Color of each neuron represents the type of
-    neuron (red, green, blue, violet) except double-cones are coloured
-    black here.  Radii of cells (1.1 um) estimated from Figure 5A of
-    \protect \citep{Kram2010-bb6}.
-    TODO: check how to cite/include the data.  PLOS permissions?
-    State file from where it came.  (DN field 4).
-  }
-  \label{fig:kram}
-\end{figure}
 
 
 \subsection{Evidence for random labelling}
 
 The random labelling hypothesis (H2) was rejected for the cholinergic
-amacrince cells Diggle1986; see also revisit with fuller model in
+amacrince cells \citep{Diggle1986-df}; see also revisit with fuller model in
 [Diggle2005(Springer)].  However, in recent years, data consistent
 with random labelling has appeared in both ferret retina
 \cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.  The random
@@ -275,7 +260,7 @@ cells in the two layers form two distinct types, or belong to one type
 of neuron.  One hypothesis tested was that simply they both belong to
 the same type, but that they are randomly assigned into one of the two
 layers within the retina.  This corresponds to the ``random
-labelling'' hypothesis of Diggle (1986).  Figure~\ref{fig:fthmaps}
+labelling'' hypothesis of \citet{Diggle1986-df}.  Figure~\ref{fig:fthmaps}
 demonstrates this hypothesis, showing one real field, along with five
 random realisations where for each cell, its location is preserved,
 but the type of the cell (GCL versus IPL) is randomly switched,
@@ -283,12 +268,12 @@ subject to preserving the overall numbers of cells in each sub-type.
 
 By visual inspection alone, it would appear that all six fields appear
 similar, which informally suggests that the data may be consistent
-with random labelling.  (The experimental data are shown as example 5
+with random labelling.  (The experimental data are shown as example five
 in Figure~\ref{fig:fthmaps}; the other examples in
 Figure~\ref{fig:fthmaps} are five examples of random relabelling of
-the data.)  This is confirmed by calculating the L\ped{12} function
+the data.)  This is confirmed by calculating the \Lcross function
 for the experimental data and 99 realisations of random labelling.
-The L function for the data falls within the envelope formed by the 99
+The \Lcross function for the data falls within the envelope formed by the 99
 simulations (Figure~\ref{fig:fthk12}).
 
 
@@ -316,8 +301,8 @@ simulations (Figure~\ref{fig:fthk12}).
 \begin{figure}[h]
   \centering
   \fbox{\includegraphics{fthk12.pdf}}
-  \caption{L\ped{12} function for dopaminergic amacrine data set shown
-    in Figure~\ref{fig:fthmaps}.  The L function for the observed data
+  \caption{\Lcross function for dopaminergic amacrine data set shown
+    in Figure~\ref{fig:fthmaps}.  The \Lcross function for the observed data
     (example 5 in Figure~\ref{fig:fthmaps}) is shown as a dotted red
     line; black lines show the envelope from 99 simulations of random
     relabelling.}
@@ -347,15 +332,33 @@ Physiological versus anatomical (soma vs dendrite) mosaics.  (Troy papers)
 
 Many researchers have tested for the existence of functional
 dependencies between two types of retinal neuron.  In particular, a
-systematic study examining ten pairs from five types of retinal neuron
-failed to reveal any cross-correlation [Rockland].  CAT.  The most
-prominent example found to date has been in macaque, comparing the
-spatial location of blue cone photoreceptors (BC) and their synaptic
-targets in an adjacent layer, the blue cone bipolar cells (BCBP).  An
-example of such a mosaic is shown in Figure~\ref{fig:BCBP}.
+systematic study examining ten pairs of cross-correlations from five
+types of retinal neuron failed to reveal any cross-correlation
+\citep{Rockhill2000-bb}.  The most prominent example of
+cross-correlation found to date has been in macaque, comparing the
+spatial location of blue cone photoreceptors (BC or ``blue cones'')
+and their synaptic targets in an adjacent layer, the blue cone bipolar
+cells (BCBP) \citep{Kouyama1992-cf3,Kouyama1997-wm}.  An example of
+such a mosaic is shown in Figure~\ref{fig:BCBP}.  These cells tend to
+cluster together, as shown by the increased values of the L\ped{12}
+function over distances up to around 25\,\um.  As BCBPs receive input
+only from BCs, it would make sense for them to be close to each other,
+to minimise the synaptic wiring required.  Our preliminary modelling
+studies suggest that we can account for these spatial patterns by
+fixing the locations of blue cones, and allowing the BCBPs to make
+contact with nearby blue cones and then move to reduce tensile forces
+within dendrites \citep{Lonborg2008}, but other mechanisms might also
+be involved.
 
-
-\citep{Kouyama1992-cf3,Kouyama1997-wm}
+This example of BC and BCBPs demonstrates a spatial clustering between
+two types of neuron.  By contrast, there has been one report of a
+negative correlation (spatial avoidance) between two types of neuron
+in three related species from the cat family (cheetah, bobcat and
+leopard) \citep{Ahnelt2000-di}.  In this example, one class of
+axonless horizontal cells are found at significantly lower densities
+in locations near to blue cones.  Unfortunately however, we do not
+have the data from this study to investigate directly the nature of
+the \Lcross function.
 
 <<bcbp-compute>>=
 @ 
@@ -367,20 +370,64 @@ example of such a mosaic is shown in Figure~\ref{fig:BCBP}.
 \begin{figure}[h]
   \centering
   \fbox{\includegraphics{bcbp-fig.pdf}}
-  \caption{BCBP / BC data set (left) and L function (right) for the
-    five fields? TODO: complete figure}
-\label{fig:BCBP}
+  \caption{Functional dependence between two types of neuron.  A: An
+    example field of blue cones (BC; blue) and blue cone bipolar cells
+    (BCBP; red).  This is field one from the dataset provided by
+    \citet{Kouyama1997-wm}.  Scale bar is 1\,mm; soma are drawn to scale
+    with a radius of 5\,\um (BC) and 4\,\um (BCBP).
+    %%
+    B: The L\ped{12} function for the data shown in A
+    (solid red line) and expectation for the curve under Complete
+    Spatial Randomness (CSR).
+    \label{fig:bcbp}
+  }
 \end{figure}
 
 
 
 \subsection{Future directions}
 
-Multivariate patterns: Corbo paper [Kram2010]; more expected as
-genetic markers may label multiple types within one retina.
+
+That these two examples of positive and negative cross-correlation
+both involve blue cones may be a coincidence or may reflect something
+about the developmental mechanisms that constrain the movement and
+positioning of neurons.  In either case, these two examples are clear
+examples of where further modelling and analysis might help our
+understanding of the development of the retina.  Furthermore, we
+anticipate that in the near future, as genetic markers for unique cell
+types in mouse are carefully characterized \citep{Sumbul2014-vm}, I
+expect that there will be many more opportunities for labelling
+multiple types of neuron within individual samples.  The simultaneous
+localisation of five types of cone photoreceptor within a field has
+already been achieved in chick retina (Figure~\ref{fig:kram})
+\citep{Kram2010-bb6}.  In this case, the identity of cone
+photoreceptors was revealed by examining the type of oil droplet found
+just beneath their outer segment.   By examining all pairs of neurons,
+no evidence for spatial correlation was found \citep{Kram2010-bb6}.
+However, this does not rule out that there might be higher-order
+dependencies within the multiple cell types.
+
+<<plot-chickcones,echo=FALSE,results='hide'>>=
+@ 
+
+\begin{figure}
+  \centering
+  \fbox{\includegraphics{chickcones.pdf}}
+  \caption{The spatial layout of five types of cone photoreceptor from
+    chick retina \citep{Kram2010-bb6}.
+    The colour of each neuron represents the type of
+    neuron (red, green, blue, violet) except double-cones are coloured
+    black here.   Scale bar is 20\,\um; soma are
+    drawn to scale with an estimated radius of 1.1\,\um.
+    Data shown here is ``DN field 4'' taken from Supplementary
+    Information of \citet{Kram2010-bb6}.
+    %% Radii of cells (1.1 um) estimated from Figure 5A
+    State file from where it came.  (DN field 4).
+  }
+  \label{fig:kram}
+\end{figure}
 
 
-Areas other than the retina.
 
 \clearpage
 \section{Part two}
@@ -405,8 +452,7 @@ Some journals (quarterly journal of political science) now requires
 papers to be reproducible.  Science requires addendum
 e.g. \cite{Vogels2011-c8c}.
 
-Describe Docker for R (Rocker) \cite{Boettiger2014-sk}.  Check details
-with Dirk?
+Describe Docker for R (Rocker) \citep{Boettiger2014-sk}.  
 
 \url{https://github.com/mgymrek/docker-reproducibility-example}
 
@@ -448,10 +494,11 @@ R Packaging/vignettes good for modest-sized datasets;
 
 
 \subsection*{Acknowledgements}
-I thank Professors Heinz W\"{a}ssle, David Marshak and Abbie Hughes
-for providing the retinal mosaics included in this paper.  DOCKER?
-\bibliographystyle{jneurosci}
-\bibliography{eglen2015}
+I thank Professors Joseph Corbo, Abbie Hughes, David Marshak and Heinz
+W\"{a}ssle for providing the retinal mosaics included in this paper.
+DOCKER?
+
+\bibliographystyle{jneurosci} \bibliography{eglen2015}
 
 
 \subsection*{Sources of data}
