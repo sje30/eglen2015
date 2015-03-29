@@ -60,8 +60,8 @@ read_chunk('chickcones.R')
   \midrule
   BC & blue cone\\
   BCBP & blue cone photoreceptor\\
+  CSR & complete spatial randomness\\
   RGC & retinal ganglion cell\\
-  
   \bottomrule
 \end{tabular}
 \section{Introduction}
@@ -111,15 +111,17 @@ points are positioned close to each other more often than chance.
 Finally, when $L(t) < t$ is evidence of \textit{spatial regularity}, whereby
 points avoid each other \citep{Diggle2002-db}.  
 
-As can be seen in Figure XXX, retinal mosaics normally show evidence
-of spatial regularity over small distances, in this case up to around
-XXX um.  One common approach used in spatial statistics to compare
-model and data is to compare their K or L functions (Figure XXXa).
+As can be seen in Figure~\ref{fig:univk}, retinal mosaics normally
+show evidence of spatial regularity over small distances, in this case
+up to around 150\,\um.  Beyond this distance, there is no further
+order and so the L function matches that expected from CSR.  One
+common approach used in spatial statistics to compare model and data
+is to compare their K or L functions (Figure \ref{fig:univk}).
 Informally, if the L function for the data falls within the envelope
-of the L functions from the model, then say that the model fits the
-data.  More formally, empirical p values can be computed to compare
-model and data \citep{Diggle1986-df}.
-
+of the L functions from multiple runs of the model from different
+initial conditions, then we say that the model fits the data.  More
+formally, empirical p values can be computed to compare model and data
+\citep{Diggle1986-df}.
 
 Note that many other methods for quantifying order in retinal mosaics
 have been proposed, ranging from simple nearest-neighbour methods
@@ -128,7 +130,7 @@ Several of these measures have been empirically compared \cite{Cook1996}.
 In this review we focus on probably the single most useful measure,
 the K function.  It is worth noting that a closely related variant of
 the K function, the density recovery profile, was proposed
-specifically for the analysis of retinal mosaics \citep{Rodieck1991}.
+specifically for the analysis of retinal mosaics \citep{Rodieck1991-kc}.
 However, as noted by its author, the density recovery profile is
 effectively the derivative of the K function computed with a given bin
 width, and has the disadvantage that the bin width must be specified.
@@ -163,6 +165,20 @@ TODO: Explain exclusion zone, and its biological basis.
     density of points.  Scale bar is 100\,\um; soma are drawn to scale
     with a radius of 8\,\um.
     \label{fig:univ}}
+\end{figure}
+
+
+<<khat-univariate-betamap,results='hide'>>=
+@ 
+\begin{figure}
+  \centering
+  \fbox{\includegraphics{khat-univbeta.pdf}}
+  \caption{Evidence for local exclusion zones in retinal mosaics.
+    The solid red curve shows the L function for the mosaic shown in
+    Figure~\ref{fig:univ}A; the dotted blue curve is the corresponding
+    L function for the model output in Figure~\ref{fig:univ}B.  The
+    dotted black line is the expectation for the L function assumnig
+    complete spatial randomness (CSR). \label{fig:univk}}
 \end{figure}
 
 
