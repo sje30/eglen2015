@@ -1,6 +1,8 @@
 ## Plot the BCBP data sets.
 ## 2015-03-24
 
+require(splancs)
+
 ## ---- bcbp-compute
 bcbp.dat.file = system.file("extdata/bcbp2/bc_bcbp_f1.dat", package="eglen2015")
 bcbp.w.file   = system.file("extdata/bcbp2/bc_bcbp_f1.w",   package="eglen2015")
@@ -8,6 +10,8 @@ bcbp.w.file   = system.file("extdata/bcbp2/bc_bcbp_f1.w",   package="eglen2015")
 bcbp = as.matrix(read.table(bcbp.dat.file))
 bcbp.w = as.matrix(read.table(bcbp.w.file))
 
+## type 1 = blue cone.
+## type 2 = blue cone bipolar
 
 bcbp.computek12 = function(smax) {
   id1 = which(bcbp[,3]==1)
@@ -15,7 +19,6 @@ bcbp.computek12 = function(smax) {
   pts2 = bcbp[-id1, 1:2]
   poly = bboxx(bbox(matrix(bcbp.w,2,2)))
   steps = 0:smax
-  require(splancs)
   k12.hat = k12hat(pts1, pts2, poly, steps)
   cbind(steps, sqrt(k12.hat/pi))
 }
@@ -29,11 +32,11 @@ plot(NA, asp=1, xaxs='i', yaxs='i', bty='n',
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(bcbp[,1], bcbp[,2],
         circles=ifelse(bcbp[,3]==1, 5, 4), # 10um for BC, 8um for BCBP
-        bg=ifelse(bcbp[,3]==1, "red", "blue"),
+        bg=ifelse(bcbp[,3]==1, "blue", "red"),
         inches=FALSE, add=TRUE)
 rect(bcbp.w[1], bcbp.w[3], bcbp.w[2], bcbp.w[4])
 segments(50, 30, 150, lend="butt", lwd=3,xpd=NA)
-legend(x=250, y=20, legend=c('BCBP', 'BC'), xpd=NA, pch=19, col=c("red", "blue"))
+legend(x=250, y=20, legend=c('BC', 'BCBP'), xpd=NA, pch=19, col=c("blue", "red"))
 mtext(side=3, at=0, 'A')
 
 ## Now do the K function.
