@@ -429,3 +429,32 @@ symbols(univ.sim$x, univ.sim$y, circles=rep(rgc.soma.rad, n1),
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
 mtext(side=3, adj=0, cex=1.5, 'B', line=-1.25)
 dev.off()
+
+
+## ---- khat-univariate-betamap
+require(splancs)
+window.to.poly = function(window) {
+  bboxx(bbox(matrix(window,2,2)))  
+}
+
+
+lhat = function(pts, steps) {
+  poly = window.to.poly(rgc.w)
+  k = khat(pts, poly, steps)
+  cbind(steps, sqrt(k/pi))
+}
+
+steps = seq(from=0, to=200)
+
+pdf(file='khat-univbeta.pdf', width=4, height=4)
+par(mgp=c(2,0.8,0), mar=c(3.25,3.25,0.5, 0.5))
+plot(lhat(rgc.on, steps), type='l',las=1, bty='n', asp=1, col='red',xlab='')
+title(xlab=expression(paste("distance (", mu, "m)")),
+      ylab='L')
+lines(lhat(cbind(univ.sim$x, univ.sim$y), steps), lty=3, col='blue')
+segments(0, 0, max(steps), max(steps), lty=2)
+legend(x=0, y=200, ##'topleft',
+       legend=c('data', 'model', 'CSR'),
+       col=c('red', 'blue', 'black'),
+       lty=c(1, 3, 2))
+dev.off()
