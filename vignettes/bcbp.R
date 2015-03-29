@@ -45,7 +45,7 @@ smax = 60
 bcbpf1.k12 = bcbp.computek12(smax)
 plot(bcbpf1.k12, type='l', asp=1, xlim=c(0,smax), ylim=c(0, smax),
      bty='n', col='red', las=1,
-     xlab=expression('Distance (' * mu * 'm)'),
+     xlab=expression('distance (' * mu * 'm)'),
      ylab=expression(L[12]))
 segments(0, 0, smax, smax, lty=2)
 legend(5, 60, legend=c('data', 'CSR'), lty=c(1,2), col=c('red', 'black'))
