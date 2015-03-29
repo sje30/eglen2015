@@ -10,8 +10,8 @@ bcbp.w.file   = system.file("extdata/bcbp2/bc_bcbp_f1.w",   package="eglen2015")
 bcbp = as.matrix(read.table(bcbp.dat.file))
 bcbp.w = as.matrix(read.table(bcbp.w.file))
 
-## type 1 = blue cone.
-## type 2 = blue cone bipolar
+## type 1 = blue cone (BC)
+## type 2 = blue cone bipolar (BCBP)
 
 bcbp.computek12 = function(smax) {
   id1 = which(bcbp[,3]==1)
