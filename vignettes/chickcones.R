@@ -6,7 +6,7 @@ cols = scan(kram.dn4.file, what="character", nlines=1, sep=',')
 cols[9] = "black"
 xcol = 1;
 
-pdf(file="chickcones.pdf", width=5, height=5)
+pdf(file="chickcones.pdf", width=4, height=4)
 par(mar=rep(0.5, 4))
 plot(NA, xlim=c(100,200), ylim=c(100,200), asp=1, xaxt='n', yaxt='n')
 for (i in 1:5) {
