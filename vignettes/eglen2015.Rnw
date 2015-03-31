@@ -3,7 +3,7 @@
 %\VignettePackage{eglen2015}
 %\VignetteEngine{knitr::knitr}
 \documentclass{article}
-\usepackage{mathpazo,booktabs}
+\usepackage{mathpazo,booktabs,upgreek}
 \renewcommand{\sfdefault}{lmss}
 \renewcommand{\ttdefault}{lmtt}
 \usepackage[T1]{fontenc}
@@ -13,7 +13,7 @@
 \usepackage{verbatim}
 
 \usepackage{xspace,amsmath}
-\newcommand{\um}{\ensuremath{\mu \text{m}}\xspace}
+\newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
 \newcommand{\Lcross}{L\ped{12}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \usepackage{url}
@@ -33,7 +33,30 @@
 
 \maketitle
 
-<<setup-knitr,eval=TRUE,echo=FALSE,results='hide',message=TRUE>>=
+\begin{abstract}
+  In this article I present a reproducible review of recent research
+  to investigate the spatial positioning of neurons in the nervous
+  system.  In particular, I focus on the relative spatial positioning
+  on pairs of cell types within the retina.  I examine three different
+  cases by which pairs of neurons might be arranged relative to each
+  other.  (1) Cells of different type might be effectively independent
+  of each other. (2) Random labelling (3) Functional dependence.
+  %% 
+  Finally, I have termed this article a 'reproducible review' because
+  all the data and computer code are integrated into the manuscript so
+  that others can repeat the analysis presented here.  I close the
+  review with a discussion of this concept.
+
+\end{abstract}
+
+  %% The retina makes for an
+  %% ideal system to investigate this question because of two main
+  %% factors.  First, the retina is highly laminar, and neurons of a
+  %% given type are normally found only within one layer, usually
+  %% arranged in semi-regular patterns.  Second, many retinal cell types
+  %% can be selectively labelled using robust markers
+
+<<setup-knitr,eval=TRUE,echo=FALSE,results='hide',message=FALSE>>=
 require(knitr)
 require(xtable)
 require(splancs)
@@ -53,6 +76,13 @@ read_chunk('chickcones.R')
 
 
 
+TODO
+\begin{itemize}
+\item Finish figure 1 with abbrevs: five main classes of neuron.
+\item define K and L for univariate and bivariate case.
+\item TODO create data tables?
+
+\end{itemize}
 \subsection*{Table of abbreviations}
 \begin{tabular}{ll}
   \toprule
@@ -212,12 +242,16 @@ types of retinal neuron within the same sample window.
 <<w81s1-compute-mosaics,echo=FALSE,results='hide'>>=
 @ 
 
+<<plot-w81s1-real-sim>>=
+@ 
+
 \begin{figure}[h]
   \centering
-  <<plot-w81s1-real-sim,echo=FALSE,fig.width=6,fig.height=4>>=
-@ 
-\caption{Bivariate spatial point pattern.  A: observed field; B:
-  simulation using PIPP rule.}
+  \fbox{\includegraphics{biv-w81s1.pdf}}
+  \caption{Bivariate spatial point pattern.  A: observed field, W81S1
+    from \citep{Wassle1981-beta}; B: simulation using bivariate PIPP
+    rule.  Scale bar is 100\,\um; soma are drawn to scale with a
+    radius of 8\,\um.}
 \label{w81}
 \end{figure}
 
@@ -230,15 +264,18 @@ that neurons of different types constrain each other in their spatial
 positioning.  Interactions between two types of neurons are termed
 \textit{heterotypic interactions}, to be compared with interactions
 between neurons of the same type, called \textit{homotypic
-  interactions}.  In the case where there are 
+  interactions}.  Discovering the interactions present among cell
+types can help understand the developmental mechanisms that create
+neural circuits.
 
-\textit{Statistical independence} between two spatial point patterns
-means that the spatial location of one type of neurons is completely
-unaffected by the spatial location of another type of neurons.
-Statistical independence between type of neurons occupying different
-layers of the retina was reported for cholinergic amacrine cells
-\citep{Diggle1986-df} and for several other pairs of neuron in rabbits
-\citep{Rockhill2000-bb}.
+The simplest situation is that of \textit{Statistical independence}
+between two spatial point patterns, which means that the spatial
+location of one type of neurons is completely unaffected by the
+spatial location of another type of neurons.  Statistical independence
+between type of neurons occupying different layers of the retina has been
+reported for cholinergic amacrine cells \citep{Diggle1986-df} and for
+several other pairs of neuron in rabbits \citep{Rockhill2000-bb} and
+zebrafish \citep{Mack2007}.
 
 Full statistical independence between pairs of neurons can be shown
 only when the two types of neurons occupy different layers of the
@@ -246,7 +283,7 @@ retina.  When both types of neurons are in the same layer, their
 physical size constraints need to be taken into account as neurons
 cannot occupy the same physical space.  The cell bodies of retinal
 neurons are typically at least 10\,\um for example, which introduce
-steric hindrance effects \cite{Cook2003-116} between all neurons,
+steric hindrance effects \citep{Cook2003-116} between all neurons,
 irrespective of their type.
 
 To account for these physical effects, we devised the term
@@ -255,7 +292,7 @@ point patterns do not interact, except for these short-range steric
 hindrance effects \citep{Eglen2006-nj}.  An example of a bivariate
 point pattern simulated under the case where the only interaction
 between types is that cells cannot closer than some minimal distance
-(here 18\,\um -- about the diameter of an RGC soma) between each other.
+(here 18\,\um\ -- about the diameter of an RGC soma) between each other.
 
 
 
@@ -265,7 +302,7 @@ The random labelling hypothesis (H2) was rejected for the cholinergic
 amacrince cells \citep{Diggle1986-df}; see also revisit with fuller model in
 [Diggle2005(Springer)].  However, in recent years, data consistent
 with random labelling has appeared in both ferret retina
-\cite{Eglen2003-dc} and in Drosophila \cite{Bell2007-507}.  The random
+\citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.  The random
 labelling hypothesis indicates that one population of cells divides
 into two by simple random labelling.
 
@@ -279,7 +316,7 @@ layers within the retina.  This corresponds to the ``random
 labelling'' hypothesis of \citet{Diggle1986-df}.  Figure~\ref{fig:fthmaps}
 demonstrates this hypothesis, showing one real field, along with five
 random realisations where for each cell, its location is preserved,
-but the type of the cell (GCL versus IPL) is randomly switched,
+but the type of the cell (GCL versus INL) is randomly switched,
 subject to preserving the overall numbers of cells in each sub-type.
 
 By visual inspection alone, it would appear that all six fields appear
@@ -305,7 +342,7 @@ simulations (Figure~\ref{fig:fthk12}).
 \begin{figure}
   \centering
   \fbox{\includegraphics{fthmaps.pdf}}
-  \caption{Dopaminergic amacrine neurons in ferret, showing one field
+  \caption{Dopaminergic amacrine neurons in ferret, showing one real field
     along with five simulated fields.  Which figure is the
     experimental data? Scale bar is 1\,mm; soma are drawn to scale
     with a radius of 22\,\um.\label{fig:fthmaps}}
@@ -329,21 +366,6 @@ simulations (Figure~\ref{fig:fthk12}).
 
 TODO: maths for the L12 function.
 
-
-Different hypotheses from [Diggle1986]
-\begin{itemize}
-
-\item random labelling \cite{Eglen2003-dc}.  Melanie Bell Drosophila \cite{Bell2007-507}
-
-\item independence (RGCs, horizontal cells) \cite{Eglen2008}
-
-\end{itemize}
-
-Lateral inhibition patterns seen in other parts of the nervous system?
-
-Physiological versus anatomical (soma vs dendrite) mosaics.  (Troy papers)
-
-
 \subsection{Evidence for functional dependence}
 
 Many researchers have tested for the existence of functional
@@ -355,7 +377,7 @@ cross-correlation found to date has been in macaque, comparing the
 spatial location of blue cone photoreceptors (BC or ``blue cones'')
 and their synaptic targets in an adjacent layer, the blue cone bipolar
 cells (BCBP) \citep{Kouyama1992-cf3,Kouyama1997-wm}.  An example of
-such a mosaic is shown in Figure~\ref{fig:BCBP}.  These cells tend to
+such a mosaic is shown in Figure~\ref{fig:bcbp}.  These cells tend to
 cluster together, as shown by the increased values of the L\ped{12}
 function over distances up to around 25\,\um.  As BCBPs receive input
 only from BCs, it would make sense for them to be close to each other,
@@ -369,12 +391,11 @@ be involved.
 This example of BC and BCBPs demonstrates a spatial clustering between
 two types of neuron.  By contrast, there has been one report of a
 negative correlation (spatial avoidance) between two types of neuron
-in three related species from the cat family (cheetah, bobcat and
-leopard) \citep{Ahnelt2000-di}.  In this example, one class of
-axonless horizontal cells are found at significantly lower densities
-in locations near to blue cones.  Unfortunately however, we do not
-have the data from this study to investigate directly the nature of
-the \Lcross function.
+in three related species from the cat family \citep{Ahnelt2000-di}.
+In this example, one class of axonless horizontal cells are found at
+significantly lower densities in locations near to blue cones.
+Unfortunately however, we do not have the data from this study to
+investigate directly the nature of the \Lcross function.
 
 <<bcbp-compute>>=
 @ 
@@ -389,7 +410,7 @@ the \Lcross function.
   \caption{Functional dependence between two types of neuron.  A: An
     example field of blue cones (BC; blue) and blue cone bipolar cells
     (BCBP; red).  This is field one from the dataset provided by
-    \citet{Kouyama1997-wm}.  Scale bar is 1\,mm; soma are drawn to scale
+    \citet{Kouyama1997-wm}.  Scale bar is 100\,\um; soma are drawn to scale
     with a radius of 5\,\um (BC) and 4\,\um (BCBP).
     %%
     B: The L\ped{12} function for the data shown in A
@@ -438,15 +459,29 @@ dependencies within the multiple cell types.
     Data shown here is ``DN field 4'' taken from Supplementary
     Information of \citet{Kram2010-bb6}.
     %% Radii of cells (1.1 um) estimated from Figure 5A
-    State file from where it came.  (DN field 4).
   }
   \label{fig:kram}
 \end{figure}
 
+The retina has been chosen here as a model system for exploring
+spatial correlations in the nervous system.  The retina is
+particularly useful for this task because of its strongly laminar
+structure and the availability of markers for selectively identifying
+cells of one type.  However, we imagine these techniques will have
+utility in other regions of the nervous system, and have indeed
+recently been applied to striatum and spinal cord
+\citep{Gangarossa2013-cc,Prodanov2007-fe}.  Finally, although we have
+used these techniques here to demonstrate the spatial organisation of
+anatomical features, they can also be used for physiological features,
+such as the arrangement of centres of receptive fields \citep{Hore2012-ac}.
 
 
 \clearpage
 \section{Part two}
+
+
+TODO This paper is available as a reproducible research document, written
+in the knitr framework \citep{Knitrxxx}
 
 The role of reproducible research...  Challenges for the compendium
 concept recently brought into neuroscience [Pouzat]
@@ -485,7 +520,7 @@ docker run -d -p 8787:8787 sje30/eglen2015
 \end{verbatim}
 
 Once this is complete, which typically takes a few minutes, the user
-can then open a web browser to view and edit this paper.  Further
+can then open a web browser to view the PDF or edit this paper.  Further
 details on running the docker system are given at
 \url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
 \textbf{How stable is this link likely to be?}.
