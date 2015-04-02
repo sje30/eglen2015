@@ -64,6 +64,10 @@ myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
 ## End of functions
 ######################################################################
 
+## type 1 = inl = blue
+## type 2 = gcl = yellow
+
+fth.cols = c("#5ab4ac", "#d8b365")
 
 ## TODO: get the data from the package, not from my homedir!!
 fth.1.file = system.file("extdata/fth/f9942i.txt", package="eglen2015")
@@ -91,10 +95,11 @@ plot.fth.maps = function(fth.1, fth.2, relabel=F) {
   plot(fth.1, asp=1, type='n', xlab='', ylab='',
        bty='n', xaxt='n', yaxt='n')
   symbols(fth.1[,1], fth.1[,2], circles=rep(fth.soma.rad, nrow(fth.1)),
-          lwd=0.2,
+          fg=fth.cols[1], bg=fth.cols[1], lwd=0.1,
           inches=FALSE, add=TRUE)
   symbols(fth.2[,1], fth.2[,2], circles=rep(fth.soma.rad, nrow(fth.2)),
-          inches=FALSE, add=TRUE,bg='black')
+          inches=FALSE, add=TRUE,
+          fg=fth.cols[2], bg=fth.cols[2], lwd=0.1)
   rect(fth.w[1], fth.w[3], fth.w[2], fth.w[4])
 
 }
@@ -108,7 +113,9 @@ for(i in 1:6) {
   title(main=i)
   if (i == 1) {
     segments(50, -60, 1050, lend="butt", lwd=3,xpd=NA) #scalebar 1mm
-    legend( 1400, -60, c("INL", "GCL"), pch=c(1,19), xpd=NA, horiz=TRUE, cex=0.7)
+    legend( 1400, -60, c("INL", "GCL"), pch=c(19,19),
+           col=fth.cols,
+           xpd=NA, horiz=TRUE, cex=0.7)
     
   }
 }
