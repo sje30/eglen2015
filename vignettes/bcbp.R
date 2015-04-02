@@ -24,7 +24,7 @@ bcbp.computek12 = function(smax) {
 }
 
 ## ---- bcbp-draw
-
+bcbp.cols = c("#0000a0", "#d35f5f")
 pdf(file='bcbp-fig.pdf', width=6.8, height=3.5)
 par(mfrow=c(1,2), mar=c(3,1, 0.1, 1.5), mgp=c(2, 0.8, 0))
 plot(NA, asp=1, xaxs='i', yaxs='i', bty='n',
@@ -32,12 +32,13 @@ plot(NA, asp=1, xaxs='i', yaxs='i', bty='n',
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(bcbp[,1], bcbp[,2],
         circles=ifelse(bcbp[,3]==1, 5, 4), # 10um for BC, 8um for BCBP
-        bg=ifelse(bcbp[,3]==1, "blue", "red"),
+        ##bg=ifelse(bcbp[,3]==1, "blue", "red"),
+        fg=bcbp.cols[bcbp[,3]], bg=bcbp.cols[bcbp[,3]], lwd=0.1,
         inches=FALSE, add=TRUE)
 rect(bcbp.w[1], bcbp.w[3], bcbp.w[2], bcbp.w[4])
 segments(50, 30, 150, lend="butt", lwd=3,xpd=NA)
 legend(x=220, y=20, legend=c('BC', 'BCBP'),
-       horiz=TRUE, xpd=NA, pch=19, col=c("blue", "red"))
+       horiz=TRUE, xpd=NA, pch=19, col=bcbp.cols)
 mtext(side=3, at=0, 'A')
 
 ## Now do the K function.
