@@ -1,0 +1,8 @@
+Colors for cells.
+
+bc	#0000a0
+bipolar #d35f5f
+on rgc  #d40000
+off rgc #008000
+inl DAC #5ab4ac (blue)
+gcl DAC #d8b365 (yellow)
