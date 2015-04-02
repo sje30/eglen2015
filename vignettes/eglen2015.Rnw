@@ -110,7 +110,8 @@ typically occupies one of three layers (Figure~\ref{fig:layers}).
 
 \begin{figure}
   \centering
-  \fbox{\includegraphics[width=8cm]{layers_csn2.pdf}}
+  %%\fbox{\includegraphics[width=8cm]{layers_csn2.pdf}}
+  \includegraphics[width=8cm]{layers_csn3.pdf}
   \caption{Cross section of vertebrate retina.  Adapted from Figure 1
     of \citep{Eglen2012}.  TODO: seek permission.}
   \label{fig:layers}
@@ -189,7 +190,8 @@ TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
 \begin{figure}
   \centering
   \fbox{\includegraphics{beta_univ.pdf}}
-  \caption{Example retinal mosaic.  Beta on-cells from
+  \caption{An example retinal mosaic: beta on-centre retinal ganglion
+    cells, taken from
     \citep{Wassle1981-beta}.  On the left is the observed map, and the
     right is an example univariate simulation with matching field and
     density of points.  Scale bar is 100\,\um; soma are drawn to scale
@@ -242,7 +244,7 @@ types of retinal neuron within the same sample window.
 <<w81s1-compute-mosaics,echo=FALSE,results='hide'>>=
 @ 
 
-<<plot-w81s1-real-sim>>=
+<<plot-w81s1-real-sim,results='hide'>>=
 @ 
 
 \begin{figure}[h]
