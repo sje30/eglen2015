@@ -18,6 +18,8 @@ rgc.of = as.matrix(read.table(rgc.of.file))
 rgc.on = as.matrix(read.table(rgc.on.file))
 rgc.w  = scan(rgc.w.file)
 
+rgc.cols = c("#d40000", "#008000")
+## type one is on; type 2 is off.
 
 ## ---- setup-betamap
 
@@ -377,22 +379,27 @@ rgc.soma.rad = 8
 par(mfrow=c(1,2), bty='n', mar=c(1.5,.5,.1,.1))
 plot(rgc.on, asp=1, type='n', xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(rgc.on[,1], rgc.on[,2], circles=rep(rgc.soma.rad, nrow(rgc.on)),
+        fg=rgc.cols[1], bg=rgc.cols[1], lwd=0.1,
         inches=FALSE, add=TRUE)
 symbols(rgc.of[,1], rgc.of[,2], circles=rep(rgc.soma.rad, nrow(rgc.of)),
-        inches=FALSE, add=TRUE,bg='black')
+        fg=rgc.cols[2], bg=rgc.cols[2], lwd=0.1,
+        inches=FALSE, add=TRUE)
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
 legend(620, 0, legend=c('on-centre', 'off-centre'),
        horiz=TRUE,
-       xpd=NA, pch=c(1, 19),cex=0.7)
+       col=rgc.cols,
+       xpd=NA, pch=c(19),cex=0.7)
 mtext(side=3, at=0, line=-1, 'A', xpd=NA)
 segments(40, 00, 140, lwd=3, lend='butt', xpd=NA)
 ##
 ## Now show the simulation ##
 plot(rgc.on, asp=1, type='n', xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(sim.on[,1], sim.on[,2], circles=rep(rgc.soma.rad, nrow(sim.on)),
+        fg=rgc.cols[1], bg=rgc.cols[1], lwd=0.1,
         inches=FALSE, add=TRUE)
 symbols(sim.of[,1], sim.of[,2], circles=rep(rgc.soma.rad, nrow(sim.of)),
-        inches=FALSE, add=TRUE,bg='black')
+        fg=rgc.cols[2], bg=rgc.cols[2], lwd=0.1,
+        inches=FALSE, add=TRUE)
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
 mtext(side=3, at=0, line=-1, 'B',xpd=NA)
 ## text(grconvertX(c(0.1, 0.5), from='ndc'), grconvertY(rep(0.9,2), from='ndc'),
@@ -416,9 +423,7 @@ plot(NA, asp=1, xaxs='i', yaxs='i',
      xlim=rgc.w[1:2], ylim=rgc.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(rgc.on[,1], rgc.on[,2], circles=rep(rgc.soma.rad, nrow(rgc.on)),
-        inches=FALSE, add=TRUE, bg='black')
-## symbols(rgc.of[,1], rgc.of[,2], circles=rep(rgc.soma.rad, nrow(rgc.of)),
-##         inches=FALSE, add=TRUE,bg='black')
+        inches=FALSE, add=TRUE, bg=rgc.cols[1], fg=rgc.cols[1], lwd=0.1)
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4]) 
 mtext(side=3, adj=0, 'A',cex=1.5, line=-1.25)
 segments(50, 0, 150, lend="butt", lwd=5,xpd=NA)
@@ -428,7 +433,8 @@ plot(NA, asp=1, xaxs='i', yaxs='i',
      xlim=rgc.w[1:2], ylim=rgc.w[3:4],
      xlab='', ylab='', xaxt='n', yaxt='n')
 symbols(univ.sim$x, univ.sim$y, circles=rep(rgc.soma.rad, n1),
-        inches=FALSE, add=TRUE, bg='black')
+        bg=rgc.cols[1], fg=rgc.cols[1], lwd=0.1,
+        inches=FALSE, add=TRUE)
 rect(rgc.w[1], rgc.w[3], rgc.w[2], rgc.w[4])
 mtext(side=3, adj=0, cex=1.5, 'B', line=-1.25)
 dev.off()
