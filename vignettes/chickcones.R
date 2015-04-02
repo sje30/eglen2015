@@ -13,7 +13,7 @@ for (i in 1:5) {
   x = kram.data[,xcol]; y=kram.data[,xcol+1]
   col = cols[xcol]
   ##points(x, y, pch=19, col=col, cex=0.3)
-  symbols(x, y, circles=rep(1.1, length(x)),
+  symbols(x, y, circles=rep(1.1, length(x)), lwd=0.01,
           inches=FALSE, add=TRUE, bg=col, cex=0.3)
   xcol = xcol + 2                       #get ready for next type
 }
