@@ -15,6 +15,9 @@
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
 \newcommand{\Lcross}{L\ped{12}\xspace}
+\newcommand{\vx}{\ensuremath{\mathbf{x}}}
+\newcommand{\K}{\ensuremath{K}\xspace}
+\renewcommand{\L}{\ensuremath{L}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \usepackage{url}
 \usepackage[authoryear]{natbib}
@@ -79,9 +82,7 @@ read_chunk('chickcones.R')
 TODO
 \begin{itemize}
 \item Finish figure 1 with abbrevs: five main classes of neuron.
-\item define K and L for univariate and bivariate case.
 \item TODO create data tables?
-
 \end{itemize}
 \subsection*{Table of abbreviations}
 \begin{tabular}{ll}
@@ -91,6 +92,11 @@ TODO
   BC & blue cone\\
   BCBP & blue cone photoreceptor\\
   CSR & complete spatial randomness\\
+  GCL & ganglion cell layer\\
+  INL & inner nuclear layer\\
+  IPL & inner plexiform layer\\
+  ONL & outer nuclear layer\\
+  OPL & outer plexiform layer\\
   RGC & retinal ganglion cell\\
   \bottomrule
 \end{tabular}
@@ -110,10 +116,20 @@ typically occupies one of three layers (Figure~\ref{fig:layers}).
 
 \begin{figure}
   \centering
-  %%\fbox{\includegraphics[width=8cm]{layers_csn2.pdf}}
   \includegraphics[width=8cm]{layers_csn3.pdf}
-  \caption{Cross section of vertebrate retina.  Adapted from Figure 1
-    of \citep{Eglen2012}.  TODO: seek permission.}
+  \caption{Cross section of vertebrate retina.  The cell bodies of
+    neurons are located in three layers: outer nuclear layer (ONL),
+    inner nuclear layer (INL) and ganglion cell layer (GCL).  Connections
+    between these neurons are typically formed in the outer plexiform
+    layer (OPL) and inner plexiform layer (IPL) that separate the
+    three layers.  Neurons of a given type normally occupy just one
+    layer.  The diagram indicates the five main classes of neuron:
+    photoreceptor (P), horizontal cell (H), bipolar cell (B), amacrine
+    cell (A) and retinal ganglion cell (RGC).  If a slice is taken
+    through one layer, e.g. GCL, we can observe the spatial regularity
+    of neurons within one layer (Figure~\ref{fig:univ}).  This figure
+    adapted from Figure 1 of \citet{Eglen2012}.  TODO: seek
+    permission.}
   \label{fig:layers}
 \end{figure}
 
@@ -127,29 +143,47 @@ Figure~\ref{fig:univ}B shows the result of one such simulation.  These
 patterns appear to have similar spatial properties.
 
 The spatial organisation of point processes can be quantified using
-the K function \citep{Ripley1976-ic}, which quantifies the expected
-number of points within a given distance of any point.  It is defined
-as:
+the \K function \citep{Ripley1976-ic}, which quantifies the expected
+number of points within a given distance of any point.  We store the
+position of the $i$th type 1 neuron as a two-dimensional vector
+$\vx_{1i}$ where $i \in [1,n_1]$ and likewise for the $j$th type 2
+neuron in $\vx_{2j}, j \in [1, n_2]$.  We then define the bivariate \K
+and \L functions as
 
-[define K and L here]
+\begin{align}
+  K_{12}(t) &= \frac{|A|}{n_1 n_2} 
+  \sum_{i=1}^{n_1} \sum_{j=1}^{n_2}
+  w(i,j)^{-1} I ( || \vx_{1i} - \vx_{2j} || \leq t)
+  \\
+  L_{12}(t) &= \sqrt{K_{12}(t)} / \pi
+\end{align}
+%%
+The weighting factor $w(i,j)$ is a normalisation term to account for
+edge effect.  It is defined as the fraction of circumference of the
+circle centred at $\vx_{1i}$ and with radius $|| \vx_{1i} -
+\vx_{2j}||$ that lies within the sampling window $A$.  $|A|$ denotes
+the area of the sample window.  The \L function is a common
+normalisation of the \K function.  The univariate K function (to
+analyse one set of points) is calculated by allowing $n_2 = n_1$ and
+$\vx_{2i} = \vx_{1i}$ for all points and ignoring self-counts.
 
-The L function is a common normalisation of the K function.  If for a
-range of distances $t$ we find that $L(t) \approx t$, this indicates
-that there is no spatial order in the point pattern.  This is commonly
-termed \textit{Complete Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If
+For either the univariate or bivariate L function, if for a range of
+distances $t$ we find that $L(t) \approx t$, this indicates that there
+is no spatial order in the point pattern.  This is commonly termed
+\textit{Complete Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If
 however $L(t) > t$, this would indicate \textit{spatial clustering}:
 points are positioned close to each other more often than chance.
-Finally, when $L(t) < t$ is evidence of \textit{spatial regularity}, whereby
-points avoid each other \citep{Diggle2002-db}.  
+Finally, when $L(t) < t$ is evidence of \textit{spatial regularity},
+whereby points avoid each other \citep{Diggle2002-db}.
 
 As can be seen in Figure~\ref{fig:univk}, retinal mosaics normally
 show evidence of spatial regularity over small distances, in this case
 up to around 150\,\um.  Beyond this distance, there is no further
-order and so the L function matches that expected from CSR.  One
+order and so the \L function matches that expected from CSR.  One
 common approach used in spatial statistics to compare model and data
-is to compare their K or L functions (Figure \ref{fig:univk}).
-Informally, if the L function for the data falls within the envelope
-of the L functions from multiple runs of the model from different
+is to compare their \K or \L functions (Figure \ref{fig:univk}).
+Informally, if the \L function for the data falls within the envelope
+of the \L functions from multiple runs of the model from different
 initial conditions, then we say that the model fits the data.  More
 formally, empirical p values can be computed to compare model and data
 \citep{Diggle1986-df}.
@@ -159,11 +193,11 @@ have been proposed, ranging from simple nearest-neighbour methods
 \citep{Wassle1978-uo} to those based on Voronoi diagrams \citep{Keeley2014-dn}.
 Several of these measures have been empirically compared \cite{Cook1996}.
 In this review we focus on probably the single most useful measure,
-the K function.  It is worth noting that a closely related variant of
-the K function, the density recovery profile, was proposed
+the \K function.  It is worth noting that a closely related variant of
+the \K function, the density recovery profile, was proposed
 specifically for the analysis of retinal mosaics \citep{Rodieck1991-kc}.
 However, as noted by its author, the density recovery profile is
-effectively the derivative of the K function computed with a given bin
+effectively the derivative of the \K function computed with a given bin
 width, and has the disadvantage that the bin width must be specified.
 
 TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
@@ -191,8 +225,7 @@ TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
   \centering
   \fbox{\includegraphics{beta_univ.pdf}}
   \caption{An example retinal mosaic: beta on-centre retinal ganglion
-    cells, taken from
-    \citep{Wassle1981-beta}.  On the left is the observed map, and the
+    cells \citep{Wassle1981-beta}.  On the left is the observed map, and the
     right is an example univariate simulation with matching field and
     density of points.  Scale bar is 100\,\um; soma are drawn to scale
     with a radius of 8\,\um.
@@ -206,10 +239,10 @@ TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
   \centering
   \fbox{\includegraphics{khat-univbeta.pdf}}
   \caption{Evidence for local exclusion zones in retinal mosaics.
-    The solid red curve shows the L function for the mosaic shown in
+    The solid red curve shows the \L function for the mosaic shown in
     Figure~\ref{fig:univ}A; the dotted blue curve is the corresponding
-    L function for the model output in Figure~\ref{fig:univ}B.  The
-    dotted black line is the expectation for the L function assumnig
+    \L function for the model output in Figure~\ref{fig:univ}B.  The
+    dotted black line is the expectation for the \L function assumnig
     complete spatial randomness (CSR). \label{fig:univk}}
 \end{figure}
 
@@ -277,7 +310,7 @@ spatial location of another type of neurons.  Statistical independence
 between type of neurons occupying different layers of the retina has been
 reported for cholinergic amacrine cells \citep{Diggle1986-df} and for
 several other pairs of neuron in rabbits \citep{Rockhill2000-bb} and
-zebrafish \citep{Mack2007}.
+zebrafish \citep{Mack2007-ia}.
 
 Full statistical independence between pairs of neurons can be shown
 only when the two types of neurons occupy different layers of the
@@ -364,10 +397,6 @@ simulations (Figure~\ref{fig:fthk12}).
   \label{fig:fthk12}
 \end{figure}
 
-
-
-TODO: maths for the L12 function.
-
 \subsection{Evidence for functional dependence}
 
 Many researchers have tested for the existence of functional
@@ -380,7 +409,7 @@ spatial location of blue cone photoreceptors (BC or ``blue cones'')
 and their synaptic targets in an adjacent layer, the blue cone bipolar
 cells (BCBP) \citep{Kouyama1992-cf3,Kouyama1997-wm}.  An example of
 such a mosaic is shown in Figure~\ref{fig:bcbp}.  These cells tend to
-cluster together, as shown by the increased values of the L\ped{12}
+cluster together, as shown by the increased values of the \L\ped{12}
 function over distances up to around 25\,\um.  As BCBPs receive input
 only from BCs, it would make sense for them to be close to each other,
 to minimise the synaptic wiring required.  Our preliminary modelling
@@ -470,12 +499,13 @@ spatial correlations in the nervous system.  The retina is
 particularly useful for this task because of its strongly laminar
 structure and the availability of markers for selectively identifying
 cells of one type.  However, we imagine these techniques will have
-utility in other regions of the nervous system, and have indeed
-recently been applied to striatum and spinal cord
-\citep{Gangarossa2013-cc,Prodanov2007-fe}.  Finally, although we have
-used these techniques here to demonstrate the spatial organisation of
-anatomical features, they can also be used for physiological features,
-such as the arrangement of centres of receptive fields \citep{Hore2012-ac}.
+utility in other regions of the nervous system, and have indeed been
+applied to prefontal cortex, striatum and spinal cord
+\citep{Cotter2002-fc,Gangarossa2013-cc,Prodanov2007-fe}.  Finally,
+although we have used these techniques here to demonstrate the spatial
+organisation of anatomical features, they can also be used for
+physiological features, such as the arrangement of centres of
+receptive fields \citep{Hore2012-ac}.
 
 
 \clearpage
