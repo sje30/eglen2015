@@ -584,7 +584,7 @@ R Packaging/vignettes good for modest-sized datasets;
 \subsection*{Acknowledgements}
 I thank Professors Joseph Corbo, Abbie Hughes, David Marshak and Heinz
 W\"{a}ssle for providing the retinal mosaics included in this paper.
-DOCKER?
+Thanks to Ben Marwick for help with Docker testing.
 
 \bibliographystyle{jneurosci} \bibliography{eglen2015}
 
