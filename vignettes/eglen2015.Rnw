@@ -2,6 +2,8 @@
 %\VignetteKeywords{retina,mosaics,reproducible-research}
 %\VignettePackage{eglen2015}
 %\VignetteEngine{knitr::knitr}
+% Tell Rstudio this is a knitr document
+% !Rnw weave = knitr
 \documentclass{article}
 \usepackage{mathpazo,booktabs,upgreek}
 \renewcommand{\sfdefault}{lmss}
@@ -25,7 +27,9 @@
 %% Place all figures at end of paper?
 %%\usepackage[noheads,nomarkers]{endfloat}
 
+
 \begin{document}
+
 
 \onehalfspacing
 
