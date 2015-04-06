@@ -14,7 +14,7 @@
 
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
-\newcommand{\Lcross}{L\ped{12}\xspace}
+\newcommand{\Lcross}{\ensuremath{L_{12}}\xspace}
 \newcommand{\vx}{\ensuremath{\mathbf{x}}}
 \newcommand{\K}{\ensuremath{K}\xspace}
 \renewcommand{\L}{\ensuremath{L}\xspace}
@@ -45,7 +45,7 @@
   other.  (1) Cells of different type might be effectively independent
   of each other. (2) Random labelling (3) Functional dependence.
   %% 
-  Finally, I have termed this article a 'reproducible review' because
+  Finally, I have termed this article a `reproducible review' because
   all the data and computer code are integrated into the manuscript so
   that others can repeat the analysis presented here.  I close the
   review with a discussion of this concept.
@@ -107,11 +107,12 @@ The retina is the neural structure located at the back of the eye.
 Light passes through the eye and is converted into electrical activity
 by the photoreceptors.  The retina then performs sophisticated
 processing of the visual scene before transmitting this information to
-the brain for further processing.  See \citet{Wassle2004-lt} for an overview of
-this processing.  Estimates vary, but there are thought to be 70--100
-types of retinal neuron that perform unique computations to transform
-the visual scene into a neural code.  Each of the types of neurons
-typically occupies one of three layers (Figure~\ref{fig:layers}).
+the brain for further processing.  See \citet{Wassle2004-lt} for an
+overview of this processing.  Estimates vary, but there are thought to
+be 70--100 types of retinal neuron [REF] that perform unique
+computations to transform the visual scene into a neural code.  Each
+of the types of neurons typically occupies one of three layers
+(Figure~\ref{fig:layers}).
 
 
 \begin{figure}
