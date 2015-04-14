@@ -114,17 +114,17 @@ by the photoreceptors.  The retina then performs sophisticated
 processing of the visual scene before transmitting this information to
 the brain for further processing.  See \citet{Wassle2004-lt} for an
 overview of this processing.  Estimates vary, but there are thought to
-be 70--100 types of retinal neuron [REF] that perform unique
-computations to transform the visual scene into a neural code.  Each
-of the types of neurons typically occupies one of three layers
-(Figure~\ref{fig:layers}).  Although the cell body of a retinal neuron
-has a three dimensional position $(x, y, z)$ we can often disregard
-$z$ for two reasons.  First, once we know the type of a neuron, its
-$z$ value is fairly well determined.  Second, the range of $z$
-\citep[given by retinal thickness, about .2\,mm;]{Ferguson2013-ks} is
-much smaller than the range of $x$ and $y$
-\citep[4--5\,mm]{Sterratt2013-oq} Therefore in this review, we will
-treat neuron positions as two-dimensional.
+be at least 60 types of retinal neuron \cite{Masland2012-gm} that
+perform unique computations to transform the visual scene into a
+neural code.  Each of the types of neurons typically occupies one of
+three layers (Figure~\ref{fig:layers}).  Although the cell body of a
+retinal neuron has a three dimensional position $(x, y, z)$ we can
+often disregard $z$ for two reasons.  First, once we know the type of
+a neuron, its $z$ value is fairly well determined.  Second, the range
+of $z$ \citep[given by retinal thickness, about
+.2\,mm;]{Ferguson2013-ks} is much smaller than the range of $x$ and
+$y$ \citep[4--5\,mm]{Sterratt2013-oq} Therefore in this review, we
+will treat neuron positions as two-dimensional.
 
 \begin{figure}
   \centering
