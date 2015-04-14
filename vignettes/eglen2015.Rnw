@@ -86,7 +86,6 @@ read_chunk('chickcones.R')
 
 TODO
 \begin{itemize}
-\item Finish figure 1 with abbrevs: five main classes of neuron.
 \item TODO create data tables?
 \end{itemize}
 \subsection*{Table of abbreviations}
@@ -555,8 +554,13 @@ receptive fields \citep{Hore2012-ac}.
 \section{Part two}
 
 
-TODO This paper is available as a reproducible research document, written
-in the knitr framework \citep{Knitrxxx}
+This paper is available as a reproducible research document,
+written in the knitr literate programming framework for R
+\citep{Xie2013}.  All of the materials to reproduce the analysis and
+modelling performed in this paper are available as an R package at
+\url{http://github.com/sje30/eglen2015}.  See that URL for full
+details of how to regenerate this article.
+
 
 The role of reproducible research...  Challenges for the compendium
 concept recently brought into neuroscience [Pouzat]
