@@ -17,6 +17,7 @@
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
 \newcommand{\Lcross}{\ensuremath{L_{12}}\xspace}
+\newcommand{\dmin}{d\ped{min}\xspace}
 \newcommand{\vx}{\ensuremath{\mathbf{x}}}
 \newcommand{\K}{\ensuremath{K}\xspace}
 \renewcommand{\L}{\ensuremath{L}\xspace}
@@ -116,8 +117,14 @@ overview of this processing.  Estimates vary, but there are thought to
 be 70--100 types of retinal neuron [REF] that perform unique
 computations to transform the visual scene into a neural code.  Each
 of the types of neurons typically occupies one of three layers
-(Figure~\ref{fig:layers}).
-
+(Figure~\ref{fig:layers}).  Although the cell body of a retinal neuron
+has a three dimensional position $(x, y, z)$ we can often disregard
+$z$ for two reasons.  First, once we know the type of a neuron, its
+$z$ value is fairly well determined.  Second, the range of $z$
+\citep[given by retinal thickness, about .2\,mm;]{Ferguson2013-ks} is
+much smaller than the range of $x$ and $y$
+\citep[4--5\,mm]{Sterratt2013-oq} Therefore in this review, we will
+treat neuron positions as two-dimensional.
 
 \begin{figure}
   \centering
@@ -184,28 +191,57 @@ whereby points avoid each other \citep{Diggle2002-db}.
 As can be seen in Figure~\ref{fig:univk}, retinal mosaics normally
 show evidence of spatial regularity over small distances, in this case
 up to around 150\,\um.  Beyond this distance, there is no further
-order and so the \L function matches that expected from CSR.  One
-common approach used in spatial statistics to compare model and data
-is to compare their \K or \L functions (Figure \ref{fig:univk}).
-Informally, if the \L function for the data falls within the envelope
-of the \L functions from multiple runs of the model from different
-initial conditions, then we say that the model fits the data.  More
-formally, empirical p values can be computed to compare model and data
-\citep{Diggle1986-df}.
+order and so the \L function matches that expected from CSR.  Hence,
+this suggests there is a local exclusion zone working over relatively
+small distances (no more than 150\,\um) to space neurons apart.
+Several biological mechanisms have been proposed to account for the
+formation of such exclusion zones, including lateral inhibition of
+cell fate \citep{Takesue1998-eg}, lateral migration of neurons
+\citep{Reese2002-ba} and cell death
+\citep{Jeyarasasingam1998-ie,Resta2005-ba}.
 
-Note that many other methods for quantifying order in retinal mosaics
-have been proposed, ranging from simple nearest-neighbour methods
-\citep{Wassle1978-uo} to those based on Voronoi diagrams \citep{Keeley2014-dn}.
-Several of these measures have been empirically compared \cite{Cook1996}.
-In this review we focus on probably the single most useful measure,
-the \K function.  It is worth noting that a closely related variant of
-the \K function, the density recovery profile, was proposed
-specifically for the analysis of retinal mosaics \citep{Rodieck1991-kc}.
-However, as noted by its author, the density recovery profile is
-effectively the derivative of the \K function computed with a given bin
-width, and has the disadvantage that the bin width must be specified.
+To check that the global patterns of retinal mosaics can emerge from
+simple local exclusion zones, we can models whereby cells are
+positioned subject to such local rules only.  The simplest of these
+models is called the ``exclusion zone'' model, or the ``\dmin model''
+\citep{Eglen2012_csn}.  In this model, cells are added one-by-one into
+the array at random locations as long as they are some distance \dmin
+away from all previously positioned cells.  The larger the value of
+\dmin the bigger the exclusion zone surrounding each cell.  \dmin is
+the only free parameter of the model, and is often varied from cell to
+cell by sampling from a Normal distribution.
 
-TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
+
+To test whether the \dmin model accounts for the data, we need a
+method to compare model output with experimental data.  One common
+approach used in spatial statistics is to compare their \K or \L
+functions either for one run, or many runs, of the model (Figure
+\ref{fig:univk}).  Informally, if the \L function for the data falls
+within the envelope of the \L functions from multiple runs of the
+model from different initial conditions, then we say that the model
+fits the data.  More formally, empirical p values can be computed to
+compare model and data \citep{Diggle1986-df}.  In
+Figure~\ref{fig:univk} there is a good qualitative match.  Given that
+the \dmin model is a phenomenological model, it suggests only that
+local exclusion zones are sufficient to recreate global order, but
+cannot tell us which developmental mechanisms are responsible.  To
+assess which mechanisms might be responsible, we need to examine
+mechanistic models \citep{Eglen2000-ab,Eglen2002-ce,Ruggiero2007-9c0}.
+
+Many other methods for quantifying order in retinal mosaics have been
+proposed, ranging from simple nearest-neighbour methods
+\citep{Wassle1978-uo} to those based on Voronoi diagrams
+\citep{Keeley2014-dn}.  Several of these measures have been
+empirically compared \citep{Cook1996-be}.  In this review we focus on
+probably the single most useful measure, the \K function.  It is worth
+noting that a closely related variant of the \K function, the density
+recovery profile, was proposed specifically for the analysis of
+retinal mosaics \citep{Rodieck1991-kc}.  However, as noted by its
+author, the density recovery profile is effectively the derivative of
+the \K function computed with a given bin width, and has the
+disadvantage that the bin width must be specified.
+
+
 
 
 <<get-rgc-data,echo=FALSE>>=
@@ -252,17 +288,19 @@ TODO: Explain exclusion zone, and its biological basis. (cell death/dendrites).
 \end{figure}
 
 
+TODO: explain bivariate here.
 
-Figure 2 shows an example of a bivariate point pattern from cat
-retina.  Figure 2A shows the position of neurons taken from cat
-retina, and Figure 2B is from a stochastic model, based on exclusion
-zones (to be described later).  How do we decide what structure might
-be present in the data, and whether the model is a good fit for the
-data?  In particular, a key question to explore is whether neurons of
-different type interact to generate these spatial patterns.  To answer
-these questions, we can use the framework established by Peter Diggle
-nearly thirty years ago \citep{Diggle1986-df}.  This framework
-examined two hypotheses in detail:
+
+Figure~\ref{w81}A shows an example of a bivariate point pattern from
+cat retina and Figure~\ref{w81}B is from a stochastic model, based on
+exclusion zones (to be described later).  How do we decide what
+structure might be present in the data, and whether the model is a
+good fit for the data?  In particular, a key question to explore is
+whether neurons of different type interact to generate these spatial
+patterns.  To answer these questions, we can use the framework
+established by Peter Diggle nearly thirty years ago
+\citep{Diggle1986-df}.  This framework examined two hypotheses in
+detail:
 
 \begin{description}
 \item[H1] neurons of different types do not interact.
@@ -273,7 +311,7 @@ examined two hypotheses in detail:
 In this review we consider evidence from different neuronal types in
 the retina collected over the last thirty to forty years that suggests
 different pairs of neuronal types obey different rules.  In this
-review we use the phrase coined in \cite{Diggle1986-df} of ``bivariate
+review we use the phrase coined in \citet{Diggle1986-df} of ``bivariate
 spatial point patterns'' to refer to the spatial arrangement of two
 types of retinal neuron within the same sample window.
 
@@ -534,11 +572,11 @@ to be made available (Oct 2014).
 
 
 Kitemarking editorials in Biostatistics [Diggle...] and review by
-\cite{Peng2011-75a}.  Hard to find examples.
+\citep{Peng2011-75a}.  Hard to find examples.
 
 Some journals (quarterly journal of political science) now requires
 papers to be reproducible.  Science requires addendum
-e.g. \cite{Vogels2011-c8c}.
+e.g. \citep{Vogels2011-c8c}.
 
 Describe Docker for R (Rocker) \citep{Boettiger2014-sk}.  
 
