@@ -12,7 +12,7 @@
 \usepackage[a4paper,left=2cm,right=4cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{setspace}
 \usepackage{listings}
-\usepackage{verbatim}
+\usepackage{verbatim,hyperref}
 
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
@@ -23,6 +23,7 @@
 \renewcommand{\L}{\ensuremath{L}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \usepackage{url}
+\usepackage[nolists,figuresonly]{endfloat}
 \usepackage[authoryear]{natbib}
 
 %% Place all figures at end of paper?
@@ -104,7 +105,7 @@ TODO
   RGC & retinal ganglion cell\\
   \bottomrule
 \end{tabular}
-\section{Introduction}
+\section*{Introduction}
 
 
 The retina is the neural structure located at the back of the eye.
@@ -147,19 +148,22 @@ treat neuron positions as two-dimensional.
 One organisational feature of the retina found in many species is that
 of ``retinal mosaics'': neurons are typically positioned within a
 layer in a semi-regular manner.  Figure~\ref{fig:univ} shows a typical
-example from cat retina.  These patterns can be simulated effectively
-by assuming that cells are positioned randomly, subject to a local
-exclusion zone -- no two cells come too close together.
-Figure~\ref{fig:univ}B shows the result of one such simulation.  These
-patterns appear to have similar spatial properties.
-
-The spatial organisation of point processes can be quantified using
+example from cat retina.  Figure~\ref{fig:univ}B shows the result of a
+corresponding model, which will be explained below.  These patterns
+visually appear to have similar spatial properties.  The spatial
+organisation of point processes such as these can be quantified using
 the \K function \citep{Ripley1976-ic}, which quantifies the expected
-number of points within a given distance of any point.  We store the
-position of the $i$th type 1 neuron as a two-dimensional vector
-$\vx_{1i}$ where $i \in [1,n_1]$ and likewise for the $j$th type 2
-neuron in $\vx_{2j}, j \in [1, n_2]$.  We then define the bivariate \K
-and \L functions as
+number of points within a given distance of any point.  The \K
+function can analyse both univariate patterns (cells of one type;
+Figure~\ref{fig:univ}) or bivariate patterns (cells of two types;
+Figure~\ref{w81}).  Given that the univariate \K function is a
+simplification of the bivariate \K function, we first define the
+bivariate function.
+
+We store the position of the $i$th type 1 neuron as a two-dimensional
+vector $\vx_{1i}$ where $i \in [1,n_1]$ and likewise for the $j$th
+type 2 neuron in $\vx_{2j}, j \in [1, n_2]$.  We then define the
+bivariate \K and \L functions as
 
 \begin{align}
   K_{12}(t) &= \frac{|A|}{n_1 n_2} 
@@ -192,7 +196,7 @@ show evidence of spatial regularity over small distances, in this case
 up to around 150\,\um.  Beyond this distance, there is no further
 order and so the \L function matches that expected from CSR.  Hence,
 this suggests there is a local exclusion zone working over relatively
-small distances (no more than 150\,\um) to space neurons apart.
+small distances (no more than 150\,\um here) to space neurons apart.
 Several biological mechanisms have been proposed to account for the
 formation of such exclusion zones, including lateral inhibition of
 cell fate \citep{Takesue1998-eg}, lateral migration of neurons
@@ -202,13 +206,14 @@ cell fate \citep{Takesue1998-eg}, lateral migration of neurons
 To check that the global patterns of retinal mosaics can emerge from
 simple local exclusion zones, we can models whereby cells are
 positioned subject to such local rules only.  The simplest of these
-models is called the ``exclusion zone'' model, or the ``\dmin model''
-\citep{Eglen2012_csn}.  In this model, cells are added one-by-one into
-the array at random locations as long as they are some distance \dmin
-away from all previously positioned cells.  The larger the value of
-\dmin the bigger the exclusion zone surrounding each cell.  \dmin is
-the only free parameter of the model, and is often varied from cell to
-cell by sampling from a Normal distribution.
+models is called the \textit{exclusion zone} model, or the
+\textit{\dmin model} \citep{Eglen2012}.  In this model, cells are
+added one-by-one into the array at random locations as long as they
+are some distance \dmin away from all previously positioned cells.
+The larger the value of \dmin the bigger the exclusion zone
+surrounding each cell.  \dmin is the only free parameter of the model,
+and is often varied from cell to cell by sampling from a Normal
+distribution.
 
 
 To test whether the \dmin model accounts for the data, we need a
@@ -287,32 +292,33 @@ disadvantage that the bin width must be specified.
 \end{figure}
 
 
-TODO: explain bivariate here.
+\subsection*{Bivariate patterns}
 
+In the previous section we have explored the spatial relationships
+among cells of the same type.  We now consider the spatial
+relationships between cells of different types.  In particular, we
+examine several examples of related pairs of neuronal types.  Perhaps
+the most famous example of such a bivariate pattern is the on-centre
+and off-centre beta retinal ganglion cells \cite{Wassle1981-beta}.
+These two types of neuron differ physiologically in terms of whether
+they respond to increases or decreases in light levels in the centre
+of their receptive fields.  Figure~\ref{w81}A shows an example of a
+bivariate point pattern from cat retina, and Figure~\ref{w81}B shows a
+stochastic model again based on exclusion zones (to be described
+later).  How do we decide what structure might be present in the data,
+and whether the model is a good fit for the data?  In particular, a
+key question to explore is whether neurons of different type interact
+to generate these spatial patterns.  
+\citet{Diggle1986-df} established a quantitative framework to examine
+these questions nearly thirty years ago.
 
-Figure~\ref{w81}A shows an example of a bivariate point pattern from
-cat retina and Figure~\ref{w81}B is from a stochastic model, based on
-exclusion zones (to be described later).  How do we decide what
-structure might be present in the data, and whether the model is a
-good fit for the data?  In particular, a key question to explore is
-whether neurons of different type interact to generate these spatial
-patterns.  To answer these questions, we can use the framework
-established by Peter Diggle nearly thirty years ago
-\citep{Diggle1986-df}.  This framework examined two hypotheses in
-detail:
-
-\begin{description}
-\item[H1] neurons of different types do not interact.
-\item[H2] neurons are initially created in a single population, and
-  then differentiate into two populations.
-\end{description}
-
-In this review we consider evidence from different neuronal types in
-the retina collected over the last thirty to forty years that suggests
+In this review we consider evidence from three pairs of retinal
+neuronal types collected over the last thirty years that suggests
 different pairs of neuronal types obey different rules.  In this
-review we use the phrase coined in \citet{Diggle1986-df} of ``bivariate
-spatial point patterns'' to refer to the spatial arrangement of two
-types of retinal neuron within the same sample window.
+review we use the phrase coined in \citet{Diggle1986-df} of
+``bivariate spatial point patterns'' to refer to the spatial
+arrangement of two types of retinal neuron within the same sample
+window.
 
 
 
@@ -333,7 +339,7 @@ types of retinal neuron within the same sample window.
 \end{figure}
 
 
-\subsection{Evidence for functional independence}
+\subsection*{Example one: evidence for functional independence}
 
 
 With multiple types of neurons present in the retina, it is possible
@@ -373,7 +379,7 @@ between types is that cells cannot closer than some minimal distance
 
 
 
-\subsection{Evidence for random labelling}
+\subsection*{Example two: evidence for random labelling}
 
 The random labelling hypothesis (H2) was rejected for the cholinergic
 amacrince cells \citep{Diggle1986-df}; see also revisit with fuller model in
@@ -439,7 +445,7 @@ simulations (Figure~\ref{fig:fthk12}).
   \label{fig:fthk12}
 \end{figure}
 
-\subsection{Evidence for functional dependence}
+\subsection*{Example three: evidence for functional dependence}
 
 Many researchers have tested for the existence of functional
 dependencies between two types of retinal neuron.  In particular, a
@@ -495,7 +501,7 @@ investigate directly the nature of the \Lcross function.
 
 
 
-\subsection{Future directions}
+\subsection*{Future directions}
 
 
 That these two examples of positive and negative cross-correlation
@@ -551,23 +557,23 @@ receptive fields \citep{Hore2012-ac}.
 
 
 \clearpage
-\section{Part two}
+\section*{Reproducible research}
 
 
-This paper is available as a reproducible research document,
-written in the knitr literate programming framework for R
-\citep{Xie2013}.  All of the materials to reproduce the analysis and
-modelling performed in this paper are available as an R package at
+This paper is available as a reproducible research document, written
+in the knitr literate programming framework for R \citep{Xie2013}.  In
+recent years, R has gained wide acceptance and was noted as the most
+popular tool in statistics in 2014 \citep{Tippmann2015-sv}.  One key
+advantage of R is the availability of mature methods for sharing code
+and data in packages.  All of the materials to reproduce the analysis
+and modelling performed in this paper are available as an R package at
 \url{http://github.com/sje30/eglen2015}.  See that URL for full
 details of how to regenerate this article.
 
 
+
 The role of reproducible research...  Challenges for the compendium
 concept recently brought into neuroscience [Pouzat]
-
-R as most popular tool in statistics in 2014 \citep{Tippmann2015-sv}
-and has been at the leading edge of modern computational statistics
-for many years.
 
 Other journals encouraging data sharing beyond the paper
 \citep{Leng2014-uo}.  Recent developments: Nature have asked for code
@@ -583,8 +589,6 @@ papers to be reproducible.  Science requires addendum
 e.g. \citep{Vogels2011-c8c}.
 
 Describe Docker for R (Rocker) \citep{Boettiger2014-sk}.  
-
-\url{https://github.com/mgymrek/docker-reproducibility-example}
 
 The docker system provides a convenient way for the entire computing
 environment relating to a project to be efficiently captured and then
@@ -602,7 +606,6 @@ Once this is complete, which typically takes a few minutes, the user
 can then open a web browser to view the PDF or edit this paper.  Further
 details on running the docker system are given at
 \url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
-\textbf{How stable is this link likely to be?}.
 
 
 
@@ -617,8 +620,6 @@ details on running the docker system are given at
 R Packaging/vignettes good for modest-sized datasets;
 
 
-
-\section*{Installation}
 
 %% \url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
 
