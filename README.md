@@ -5,6 +5,15 @@ article is currently titled "Bivariate spatial point patterns in the
 visual system: A reproducible review" and is hopefully of relevance to
 the computational neuroscience and spatial statistics communities.
 
+This package contains all the material needed to regenerate the
+article for itself.  Some key parts of the package are:
+
+* [vignettes/eglen2015.Rnw](vignettes/eglen2015.Rnw): the source file
+  for the article in LaTeX format.
+* [inst/extdata](inst/extdata): a folder containing all the data files
+analysed in this article.
+
+
 
 ## Recompiling the paper
 
@@ -23,7 +32,7 @@ then view the paper, or view the knitr document that created the paper:
 	
 This does of course assume that your system already has R, latex, and
 various unix tools.  That may not be the case; however, you can still
-use the package through the docker system, see below.
+use the package through the Docker system, see next.
 
 
 
@@ -47,8 +56,6 @@ From that session, you can then view the vignette with `vignette("eglen2015")` o
 
 Thanks to the [Rocker](https://github.com/rocker-org) team for the
 R-based docker images, on which this work is based.
-
-
 
 
 
