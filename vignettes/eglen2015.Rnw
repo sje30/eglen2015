@@ -89,10 +89,6 @@ read_chunk('chickcones.R')
 
 
 
-TODO
-\begin{itemize}
-\item TODO create data tables?
-\end{itemize}
 \subsection*{Table of abbreviations}
 \begin{tabular}{ll}
   \toprule
