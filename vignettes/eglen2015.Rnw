@@ -660,15 +660,17 @@ research artefacts, notably computer code, to be shared.  The journal
 \textit{Biostatistics} was one of the first to encourage researchers
 to share code and data, along with reproducible research, by including
 suitable kitemarks (``badges'') on the front page of the article
-\citep{Diggle,Peng2011-75a}.  The journal \textit{Science} requires
-authors to generated supporting online material including relevant
-code and data.  As an example, \citet{Vogels2011-c8c} provides a
-comprehensive supplement in the field of computational neuroscience.
-Most recently, in 2014, Nature journals began to request computer code
-relating to papers to be made available upon publication \citep{...}.
-Outside of the sciences, the journal \textit{Quarterly Journal of
-  Political Science} since 2005 has required all empirical papers to
-be reproducible.  See
+\citep{Peng2009-hz,Peng2011-75a}.  The journal \textit{Science}
+requires authors to generated supporting online material including
+relevant code and data.  As an example, \citet{Vogels2011-c8c}
+provides a comprehensive supplement in the field of computational
+neuroscience.  Most recently, since October 2014, Nature journals
+require a statement whether (and where) the code underlying research
+results is available \citep{noauthor_2014-mv};
+\textit{Neuroinformatics} has a similar approach to listing whether
+code is available \citep{Ascoli2014-dk}.  Outside of the sciences, the
+journal \textit{Quarterly Journal of Political Science} since 2005 has
+required all empirical papers to be reproducible.  See
 \url{http://thepoliticalmethodologist.com/2014/12/09/a-decade-of-replications-lessons-from-the-quarterly-journal-of-political-science/}
 for lessons learnt from this process.
 
