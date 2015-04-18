@@ -586,75 +586,119 @@ receptive fields \citep{Hore2012-ac}.
 
 \section*{Reproducible research}
 
-
-This paper is available as a reproducible research document, written
-in the knitr literate programming framework for R \citep{Xie2013}.  In
-recent years, R has gained wide acceptance and was noted as the most
-popular tool in statistics in 2014 \citep{Tippmann2015-sv}.  One key
-advantage of R is the availability of mature methods for sharing code
-and data in packages.  All of the materials to reproduce the analysis
-and modelling performed in this paper are available as an R package at
-\url{http://github.com/sje30/eglen2015}.  See that URL for full
+When writing a review article such as this, it is typical to include
+results (typically in the form of figures or graphs) that have been
+published before in other articles.  For computational work, this
+typically means include the results of previous modelling or analysis.
+I have deliberately taken a different approach in this article: all of
+the results presented here have been generated afresh, albeit based on
+my previous work, and new figures generated for the results.  The one
+exception to this is Figure~\ref{fig:layers}, which is a schematic of
+retinal layers, rather than showing any results.  Furthermore, all the
+code and data required for others to generate new figures are
+available as part of an R package.  This package is publicly available
+at \url{http://github.com/sje30/eglen2015}; see that URL for full
 details of how to regenerate this article.
 
+This paper is therefore the main output of the R package that I have
+created.  This approach to writing papers is known as reproducible
+research, since the aim is that others should be able to reproduce the
+results presented in this paper for themselves.  (Given that the
+simulations in this paper are stochastic, there will be some
+variation each time the paper is created.)  This notion is fairly new
+to computational neuroscience, with \citet{Delescluse2011} possibly as
+the first example.  However, in other disciplines, such as
+computational biology, reproducible research papers have a slightly
+longer history \citep{Gentleman2004}.  
+
+There are now several alternative workflows for generating such
+reproducible research documents.  I have chosen to use the knitr
+literate programming framework for R \citep{Xie2013}.  This provides a
+powerful framework for mixing documentation (the paper) and code (the
+analysis).  Although knitr can work with several programming
+languages, it has strongest support for the R programming language,
+which in 2014 was the most popular tool in statistics in 2014
+\citep{Tippmann2015-sv}.  The packaging system in R blends easily with
+the reproducible research document since it allows the developer to
+include all of the data and code relating to a project into one
+package.  This package can then be shared easily with other R users.
 
 
-The role of reproducible research...  Challenges for the compendium
-concept recently brought into neuroscience [Pouzat]
-
-Other journals encouraging data sharing beyond the paper
-\citep{Leng2014-uo}.  Recent developments: Nature have asked for code
-to be made available (Oct 2014).
-
-
-
-Kitemarking editorials in Biostatistics [Diggle...] and review by
-\citep{Peng2011-75a}.  Hard to find examples.
-
-Some journals (quarterly journal of political science) now requires
-papers to be reproducible.  Science requires addendum
-e.g. \citep{Vogels2011-c8c}.
-
-Describe Docker for R (Rocker) \citep{Boettiger2014-sk}.  
-
-The docker system provides a convenient way for the entire computing
-environment relating to a project to be efficiently captured and then
-run.  Docker runs on all major operating systems and provides
-lightweight linux virtual machines and hence a convenient way of
-getting software to run on different platforms.  Once installed, the
-entire environment required to generate this program can be downloaded
-and initialised using the command:
+Although this packaging system can work well in R, and has done for
+this modest sized review, there are still technical challenges to
+overcome, mostly when dealing with large data sets or with intensive
+computation.  Another technical problem is how to ensure that another
+user has a compatible environment for running your software.  Running
+the same code in different environments may well produce different
+results.  To help solve this last problem, the Docker system provides
+a convenient way for the entire computing environment relating to a
+project to be efficiently captured and then run.  Docker runs on all
+major operating systems and provides lightweight linux virtual
+machines and hence a convenient way of getting software to run on
+different platforms.  For example, once installed, the entire
+environment required to generate this paper can be downloaded and
+initialised using the command:
 
 \begin{verbatim}
 docker run -d -p 8787:8787 sje30/eglen2015
 \end{verbatim}
 
-Once this is complete, which typically takes a few minutes, the user
-can then open a web browser to view the PDF or edit this paper.  Further
-details on running the docker system are given at
+Once this is complete, which typically takes a few minutes the first
+time it is run, the user can then open a web browser to run R locally
+and then view the PDF or edit and regenerate this article.  Given that
+the R environment is open source, the support for R in docker is
+fairly mature \citep{Boettiger2014-sk}.  Further details on running
+the docker system with R are given at
 \url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
+The biggest restriction to Docker for reproducible research is that
+the required software must be open source (which excludes environments
+such as Matlab which are popular in Neuroscience).
+
+Although the concept of reproducible research documents is fairly new
+in most mainstream journals, I hope we will see more people choosing
+to write their papers in this fashion in years to come.  Just as in
+recent years journals and funding agencies have embraced the notion of
+``open data'' so that data relating to a paper should be freely
+shared, there is now a growing trend for journals to ask for other
+research artefacts, notably computer code, to be shared.  The journal
+\textit{Biostatistics} was one of the first to encourage researchers
+to share code and data, along with reproducible research, by including
+suitable kitemarks (``badges'') on the front page of the article
+\citep{Diggle,Peng2011-75a}.  The journal \textit{Science} requires
+authors to generated supporting online material including relevant
+code and data.  As an example, \citet{Vogels2011-c8c} provides a
+comprehensive supplement in the field of computational neuroscience.
+Most recently, in 2014, Nature journals began to request computer code
+relating to papers to be made available upon publication \citep{...}.
+Outside of the sciences, the journal \textit{Quarterly Journal of
+  Political Science} since 2005 has required all empirical papers to
+be reproducible.  See
+\url{http://thepoliticalmethodologist.com/2014/12/09/a-decade-of-replications-lessons-from-the-quarterly-journal-of-political-science/}
+for lessons learnt from this process.
 
 
-
-\begin{itemize}
-\item computation time
-\item size of data
-\item Packaging.  Packages may be a good technical solution, but
-  perhaps are not always not a good fit, e.g. if several papers come
-  out of related bits of code, where should the code fit?
-\end{itemize}
-
-R Packaging/vignettes good for modest-sized datasets;
+In summary, the R computing environment provides many of the tools for
+reproducible research.  Other languages, such as python, have
+equivalent notebook tools to help researchers share their work.  This
+approach to writing papers is a powerful way of sharing one data and
+results with others.  It allows others to easily verify the results,
+and then directly use the code and data associated with the article.
+This should lead us to a more cooperative environment for sharing our
+research.
 
 
+%% http://nowpublishers.com/Journal/AuthorInstructions/QJPSprior to publication.
 
-%% \url{~/langs/R/sjemea/vignettes/sjemea-intro.Rnw}
-
+%% Other journals encouraging data sharing beyond the paper
+%% \citep{Leng2014-uo}. 
 
 \subsection*{Acknowledgements}
+
 I thank Professors Joseph Corbo, Abbie Hughes, David Marshak and Heinz
 W\"{a}ssle for providing the retinal mosaics included in this paper.
-Thanks to Ben Marwick for help with Docker testing.
+Thanks to Ben Marwick for help with Docker testing and comments on the
+paper.
+
 
 \bibliographystyle{jneurosci} \bibliography{eglen2015}
 
