@@ -18,10 +18,14 @@
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
 \newcommand{\Lcross}{\ensuremath{L_{12}}\xspace}
 \newcommand{\dmin}{d\ped{min}\xspace}
+\newcommand{\dminff}{\ensuremath{\text{d}^{22}_\text{min}}\xspace}
+\newcommand{\dminof}{\ensuremath{\text{d}^{12}_\text{min}}\xspace}
+\newcommand{\dminoo}{\ensuremath{\text{d}^{11}_\text{min}}\xspace}
 \newcommand{\vx}{\ensuremath{\mathbf{x}}}
 \newcommand{\K}{\ensuremath{K}\xspace}
 \renewcommand{\L}{\ensuremath{L}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
+\providecommand*{\ap}[1]{\ensuremath{^\mathrm{#1}}}
 \usepackage{url}
 \usepackage[nolists,figuresonly]{endfloat}
 \usepackage[authoryear]{natbib}
@@ -116,15 +120,16 @@ the brain for further processing.  See \citet{Wassle2004-lt} for an
 overview of this processing.  Estimates vary, but there are thought to
 be at least 60 types of retinal neuron \citep{Masland2012-gm} that
 perform unique computations to transform the visual scene into a
-neural code.  Each of the types of neurons typically occupies one of
-three layers (Figure~\ref{fig:layers}).  Although the cell body of a
-retinal neuron has a three dimensional position $(x, y, z)$ we can
-often disregard $z$ for two reasons.  First, once we know the type of
-a neuron, its $z$ value is fairly well determined.  Second, the range
-of $z$ \citep[given by retinal thickness, about
-.2\,mm;]{Ferguson2013-ks} is much smaller than the range of $x$ and
-$y$ \citep[4--5\,mm]{Sterratt2013-oq} Therefore in this review, we
-will treat neuron positions as two-dimensional.
+neural code.  The cell body of each type of neuron typically is
+located in just one of the three nuclear layers
+(Figure~\ref{fig:layers}).  Although the cell body of a retinal neuron
+has a three dimensional position $(x, y, z)$ we can often disregard
+$z$ for two reasons.  First, once we know the type of a neuron, its
+$z$ value is fairly well determined.  Second, the range of $z$
+\citep[given by retinal thickness, about .2\,mm;][]{Ferguson2013-ks}
+is much smaller than the range of $x$ and $y$
+\citep[4--5\,mm][]{Sterratt2013-oq} Therefore in this review, we will
+treat neuron positions as two-dimensional.
 
 \begin{figure}
   \centering
@@ -147,7 +152,7 @@ will treat neuron positions as two-dimensional.
 
 One organisational feature of the retina found in many species is that
 of ``retinal mosaics'': neurons are typically positioned within a
-layer in a semi-regular manner.  Figure~\ref{fig:univ} shows a typical
+layer in a semi-regular manner.  Figure~\ref{fig:univ}A shows a typical
 example from cat retina.  Figure~\ref{fig:univ}B shows the result of a
 corresponding model, which will be explained below.  These patterns
 visually appear to have similar spatial properties.  The spatial
@@ -159,6 +164,34 @@ Figure~\ref{fig:univ}) or bivariate patterns (cells of two types;
 Figure~\ref{w81}).  Given that the univariate \K function is a
 simplification of the bivariate \K function, we first define the
 bivariate function.
+
+<<get-rgc-data,echo=FALSE>>=
+@ 
+
+<<setup-betamap,echo=FALSE,message=FALSE>>=
+@ 
+
+<<w81s1-define-h,echo=FALSE>>=
+@ 
+
+<<compute-univariate-betamap,echo=FALSE>>=
+@ 
+%% This chunk creates beta_univ.pdf which is then 
+%% included in the following pdf.  This is useful when
+%% you wish to fine-tune the pdf() dimensions.
+<<plot-univariate-betamap,results='hide'>>=
+@
+
+\begin{figure}
+  \centering
+  \fbox{\includegraphics{beta_univ.pdf}}
+  \caption{An example retinal mosaic: beta on-centre retinal ganglion
+    cells \citep{Wassle1981-beta}.  On the left is the observed map, and the
+    right is an example univariate simulation with matching field and
+    density of points.  Scale bar is 100\,\um; soma are drawn to scale
+    with a radius of 9\,\um.
+    \label{fig:univ}}
+\end{figure}
 
 We store the position of the $i$th type 1 neuron as a two-dimensional
 vector $\vx_{1i}$ where $i \in [1,n_1]$ and likewise for the $j$th
@@ -174,22 +207,35 @@ bivariate \K and \L functions as
 \end{align}
 %%
 The weighting factor $w(i,j)$ is a normalisation term to account for
-edge effect.  It is defined as the fraction of circumference of the
+edge effects.  It is defined as the fraction of circumference of the
 circle centred at $\vx_{1i}$ and with radius $|| \vx_{1i} -
 \vx_{2j}||$ that lies within the sampling window $A$.  $|A|$ denotes
-the area of the sample window.  The \L function is a common
-normalisation of the \K function.  The univariate K function (to
-analyse one set of points) is calculated by allowing $n_2 = n_1$ and
-$\vx_{2i} = \vx_{1i}$ for all points and ignoring self-counts.
+the area of the sample window.  The univariate K function (to analyse
+one set of points) is calculated by defining $n_2 = n_1$ and $\vx_{2i}
+= \vx_{1i}$ for all points and ignoring self-counts.
 
-For either the univariate or bivariate L function, if for a range of
-distances $t$ we find that $L(t) \approx t$, this indicates that there
-is no spatial order in the point pattern.  This is commonly termed
-\textit{Complete Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If
-however $L(t) > t$, this would indicate \textit{spatial clustering}:
-points are positioned close to each other more often than chance.
-Finally, when $L(t) < t$ is evidence of \textit{spatial regularity},
-whereby points avoid each other \citep{Diggle2002-db}.
+The \L function is a rescaling of the \K function.  For either the
+univariate or bivariate L function, if for a range of distances $t$ we
+find that $L(t) \approx t$, this indicates that there is no spatial
+order in the point pattern.  This is commonly termed \textit{Complete
+  Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If however $L(t) >
+t$, this would indicate \textit{spatial clustering}: points are
+positioned close to each other more often than chance.  Finally, 
+$L(t) < t$ implies \textit{spatial regularity}, whereby points
+avoid each other \citep{Diggle2002-db}.
+
+Many other methods for quantifying order in retinal mosaics have been
+proposed, ranging from simple nearest-neighbour methods
+\citep{Wassle1978-uo} to those based on Voronoi diagrams
+\citep{Keeley2014-dn}.  Several of these measures have been
+empirically compared \citep{Cook1996-be}.  In this review we focus on
+probably the single most useful measure, the \K function.  It is worth
+noting that a closely related variant of the \K function, the density
+recovery profile, was proposed specifically for the analysis of
+retinal mosaics \citep{Rodieck1991-kc}.  However, as noted by its
+author, the density recovery profile is effectively the derivative of
+the \K function computed with a given bin width, and has the
+disadvantage that the bin width must be specified.
 
 As can be seen in Figure~\ref{fig:univk}, retinal mosaics normally
 show evidence of spatial regularity over small distances, in this case
@@ -204,7 +250,7 @@ cell fate \citep{Takesue1998-eg}, lateral migration of neurons
 \citep{Jeyarasasingam1998-ie,Resta2005-ba}.
 
 To check that the global patterns of retinal mosaics can emerge from
-simple local exclusion zones, we can models whereby cells are
+simple local exclusion zones, we can build models whereby cells are
 positioned subject to such local rules only.  The simplest of these
 models is called the \textit{exclusion zone} model, or the
 \textit{\dmin model} \citep{Eglen2012}.  In this model, cells are
@@ -212,7 +258,7 @@ added one-by-one into the array at random locations as long as they
 are some distance \dmin away from all previously positioned cells.
 The larger the value of \dmin the bigger the exclusion zone
 surrounding each cell.  \dmin is the only free parameter of the model,
-and is often varied from cell to cell by sampling from a Normal
+and is often varied from cell to cell by sampling values from a Normal
 distribution.
 
 
@@ -231,51 +277,13 @@ local exclusion zones are sufficient to recreate global order, but
 cannot tell us which developmental mechanisms are responsible.  To
 assess which mechanisms might be responsible, we need to examine
 mechanistic models \citep{Eglen2000-ab,Eglen2002-ce,Ruggiero2007-9c0}.
+However, although we cannot use the current methods to understand the
+mechanisms of development, the existence of retinal mosaics is often
+used as an indicator of an independent cell type
+\citep{Cook2003-116,Seung2014-gw}.  Studying the nature of the retinal
+mosaics is therefore helpful to understanding how to classify neuronal
+types.
 
-Many other methods for quantifying order in retinal mosaics have been
-proposed, ranging from simple nearest-neighbour methods
-\citep{Wassle1978-uo} to those based on Voronoi diagrams
-\citep{Keeley2014-dn}.  Several of these measures have been
-empirically compared \citep{Cook1996-be}.  In this review we focus on
-probably the single most useful measure, the \K function.  It is worth
-noting that a closely related variant of the \K function, the density
-recovery profile, was proposed specifically for the analysis of
-retinal mosaics \citep{Rodieck1991-kc}.  However, as noted by its
-author, the density recovery profile is effectively the derivative of
-the \K function computed with a given bin width, and has the
-disadvantage that the bin width must be specified.
-
-
-
-
-<<get-rgc-data,echo=FALSE>>=
-@ 
-
-<<setup-betamap,echo=FALSE,message=FALSE>>=
-@ 
-
-<<w81s1-define-h,echo=FALSE>>=
-@ 
-
-<<compute-univariate-betamap,echo=FALSE>>=
-@ 
-
-%% This chunk creates beta_univ.pdf which is then 
-%% included in the following pdf.  This is useful when
-%% you wish to fine-tune the pdf() dimensions.
-<<plot-univariate-betamap,results='hide'>>=
-@
-
-\begin{figure}
-  \centering
-  \fbox{\includegraphics{beta_univ.pdf}}
-  \caption{An example retinal mosaic: beta on-centre retinal ganglion
-    cells \citep{Wassle1981-beta}.  On the left is the observed map, and the
-    right is an example univariate simulation with matching field and
-    density of points.  Scale bar is 100\,\um; soma are drawn to scale
-    with a radius of 8\,\um.
-    \label{fig:univ}}
-\end{figure}
 
 
 <<khat-univariate-betamap,results='hide'>>=
@@ -294,32 +302,29 @@ disadvantage that the bin width must be specified.
 
 \subsection*{Bivariate patterns}
 
-In the previous section we have explored the spatial relationships
-among cells of the same type.  We now consider the spatial
-relationships between cells of different types.  In particular, we
-examine several examples of related pairs of neuronal types.  Perhaps
-the most famous example of such a bivariate pattern is the on-centre
-and off-centre beta retinal ganglion cells \cite{Wassle1981-beta}.
-These two types of neuron differ physiologically in terms of whether
-they respond to increases or decreases in light levels in the centre
-of their receptive fields.  Figure~\ref{w81}A shows an example of a
-bivariate point pattern from cat retina, and Figure~\ref{w81}B shows a
-stochastic model again based on exclusion zones (to be described
-later).  How do we decide what structure might be present in the data,
-and whether the model is a good fit for the data?  In particular, a
-key question to explore is whether neurons of different type interact
-to generate these spatial patterns.  
-\citet{Diggle1986-df} established a quantitative framework to examine
-these questions nearly thirty years ago.
-
-In this review we consider evidence from three pairs of retinal
-neuronal types collected over the last thirty years that suggests
-different pairs of neuronal types obey different rules.  In this
-review we use the phrase coined in \citet{Diggle1986-df} of
-``bivariate spatial point patterns'' to refer to the spatial
-arrangement of two types of retinal neuron within the same sample
-window.
-
+In Figures~\ref{fig:univ} and \ref{fig:univk} we have explored the
+spatial relationships among cells of the same type.  We now consider
+the spatial relationships between cells of different types.  In
+particular, we examine several examples of related pairs of neuronal
+types.  Perhaps the most famous example of such a bivariate pattern is
+the on-centre and off-centre beta retinal ganglion cells
+\citep{Wassle1981-beta}.  These two types of neuron differ
+physiologically in terms of whether they respond to increases or
+decreases in light levels in the centre of their receptive fields.
+Figure~\ref{w81}A shows an example of a bivariate point pattern from
+cat retina, and Figure~\ref{w81}B shows a stochastic model again based
+on exclusion zones (to be described later).  How do we decide what
+structure might be present in the data, and whether the model is a
+good fit for the data?  In particular, a key question to explore is
+whether neurons of different type interact to generate these spatial
+patterns.  \citet{Diggle1986-df} established a quantitative framework
+to examine these questions nearly thirty years ago. In this review we
+use this framework on datasets from three pairs of retinal neuronal
+types collected over the last thirty years that suggests different
+pairs of neuronal types obey different rules.  In this review we use
+the phrase coined in \citet{Diggle1986-df} of ``bivariate spatial
+point patterns'' to refer to the spatial arrangement of two types of
+retinal neuron within the same sample window.
 
 
 <<w81s1-compute-mosaics,echo=FALSE,results='hide'>>=
@@ -334,7 +339,7 @@ window.
   \caption{Bivariate spatial point pattern.  A: observed field, W81S1
     from \citep{Wassle1981-beta}; B: simulation using bivariate PIPP
     rule.  Scale bar is 100\,\um; soma are drawn to scale with a
-    radius of 8\,\um.}
+    radius of 9\,\um.}
 \label{w81}
 \end{figure}
 
@@ -355,10 +360,13 @@ The simplest situation is that of \textit{Statistical independence}
 between two spatial point patterns, which means that the spatial
 location of one type of neurons is completely unaffected by the
 spatial location of another type of neurons.  Statistical independence
-between type of neurons occupying different layers of the retina has been
-reported for cholinergic amacrine cells \citep{Diggle1986-df} and for
-several other pairs of neuron in rabbits \citep{Rockhill2000-bb} and
-zebrafish \citep{Mack2007-ia}.
+between type of neurons occupying different layers of the retina was
+originally reported for cholinergic amacrine cells
+\citep{Diggle1986-df} and subsequently for several other pairs of
+neuron in rabbits \citep{Rockhill2000-bb} and zebrafish
+\citep{Mack2007-ia}.  This suggests that homotypic
+interactions are sufficient to create the spatial organisation within
+each type of neuron.
 
 Full statistical independence between pairs of neurons can be shown
 only when the two types of neurons occupy different layers of the
@@ -367,51 +375,71 @@ physical size constraints need to be taken into account as neurons
 cannot occupy the same physical space.  The cell bodies of retinal
 neurons are typically at least 10\,\um for example, which introduce
 steric hindrance effects \citep{Cook2003-116} between all neurons,
-irrespective of their type.
+irrespective of their type.  For example, cell bodies of many types of
+retinal ganglion cell (RGCs) are located in the ganglion cell layer
+(GCL).  Given that there are at least fifteen anatomical types of RGC
+in mouse retina \cite{Sumbul2014-vm} these steric hindrance effects
+are likely to be significant.
 
 To account for these physical effects, we devised the term
 \textit{functional independence} to describe the case when two spatial
 point patterns do not interact, except for these short-range steric
-hindrance effects \citep{Eglen2006-nj}.  An example of a bivariate
-point pattern simulated under the case where the only interaction
-between types is that cells cannot closer than some minimal distance
-(here 18\,\um\ -- about the diameter of an RGC soma) between each other.
-
+hindrance effects \citep{Eglen2006-nj}.  To test for functional
+independence, we examined in detail the on- and off-centre beta RGCs
+in cat \citep{Eglen2006-nj}.  We extended the exclusion zone model
+presented earlier such that were effectively three \dmin exclusion zones
+in the model, termed a pairwise interaction point process model
+\citep{Ripley1976-ic,Ripley1977-av}.  The first exclusion zone, \dminoo,
+was for modelling homotypic interactions between pairs of on-centre
+neurons, and likewise a second exclusion zone, \dminff, for homotypic
+interactions between off-centre neurons.  The third \dmin
+exclusion zone, \dminof, was used for for modelling the heterotypic
+interactions between an on-centre and an off-centre neuron.  The
+effective values of \dminoo and \dminff for homotypic interactions was
+quite large, around 50--100\,\um .  By contrast, we set \dminof to the
+relatively small value of 18\,\um\ --- the average diameter of RGC
+soma.  An example of the model output using this bivariate model is
+shown in Figure~\ref{w81}B.  This model was judged to be a good fit to
+the data when comparing various spatial statistics of the observed
+data and model simulations \citep{Eglen2006-nj}.  We therefore
+concluded that the spatial positioning of on- and off-centre beta RGCs
+are functionally independent of each other.
 
 
 \subsection*{Example two: evidence for random labelling}
 
-The random labelling hypothesis (H2) was rejected for the cholinergic
-amacrince cells \citep{Diggle1986-df}; see also revisit with fuller model in
-[Diggle2005(Springer)].  However, in recent years, data consistent
-with random labelling has appeared in both ferret retina
-\citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.  The random
-labelling hypothesis indicates that one population of cells divides
-into two by simple random labelling.
+The framework by \citet{Diggle1986-df} allowed the \textit{random
+  labelling} hypothesis to be tested.  The random labelling hypothesis
+is simply that that one homogeneous population of cells divides into
+two by simple random labelling: each cell is independently labelled as
+type 1 or type 2 with a fixed probability.  The random labelling
+hypothesis was originally rejected for the cholinergic amacrince cells
+\citep{Diggle1986-df,Diggle2006-be}.  However, in recent years, data
+consistent with random labelling has appeared in both ferret retina
+\citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.
 
 For example, in the ferret retina, dopaminergic amacrine neurons are
 found in two separate layers of the retina, one set in the INL and the
 other in the GCL \citep{Eglen2003-dc}.  It was unclear whether these
 cells in the two layers form two distinct types, or belong to one type
-of neuron.  One hypothesis tested was that simply they both belong to
-the same type, but that they are randomly assigned into one of the two
-layers within the retina.  This corresponds to the ``random
-labelling'' hypothesis of \citet{Diggle1986-df}.  Figure~\ref{fig:fthmaps}
-demonstrates this hypothesis, showing one real field, along with five
-random realisations where for each cell, its location is preserved,
-but the type of the cell (GCL versus INL) is randomly switched,
-subject to preserving the overall numbers of cells in each sub-type.
+of neuron.  Figure~\ref{fig:fthmaps} demonstrates the random labelling
+hypothesis, showing one real field, along with five random
+realisations where for each cell, its location is preserved, but the
+type of the cell (GCL versus INL) is randomly switched, subject to
+preserving the overall ratio of cells in each sub-type.
 
 By visual inspection alone, it would appear that all six fields appear
 similar, which informally suggests that the data may be consistent
-with random labelling.  (The experimental data are shown as example five
-in Figure~\ref{fig:fthmaps}; the other examples in
+with random labelling.  (The experimental data are shown as example
+five in Figure~\ref{fig:fthmaps}; the remaining examples in
 Figure~\ref{fig:fthmaps} are five examples of random relabelling of
-the data.)  This is confirmed by calculating the \Lcross function
-for the experimental data and 99 realisations of random labelling.
-The \Lcross function for the data falls within the envelope formed by the 99
-simulations (Figure~\ref{fig:fthk12}).
-
+the data.)  This is confirmed by calculating the \Lcross function for
+the experimental data and 99 realisations of random labelling.  The
+\Lcross function for the data falls within the envelope formed by the
+99 simulations (Figure~\ref{fig:fthk12}).  From this, we can conclude
+that although the cell bodies of dopaminergic amacrine cells occupy
+two distinct layers, both layers of cells should be considered
+together as a single type of neuron.
 
 <<fth-init,echo=FALSE>>=
 @ 
@@ -457,7 +485,7 @@ spatial location of blue cone photoreceptors (BC or ``blue cones'')
 and their synaptic targets in an adjacent layer, the blue cone bipolar
 cells (BCBP) \citep{Kouyama1992-cf3,Kouyama1997-wm}.  An example of
 such a mosaic is shown in Figure~\ref{fig:bcbp}.  These cells tend to
-cluster together, as shown by the increased values of the \L\ped{12}
+cluster together, as shown by the increased values of the \Lcross
 function over distances up to around 25\,\um.  As BCBPs receive input
 only from BCs, it would make sense for them to be close to each other,
 to minimise the synaptic wiring required.  Our preliminary modelling
@@ -515,13 +543,13 @@ types in mouse are carefully characterized \citep{Sumbul2014-vm}, I
 expect that there will be many more opportunities for labelling
 multiple types of neuron within individual samples.  The simultaneous
 localisation of five types of cone photoreceptor within a field has
-already been achieved in chick retina (Figure~\ref{fig:kram})
-\citep{Kram2010-bb6}.  In this case, the identity of cone
-photoreceptors was revealed by examining the type of oil droplet found
-just beneath their outer segment.   By examining all pairs of neurons,
-no evidence for spatial correlation was found \citep{Kram2010-bb6}.
-However, this does not rule out that there might be higher-order
-dependencies within the multiple cell types.
+already been achieved in chick retina
+\citep[Figure~\ref{fig:kram};][]{Kram2010-bb6}.  In this case, the
+identity of cone photoreceptors was revealed by examining the type of
+oil droplet found just beneath their outer segment.  By examining all
+pairs of neurons, no evidence for spatial correlation was found
+\citep{Kram2010-bb6}.  However, this does not rule out that there
+might be higher-order dependencies within the multiple cell types.
 
 <<plot-chickcones,echo=FALSE,results='hide'>>=
 @ 
@@ -556,7 +584,6 @@ physiological features, such as the arrangement of centres of
 receptive fields \citep{Hore2012-ac}.
 
 
-\clearpage
 \section*{Reproducible research}
 
 
