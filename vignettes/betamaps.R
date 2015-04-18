@@ -417,7 +417,7 @@ univ.sim = pipp.lookup(rgc.w, pts, n1=n1, h = h11.y, d=h11.x)
 ## ---- plot-univariate-betamap
 pdf(file='beta_univ.pdf', width=6.5, height=4)
 par(mar=c(0.6,0.01,0.5,0.1))
-rgc.soma.rad = 8
+rgc.soma.rad = 9
 par(mfrow=c(1,2), bty='n')
 plot(NA, asp=1, xaxs='i', yaxs='i',
      xlim=rgc.w[1:2], ylim=rgc.w[3:4],
