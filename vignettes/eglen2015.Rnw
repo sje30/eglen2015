@@ -55,7 +55,9 @@
 \immediate\write\figfile{Figure,Chunk,Filename}
 \newcommand{\register}[2]{\immediate\write\figfile{\arabic{figure},#1,#2}}
 %% \register{chunk}{filename} will register the current figure with the
-%% chunk and filename.
+%% chunk and filename.  It simply adds a row to the \figfile
+%% (figchunks.csv).  Once all figures have been genereated, the .csv file
+%% is closed and then included into a table using the `datatools' package.
 
 \begin{abstract}
   In this article I present a reproducible review of recent research
