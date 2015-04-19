@@ -66,7 +66,12 @@
   on pairs of cell types within the retina.  I examine three different
   cases by which pairs of neurons might be arranged relative to each
   other.  (1) Cells of different type might be effectively independent
-  of each other. (2) Random labelling (3) Functional dependence.
+  of each other. (2) Cells of one type are randomly assigned one of
+  two labels to create two related populations. (3) Interactions
+  between cells of different type generate functional dependencies.  I
+  show briefly how spatial statistic techniques can be applied to
+  investigate the nature of spatial interactions among different cell
+  types.
   %% 
   Finally, I have termed this article a `reproducible review' because
   all the data and computer code are integrated into the manuscript so
