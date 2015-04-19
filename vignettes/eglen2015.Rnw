@@ -12,7 +12,7 @@
 \usepackage[a4paper,left=2cm,right=4cm,top=2cm,bottom=2cm]{geometry}
 \usepackage{setspace}
 \usepackage{listings}
-\usepackage{verbatim,hyperref}
+\usepackage{verbatim,hyperref,datatool}
 
 \usepackage{xspace,amsmath}
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
@@ -27,12 +27,13 @@
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \providecommand*{\ap}[1]{\ensuremath{^\mathrm{#1}}}
 \usepackage{url}
-\usepackage[nolists,figuresonly]{endfloat}
+\usepackage[nolists]{endfloat}
 \usepackage[authoryear]{natbib}
 
 %% Place all figures at end of paper?
 %%\usepackage[noheads,nomarkers]{endfloat}
 
+\newwrite\figfile
 
 \begin{document}
 
@@ -45,6 +46,16 @@
 \date{\today}
 
 \maketitle
+
+
+%% These lines are used to setup a CSV file for storing the name of the
+%% code chunk and its file of origin.  This is then used to generate
+%% Table 1.
+\immediate\openout\figfile=figchunks.csv
+\immediate\write\figfile{Figure,Chunk,Filename}
+\newcommand{\register}[2]{\immediate\write\figfile{\arabic{figure},#1,#2}}
+%% \register{chunk}{filename} will register the current figure with the
+%% chunk and filename.
 
 \begin{abstract}
   In this article I present a reproducible review of recent research
@@ -61,13 +72,6 @@
   review with a discussion of this concept.
 
 \end{abstract}
-
-  %% The retina makes for an
-  %% ideal system to investigate this question because of two main
-  %% factors.  First, the retina is highly laminar, and neurons of a
-  %% given type are normally found only within one layer, usually
-  %% arranged in semi-regular patterns.  Second, many retinal cell types
-  %% can be selectively labelled using robust markers
 
 <<setup-knitr,eval=TRUE,echo=FALSE,results='hide',message=FALSE>>=
 require(knitr)
@@ -144,6 +148,7 @@ treat neuron positions as two-dimensional.
     adapted from Figure 1 of \citet{Eglen2012}.  TODO: seek
     permission.}
   \label{fig:layers}
+  %%\register{fn1}{layersfile}
 \end{figure}
 
 One organisational feature of the retina found in many species is that
@@ -187,7 +192,9 @@ bivariate function.
     density of points.  Scale bar is 100\,\um; soma are drawn to scale
     with a radius of 9\,\um.
     \label{fig:univ}}
+  \register{plot-univariate-betamap}{betamaps.R}
 \end{figure}
+
 
 We store the position of the $i$th type 1 neuron as a two-dimensional
 vector $\vx_{1i}$ where $i \in [1,n_1]$ and likewise for the $j$th
@@ -292,7 +299,9 @@ types.
     Figure~\ref{fig:univ}A; the dotted blue curve is the corresponding
     \L function for the model output in Figure~\ref{fig:univ}B.  The
     dotted black line is the expectation for the \L function assumnig
-    complete spatial randomness (CSR). \label{fig:univk}}
+    complete spatial randomness (CSR). \label{fig:univk}
+  }
+  \register{khat-univariate-betamap}{betamaps.R}
 \end{figure}
 
 
@@ -336,7 +345,8 @@ retinal neuron within the same sample window.
     from \citep{Wassle1981-beta}; B: simulation using bivariate PIPP
     rule.  Scale bar is 100\,\um; soma are drawn to scale with a
     radius of 9\,\um.}
-\label{w81}
+  \label{w81}
+  \register{plot-w81s1-real-sim}{betamaps.R}
 \end{figure}
 
 
@@ -453,6 +463,7 @@ together as a single type of neuron.
     along with five simulated fields.  Which figure is the
     experimental data? Scale bar is 1\,mm; soma are drawn to scale
     with a radius of 22\,\um.\label{fig:fthmaps}}
+  \register{plot-bivariate-fthmaps}{fthmaps.R}
 \end{figure}
 
 <<fth-k12,echo=FALSE,results='hide'>>=
@@ -467,6 +478,7 @@ together as a single type of neuron.
     line; black lines show the envelope from 99 simulations of random
     relabelling.}
   \label{fig:fthk12}
+  \register{fth-k12}{fthmaps.R}
 \end{figure}
 
 \subsection*{Example three: evidence for functional dependence}
@@ -521,6 +533,7 @@ investigate directly the nature of the \Lcross function.
     Spatial Randomness (CSR).
     \label{fig:bcbp}
   }
+  \register{bcbp-draw}{bcbp.R}
 \end{figure}
 
 
@@ -564,6 +577,7 @@ might be higher-order dependencies within the multiple cell types.
     %% Radii of cells (1.1 um) estimated from Figure 5A
   }
   \label{fig:kram}
+  \register{plot-chickcones}{chickcones.R}
 \end{figure}
 
 The retina has been chosen here as a model system for exploring
@@ -582,19 +596,45 @@ receptive fields \citep{Hore2012-ac}.
 
 \section*{Reproducible research}
 
+
+\begin{table}
+  %% This is adapted from p57 of the datatool-user guide:
+  %% http://texdoc.net/texmf-dist/doc/latex/datatool/datatool-user.pdf
+  %% We need the "figfile" (figchunks.csv) to be complete before 
+  %% generating this figure.
+  \immediate\closeout\figfile
+  \DTLloaddb{figdat}{figchunks.csv}
+  \caption{Code chunks to generate each figure}
+  \centering
+  \begin{tabular}{cll}
+    \toprule
+    \bfseries Figure & \bfseries Chunk & \bfseries Filename%
+    \DTLforeach*{figdat}%
+    {\Figure=Figure,\Chunk=Chunk,\Filename=Filename}%
+    {%
+    \DTLiffirstrow{\\\midrule}{\\}%
+    \Figure & \Chunk & \Filename
+    }% end of loop
+    \\\bottomrule
+  \end{tabular}%
+  \label{tab:chunks}
+\end{table}
+
+
 When writing a review article such as this, it is typical to include
-results (typically in the form of figures or graphs) that have been
-published before in other articles.  For computational work, this
-typically means include the results of previous modelling or analysis.
-I have deliberately taken a different approach in this article: all of
-the results presented here have been generated afresh, albeit based on
-my previous work, and new figures generated for the results.  The one
+results, usually as figures or tables, that have been published before
+in other articles.  For computational work, this typically means
+include the results of previous modelling or analysis.  I have
+deliberately taken a different approach in this article: all of the
+results presented here have been generated afresh, albeit based on my
+previous work, and new figures generated for the results.  The one
 exception to this is Figure~\ref{fig:layers}, which is a schematic of
-retinal layers, rather than showing any results.  Furthermore, all the
-code and data required for others to generate new figures are
-available as part of an R package.  This package is publicly available
-at \url{http://github.com/sje30/eglen2015}; see that URL for full
-details of how to regenerate this article.
+retinal layers.  Furthermore, all the code and data required for
+others to generate new figures are available as part of an R package.
+This package is publicly available at
+\url{http://github.com/sje30/eglen2015}; see that URL for full details
+of how to regenerate this article.  Table~\ref{tab:chunks} describes
+the chunk and filename to generate each figure.
 
 This paper is therefore the main output of the R package that I have
 created.  This approach to writing papers is known as reproducible
@@ -692,6 +732,8 @@ research.
 %% Other journals encouraging data sharing beyond the paper
 %% \citep{Leng2014-uo}. 
 
+
+
 \subsection*{Acknowledgements}
 
 I thank Professors Joseph Corbo, Abbie Hughes, David Marshak and Heinz
@@ -701,14 +743,6 @@ paper.
 
 
 \bibliographystyle{jneurosci} \bibliography{eglen2015}
-
-
-\subsection*{Sources of data}
-
-Where does the data come from, and how to attribute it?
-
-Challenges: incorporating all the data from within one package (when
-large?)
 
 
 \clearpage
@@ -729,17 +763,14 @@ load_all()                              #to get package data
 build_vignettes()
 @ 
 
-Likewise, to simulate loading the package, just do the following
-within the package directory.
 
 <<load-all,eval=FALSE>>=
+## Likewise, to simulate loading the package, just do the following
+## within the package directory.
 load_all()
 @ 
 
 
-\subsubsection{Loading via github}
-
-This seems to work now:
 
 <<github,eval=FALSE>>=
 devtools::install_github("sje30/eglen2015", build_vignettes=TRUE)
