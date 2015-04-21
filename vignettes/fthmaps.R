@@ -1,6 +1,8 @@
 ## Compute Ferret TH maps (dopaminergic amacrines)
+## R CMD BATCH fthmaps.R
+## To run standalone we need this initial chunk:
 ## ---- fth-packages
-## To run standalone we need this initial chunk
+
 library(splancs)
 
 ## ---- fth-init
@@ -137,5 +139,6 @@ klab <- myKenv.labelk(pts1, pts2, datapoly, nsims, steps,
 rank = klab$rank
 pval = rank/(nsims+1)
 ##title(main=sprintf("rank %d p %.2f", rank, pval))
+legend(0, 600, c("data", "model"), lty=c(2,1), col=c('red', 'black'))
 dev.off()
 
