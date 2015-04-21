@@ -28,7 +28,7 @@ The last line should load this package.  Once it is installed, you can
 then view the paper, or view the knitr document that created the paper:
 
     vignette("eglen2015")
-	eglen2015::edit()
+	eglen2015:::edit()
 	
 This does of course assume that your system already has R, latex, and
 various unix tools.  That may not be the case; however, you can still
@@ -53,7 +53,7 @@ Then visit the web page to start R (username and password are "rstudio"):
 
 From that session, you can then view the vignette (in PDF form) with
 `vignette("eglen2015")`.  You can edit the source of the paper with
-the command `eglen2015::edit()` or re-build it from source with the
+the command `eglen2015:::edit()` or re-build it from source with the
 command `tools::buildVignettes("eglen2015")`.
 
 Thanks to the [Rocker](https://github.com/rocker-org) team for the
