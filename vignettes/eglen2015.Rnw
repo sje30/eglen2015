@@ -611,7 +611,7 @@ receptive fields \citep{Hore2012-ac}.
   %% generating this figure.
   \immediate\closeout\figfile
   \DTLloaddb{figdat}{figchunks.csv}
-  \caption{Code chunks to generate each figure}
+  \caption{Code chunks used to generate each figure}
   \centering
   \begin{tabular}{cll}
     \toprule
