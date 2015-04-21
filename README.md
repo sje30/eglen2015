@@ -52,7 +52,10 @@ Then visit the web page to start R (username and password are "rstudio"):
     http://192.168.59.103:8787/   ## mac, windows users
 
 
-From that session, you can then view the vignette with `vignette("eglen2015")` or re-build it from source with the command `tools::buildVignettes("eglen2015")`
+From that session, you can then view the vignette with
+`vignette("eglen2015")`.  You can edit the source of the paper with
+the command `eglen2015::edit()` or re-build it from source with the
+command `tools::buildVignettes("eglen2015")`.
 
 Thanks to the [Rocker](https://github.com/rocker-org) team for the
 R-based docker images, on which this work is based.
