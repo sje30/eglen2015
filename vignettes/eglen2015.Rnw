@@ -428,7 +428,7 @@ The framework by \citet{Diggle1986-df} allowed the \textit{random
 is simply that one homogeneous population of cells divides into
 two by simple random labelling: each cell is independently labelled as
 type 1 or type 2 with a fixed probability.  The random labelling
-hypothesis was originally rejected for the cholinergic amacrince cells
+hypothesis was originally rejected for the cholinergic amacrine cells
 \citep{Diggle1986-df,Diggle2006-be}.  However, in recent years, data
 consistent with random labelling has appeared in both ferret retina
 \citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.
@@ -596,7 +596,7 @@ particularly useful for this task because of its strongly laminar
 structure and the availability of markers for selectively identifying
 cells of one type.  However, we imagine these techniques will have
 utility in other regions of the nervous system, and have indeed been
-applied to prefontal cortex, striatum and spinal cord
+applied to prefrontal cortex, striatum and spinal cord
 \citep{Cotter2002-fc,Gangarossa2013-cc,Prodanov2007-fe}.  Finally,
 although we have used these techniques here to demonstrate the spatial
 organisation of anatomical features, they can also be used for
@@ -776,14 +776,14 @@ require(knitr); knit2pdf('eglen2015.Rnw')
 require(devtools)
 load_all()                              #to get package data
 build_vignettes()
-@ 
+@
 
 
 <<load-all,eval=FALSE>>=
 ## Likewise, to simulate loading the package, just do the following
 ## within the package directory.
 load_all()
-@ 
+@
 
 
 
@@ -791,8 +791,7 @@ load_all()
 devtools::install_github("sje30/eglen2015", build_vignettes=TRUE)
 require(eglen2015)
 vignette("eglen2015")
-@ 
-
+@
 \end{document}
 
 %% ~/proj/carmen/waverepo/waverepo/paper/waverepo_paper.Rnw
@@ -803,3 +802,7 @@ vignette("eglen2015")
 %% 
 %% sjedmin, sjevor, sjedist sjedrp
 
+
+%%  LocalWords:  univariate bivariate rescaling CSR heterotypic soma
+%%  LocalWords:  homotypic zebrafish steric Drosophila dopaminergic
+%%  LocalWords:  striatum prefrontal kitemarks Biostatistics
