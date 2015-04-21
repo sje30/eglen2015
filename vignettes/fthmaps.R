@@ -71,7 +71,6 @@ myKenv.labelk <- function(pts1, pts2, poly, nsim, s, quiet=FALSE, plot=FALSE) {
 
 fth.cols = c("#5ab4ac", "#d8b365")
 
-## TODO: get the data from the package, not from my homedir!!
 fth.1.file = system.file("extdata/fth/f9942i.txt", package="eglen2015")
 fth.2.file = system.file("extdata/fth/f9942g.txt", package="eglen2015")
 fth.1 <- matrix(scan(fth.1.file), ncol=2, byrow=T)
