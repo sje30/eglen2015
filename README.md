@@ -1,6 +1,6 @@
 # Introduction
 
-This is the home for the review article by Stephen Eglen (2015).  The
+This is the home for a review article by Stephen Eglen (2015).  The
 article is currently titled "Bivariate spatial point patterns in the
 visual system: A reproducible review" and is hopefully of relevance to
 the computational neuroscience and spatial statistics communities.
@@ -11,7 +11,7 @@ article for itself.  Some key parts of the package are:
 * [vignettes/eglen2015.Rnw](vignettes/eglen2015.Rnw): the source file
   for the article in LaTeX format.
 * [inst/extdata](inst/extdata): a folder containing all the data files
-analysed in this article.
+studied in this article.
 
 
 
