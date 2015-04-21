@@ -209,7 +209,7 @@ type 2 neuron in $\vx_{2j}, j \in [1, n_2]$.  We then define the
 bivariate \K and \L functions as
 
 \begin{align}
-  K_{12}(t) &= \frac{|A|}{n_1 n_2} 
+  K_{12}(t) &= \frac{|A|}{n_1 n_2}
   \sum_{i=1}^{n_1} \sum_{j=1}^{n_2}
   w(i,j)^{-1} I ( || \vx_{1i} - \vx_{2j} || \leq t)
   \\
@@ -230,7 +230,7 @@ find that $L(t) \approx t$, this indicates that there is no spatial
 order in the point pattern.  This is commonly termed \textit{Complete
   Spatial Randomness} (CSR) \citep{Diggle2002-db}.  If however $L(t) >
 t$, this would indicate \textit{spatial clustering}: points are
-positioned close to each other more often than chance.  Finally, 
+positioned close to each other more often than chance.  Finally,
 $L(t) < t$ implies \textit{spatial regularity}, whereby points
 avoid each other \citep{Diggle2002-db}.
 
@@ -407,7 +407,7 @@ interaction point process model \citep{Ripley1976-ic,Ripley1977-av}.
 The first exclusion zone, \dminoo, was for modelling homotypic
 interactions between pairs of on-centre neurons, and likewise a second
 exclusion zone, \dminff, for homotypic interactions between off-centre
-neurons.  The third \dmin exclusion zone, \dminof, was used for for
+neurons.  The third \dmin exclusion zone, \dminof, was used for
 modelling the heterotypic interactions between an on-centre and an
 off-centre neuron.  The effective values of \dminoo and \dminff for
 homotypic interactions was quite large, around 50--100\,\um .  By
@@ -425,7 +425,7 @@ independent of each other.
 
 The framework by \citet{Diggle1986-df} allowed the \textit{random
   labelling} hypothesis to be tested.  The random labelling hypothesis
-is simply that that one homogeneous population of cells divides into
+is simply that one homogeneous population of cells divides into
 two by simple random labelling: each cell is independently labelled as
 type 1 or type 2 with a fixed probability.  The random labelling
 hypothesis was originally rejected for the cholinergic amacrince cells
@@ -458,7 +458,7 @@ two distinct layers, both layers of cells should be considered
 together as a single type of neuron.
 
 <<fth-init,echo=FALSE>>=
-@ 
+@
 
 %% This chunk creates fthmaps.pdf which is then 
 %% included in the following pdf.  This is useful when
@@ -477,7 +477,7 @@ together as a single type of neuron.
 \end{figure}
 
 <<fth-k12,echo=FALSE,results='hide'>>=
-@ 
+@
 
 \begin{figure}[h]
   \centering
@@ -635,7 +635,7 @@ When writing a review article such as this, it is typical to include
 results, usually as figures or tables, that have been published before
 in other articles.  For computational work, this typically means
 include the results of previous modelling or analysis.  I have
-deliberately taken a different approach in this article: all of the
+deliberately taken a different approach in this article: all the
 results presented here have been generated afresh, albeit based on my
 previous work, and new figures generated for the results.  The one
 exception to this is Figure~\ref{fig:layers}, which is a schematic of
@@ -663,11 +663,11 @@ reproducible research documents.  I have chosen to use the knitr
 literate programming framework for R \citep{Xie2013}.  This provides a
 powerful framework for mixing documentation (the paper) and code (the
 analysis).  Although knitr can work with several programming
-languages, it has strongest support for the R programming language,
+languages, it has the strongest support for the R programming language,
 which was described as the most popular tool in statistics in 2014
 \citep{Tippmann2015-sv}.  The packaging system in R blends easily with
 the reproducible research document since it allows an author to
-include all of the data and code relating to a project into one
+include all data and code relating to a project into one
 package.  This package can then be shared easily with other R users.
 
 Although this packaging system can work well in R, and has done for
