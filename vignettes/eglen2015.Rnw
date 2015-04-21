@@ -641,7 +641,8 @@ others to generate new figures are available as part of an R package.
 This package is publicly available at
 \url{http://github.com/sje30/eglen2015}; see that URL for full details
 of how to regenerate this article.  Table~\ref{tab:chunks} describes
-the chunk and filename to generate each figure.
+the chunk and filename used to generate the reproducible figures in
+this article.
 
 This paper is therefore the main output of the R package that I have
 created.  This approach to writing papers is known as reproducible
@@ -652,7 +653,7 @@ variation each time the paper is created.)  This notion is fairly new
 to computational neuroscience, with \citet{Delescluse2011} possibly as
 the first example.  However, in other disciplines, such as
 computational biology, reproducible research papers have a slightly
-longer history \citep{Gentleman2004}.  
+longer history \citep{Gentleman2004}.
 
 There are now several alternative workflows for generating such
 reproducible research documents.  I have chosen to use the knitr
@@ -666,21 +667,20 @@ the reproducible research document since it allows the developer to
 include all of the data and code relating to a project into one
 package.  This package can then be shared easily with other R users.
 
-
 Although this packaging system can work well in R, and has done for
-this modest sized review, there are still technical challenges to
-overcome, mostly when dealing with large data sets or with intensive
-computation.  Another technical problem is how to ensure that another
-user has a compatible environment for running your software.  Running
-the same code in different environments may well produce different
-results.  To help solve this last problem, the Docker system provides
-a convenient way for the entire computing environment relating to a
-project to be efficiently captured and then run.  Docker runs on all
-major operating systems and provides lightweight linux virtual
-machines and hence a convenient way of getting software to run on
-different platforms.  For example, once installed, the entire
-environment required to generate this paper can be downloaded and
-initialised using the command:
+this modest-sized review, there are still technical challenges to
+overcome, mostly when dealing with large data sets or with
+computations that take a long time to complete.  Another technical
+problem is how to ensure that another user has a compatible
+environment for running your software.  Running the same code in
+different environments may well produce different results.  To help
+solve this last problem, the Docker system provides a convenient way
+for the entire computing environment relating to a project to be
+efficiently captured and then run.  Docker runs on all major operating
+systems and provides lightweight linux virtual machines and hence a
+convenient way of getting software to run on different platforms.  For
+example, once installed, the entire environment required to generate
+this paper can be downloaded and initialised using the command:
 
 \begin{verbatim}
 docker run -d -p 8787:8787 sje30/eglen2015
@@ -711,18 +711,19 @@ suitable kitemarks (``badges'') on the front page of the article
 requires authors to generated supporting online material including
 relevant code and data.  As an example, \citet{Vogels2011-c8c}
 provides a comprehensive supplement in the field of computational
-neuroscience.  Most recently, since October 2014, Nature journals
+neuroscience.  Most recently, since October 2014, \textit{Nature} journals
 require a statement whether (and where) the code underlying research
-results is available \citep{noauthor_2014-mv}.
+results is available (``Code share'' editorial, \textit{Nature} 2014:514, p536).
+%% Editorial has no name, so looks odd as a regular reference.
 \textit{Neuroinformatics} has a similar approach: authors can
 optionally include an information sharing statement noting whether
 resources such as code and data are available \citep{Ascoli2014-dk}.
 Outside of the sciences, the journal \textit{Quarterly Journal of
   Political Science} since 2005 has required all empirical papers to
-be reproducible.  See
-\url{http://thepoliticalmethodologist.com/2014/12/09/a-decade-of-replications-lessons-from-the-quarterly-journal-of-political-science/}
-for lessons learnt from this process.
-
+be reproducible.  
+%% See
+%% \url{http://thepoliticalmethodologist.com/2014/12/09/a-decade-of-replications-lessons-from-the-quarterly-journal-of-political-science/}
+%% for lessons learnt from this process.
 
 In summary, the R computing environment provides many of the tools for
 reproducible research.  Other languages, such as python, have
@@ -752,17 +753,18 @@ paper.
 \bibliographystyle{jneurosci} \bibliography{eglen2015}
 
 
-\clearpage
+%% \clearpage
 
 \subsubsection*{Session information}
 
 <<session-info,results='asis'>>=
 toLatex(sessionInfo())
-date()
+##date()
 @
 
-Methods to compile the doc
+
 <<compile,eval=FALSE,include=TRUE>>=
+## Methods to compile the doc
 require(knitr); knit2pdf('eglen2015.Rnw')
 ## Or, using devtools, which puts the vignette into ../inst/doc/
 require(devtools)
