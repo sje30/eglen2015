@@ -28,7 +28,7 @@ The last line should load this package.  Once it is installed, you can
 then view the paper, or view the knitr document that created the paper:
 
     vignette("eglen2015")
-	file.edit(system.file("doc", "eglen2015.Rnw", package="eglen2015"))
+	eglen2015::edit()
 	
 This does of course assume that your system already has R, latex, and
 various unix tools.  That may not be the case; however, you can still
