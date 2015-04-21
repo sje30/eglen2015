@@ -43,16 +43,15 @@ you can download and run this package using:
 
     docker run -d -p 8787:8787 sje30/eglen2015
 
-View [sje30/eglen2015](https://registry.hub.docker.com/u/sje30/eglen2015/)
-to check the details of this Docker package.
+(View [sje30/eglen2015](https://registry.hub.docker.com/u/sje30/eglen2015/)
+to check the status of this Docker package.)
 
 Then visit the web page to start R (username and password are "rstudio"):
 
     http://localhost:8787/        ## linux
     http://192.168.59.103:8787/   ## mac, windows users
 
-
-From that session, you can then view the vignette with
+From that session, you can then view the vignette (in PDF form) with
 `vignette("eglen2015")`.  You can edit the source of the paper with
 the command `eglen2015::edit()` or re-build it from source with the
 command `tools::buildVignettes("eglen2015")`.
