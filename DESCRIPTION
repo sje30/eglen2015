@@ -1,11 +1,11 @@
 Package: eglen2015
 Type: Package
-Title: A reproducible review...
+Title: Bivariate spatial point patterns in the visual system: a reproducible review
 Version: 0.2
-Date: 2015-01-09
+Date: 2015-04-21
 Author: Stephen J Eglen
 Maintainer: Stephen J Eglen <sje30@cam.ac.uk>
-Description: More about what it does (maybe more than one line)
-URL: http://www.damtp.cam.ac.uk/user/sje30/r
+Description: Vignette of the reproducible review
+URL: http://github.com/sje30/eglen2015
 VignetteBuilder: knitr
 License: MIT
