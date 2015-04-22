@@ -30,13 +30,11 @@
 \usepackage[nolists]{endfloat}
 \usepackage[authoryear]{natbib}
 
-%% Place all figures at end of paper?
-%%\usepackage[noheads,nomarkers]{endfloat}
+
 
 \newwrite\figfile
 
 \begin{document}
-
 
 \onehalfspacing
 
@@ -345,7 +343,7 @@ retinal neuron within the same sample window.
 <<plot-w81s1-real-sim,results='hide'>>=
 @ 
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \fbox{\includegraphics{biv-w81s1.pdf}}
   \caption{Bivariate spatial point pattern.  A: observed field of cat
@@ -479,7 +477,7 @@ together as a single type of neuron.
 <<fth-k12,echo=FALSE,results='hide'>>=
 @
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \fbox{\includegraphics{fthk12.pdf}}
   \caption{\Lcross function for dopaminergic amacrine data set shown
@@ -529,7 +527,7 @@ investigate directly the nature of the \Lcross function.
 <<bcbp-draw,results='hide'>>=
 @ 
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \fbox{\includegraphics{bcbp-fig.pdf}}
   \caption{Functional dependence between two types of neuron.  A: An
@@ -752,8 +750,8 @@ research.
 
 I thank Professors Joseph Corbo, Abbie Hughes, David Marshak and Heinz
 W\"{a}ssle for providing the retinal mosaics included in this paper.
-Thanks to Ben Marwick for help with Docker testing and comments on the
-paper.
+Thanks to Ben Marwick and Sarah Mount for help with Docker testing and
+comments on the paper.
 
 
 \bibliographystyle{jneurosci} \bibliography{eglen2015}
