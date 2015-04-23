@@ -40,7 +40,12 @@
 
 \title{Bivariate spatial point patterns in the visual system:\\a reproducible review}
 
-\author{S. J. Eglen}
+\author{Stephen J. Eglen\\
+Cambridge Computational Biology Institute\\
+Department of Applied Mathematics and Theoretical Physics\\
+University of Cambridge\\
+CB3 OWA\\
+United Kingdom}
 \date{\today}
 
 \maketitle
@@ -114,6 +119,8 @@ read_chunk('chickcones.R')
   RGC & retinal ganglion cell\\
   \bottomrule
 \end{tabular}
+
+\clearpage
 \section*{Introduction}
 
 
@@ -791,15 +798,6 @@ require(eglen2015)
 vignette("eglen2015")
 @
 \end{document}
-
-%% ~/proj/carmen/waverepo/waverepo/paper/waverepo_paper.Rnw
-
-%% Likely dependencies
-%% CRAN
-%% spatstat, knitr, splancs
-%% 
-%% sjedmin, sjevor, sjedist sjedrp
-
 
 %%  LocalWords:  univariate bivariate rescaling CSR heterotypic soma
 %%  LocalWords:  homotypic zebrafish steric Drosophila dopaminergic
