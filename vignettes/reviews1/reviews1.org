@@ -1,4 +1,4 @@
-# Reviewer 1
+* Reviewer 1
 
 This is an intersting reproducible paper. Since paper is neuro oriented, 
 I include some comments from a statistical point of view.
@@ -38,7 +38,7 @@ studies in spatial point process modeling (pp. 135-150). Springer New York.
 Reproductible research:
 Just perfect !! Thanks :-)
 
-# Reviewer 2
+* Reviewer 2
 
 Overall I found the manuscript an interesting read and the author has 
 made an impressive effort at maximal reproducibility. The code runs as 
