@@ -13,6 +13,10 @@ manuscript are highlighted in blue and annotated in the manuscript
 with the corresponding number.  e.g. R2.5 refers to point 5 of referee
 2.
 
+Yours faithfully,
+
+Stephen
+
 
 ## Reviewer 1
 
@@ -30,6 +34,13 @@ with the corresponding number.  e.g. R2.5 refers to point 5 of referee
 
 > 1.4) Fig 4 since we mostly print inblack and white, I personnaly
 > prefer different symbols than different colors.
+
+I have used colour consistently throughout the paper to refer to
+different cell types: the colours in figure 1 are used in figure 2, 4
+and 7.  Also, the colours in figure 8 naturally reflect the colour
+sensitivity of the cell types.  So, if possible, I'd like to keep the
+colours.
+
 
 > 1.5) Why do you present the results for functional independence ?
 
