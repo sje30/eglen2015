@@ -682,14 +682,16 @@ computations that take a long time to complete.  Another technical
 problem is how to ensure that another user has a compatible
 environment for running your software.  Running the same code in
 different environments may well produce different results or even fail
-to run.  To help solve this problem, the Docker system provides a
-convenient way for the entire computing environment relating to a
-project to be efficiently captured and then run.  Docker runs on all
-major operating systems and provides lightweight linux virtual
-machines and hence a convenient way of getting software to run on
-different platforms.  For example, once Docker is installed, the entire
-environment required to generate this paper can be downloaded and
-initialised using the command:
+to run.  \textbf{An early attempt to solve this problem was the use of virtual
+machines to package all the data and code relating to the project such
+that others could re-run the analysis \cite{ENCODE2012}.  More
+recently,} the Docker system provides a convenient way for the entire
+computing environment relating to a project to be efficiently captured
+and then run.  Docker runs on all major operating systems and provides
+lightweight linux virtual machines and hence a convenient way of
+getting software to run on different platforms.  For example, once
+Docker is installed, the entire environment required to generate this
+paper can be downloaded and initialised using the command:
 
 
 \begin{verbatim}
