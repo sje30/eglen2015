@@ -31,6 +31,28 @@
 \usepackage[authoryear]{natbib}
 
 
+%% Code for handling edits.
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
+%%\providecommand{\myedit}[1]{{\color{OliveGreen} #1}}
+\usepackage{marginnote}
+\newcommand{\points}[1]{% Print points in margin
+  \leavevmode\marginnote{\makebox[\marginparwidth][r]{#1}}\ignorespaces}
+
+\usepackage{xparse}
+\DeclareDocumentCommand \myedit { o m } {%
+  \IfNoValueF {#1} {\points{#1}}
+  {\color{OliveGreen} #2}
+}
+%% marginnote does not work in all math environments, bah!
+%% so use this one:
+%% Source http://tex.stackexchange.com/questions/63012/using-marginnote-inside-a-math-environment-in-tufte-book
+\def\mathnote#1{%
+  \tag*{\rlap{\hspace\marginparsep\smash{\parbox[t]{\marginparwidth}{%
+  {\color{OliveGreen} #1}}}}}
+}
+
+
+
 
 \newwrite\figfile
 
@@ -38,7 +60,7 @@
 
 \onehalfspacing
 
-\title{Bivariate spatial point patterns in the visual system:\\a reproducible review}
+\title{Bivariate spatial point patterns in the \myedit[R2.2]{retina}:\\a reproducible review}
 
 \author{Stephen J. Eglen\\
 Cambridge Computational Biology Institute\\
@@ -218,9 +240,11 @@ bivariate \K and \L functions as
   \sum_{i=1}^{n_1} \sum_{j=1}^{n_2}
   w(i,j)^{-1} I ( || \vx_{1i} - \vx_{2j} || \leq t)
   \\
-  L_{12}(t) &= \sqrt{K_{12}(t)} / \pi
+  L_{12}(t) &= \myedit{\sqrt{K_{12}(t) / \pi}}
 \end{align}
 %%
+\points{R1.1}%% Can't get it within environment, so just show in Green
+             %% after. Mathnote removes the (2) equation label.
 The weighting factor $w(i,j)$ is a normalisation term to account for
 edge effects.  It is defined as the fraction of circumference of the
 circle centred at $\vx_{1i}$ and with radius $|| \vx_{1i} -
@@ -286,18 +310,27 @@ within the envelope of the \L functions from multiple runs of the
 model from different initial conditions, then we say that the model
 fits the data.  More formally, empirical p values can be computed to
 compare model and data \citep{Diggle1986-df}.  In
-Figure~\ref{fig:univk} there is a good qualitative match.  Given that
-the \dmin model is a phenomenological model, it suggests only that
-local exclusion zones are sufficient to recreate global order, but
-cannot tell us which developmental mechanisms are responsible.  To
-assess which mechanisms might be responsible, we need to examine
-mechanistic models \citep{Eglen2000-ab,Eglen2002-ce,Ruggiero2007-9c0}.
-However, although we cannot use the current methods to understand the
-mechanisms of development, the existence of retinal mosaics is often
-used as an indicator of an independent cell type
+Figure~\ref{fig:univk} there is a good qualitative match
+\myedit[R1.2,R1.3]{given that the data fall mostly within the bounds of the
+  confidence intervals.  There is a minor excursion of the data
+  outside the confidence intervals around 130--150\,\um however which
+  suggests the fit is not perfect.  Further tuning of the parameters,
+  or switching to an alternative model with combined hard-core and
+  soft-core exclusion zones \citep{Diggle2002-db}, might improve the
+  fit slightly.}
+
+Given that the \dmin model is a  phenomenological model, it suggests
+only that local exclusion zones are sufficient to recreate global
+order, but cannot tell us which developmental mechanisms are
+responsible.  To assess which mechanisms might be responsible, we need
+to examine mechanistic models
+\citep{Eglen2000-ab,Eglen2002-ce,Ruggiero2007-9c0}.  However, although
+we cannot use the current methods to understand the mechanisms of
+development, the existence of retinal mosaics is often used as an
+indicator of an independent cell type
 \citep{Cook2003-116,Seung2014-gw}.  Studying the nature of the retinal
-mosaics is therefore also helpful to understanding how to classify neuronal
-types.
+mosaics is therefore also helpful to understanding how to classify
+neuronal types.
 
 
 
@@ -306,13 +339,16 @@ types.
 \begin{figure}
   \centering
   \fbox{\includegraphics{khat-univbeta.pdf}}
-  \caption{Evidence for local exclusion zones in retinal mosaics.
-    The solid red curve shows the \L function for the mosaic shown in
-    Figure~\ref{fig:univ}A; the dotted blue curve is the corresponding
-    \L function for the model output in Figure~\ref{fig:univ}B.  The
-    dotted black line is the expectation for the \L function assumnig
-    complete spatial randomness (CSR). \label{fig:univk}
-  }
+  \caption{Evidence for local exclusion zones in retinal mosaics.  The
+    solid red curve shows the \L function for the mosaic shown in
+    Figure~\ref{fig:univ}A.  \myedit[R1.2]{The dotted blue curve is
+      the corresponding \L function for the model output in
+      Figure~\ref{fig:univ}B; the solid blue curves are the confidence
+      intervals from the model estimated by finding the range of L
+      functions from 99 simulations with fixed parameters but
+      different initial conditions.}  The dotted black line is the
+    expectation for the \L function assuming complete spatial
+    randomness (CSR). \label{fig:univk} }
   \register{khat-univariate-betamap}{betamaps.R}
 \end{figure}
 
@@ -332,16 +368,23 @@ Figure~\ref{w81}A shows an example of a bivariate point pattern from
 cat retina, and Figure~\ref{w81}B shows a stochastic model again based
 on exclusion zones (to be described later).  How do we decide what
 structure might be present in the data, and whether the model is a
-good fit for the data?  In particular, a key question to explore is
-whether neurons of different type interact to generate these spatial
-patterns.  \citet{Diggle1986-df} established a quantitative framework
-to examine these questions nearly thirty years ago. In this review we
-use this framework on datasets from three pairs of retinal neuronal
-types collected over the last thirty years that suggests different
-pairs of neuronal types obey different rules.  In this review we use
-the phrase coined in \citet{Diggle1986-df} of ``bivariate spatial
-point patterns'' to refer to the spatial arrangement of two types of
-retinal neuron within the same sample window.
+good fit for the data?  \citet{Diggle1986-df} established a
+quantitative framework to examine these questions nearly thirty years
+ago. \myedit[R1.5]{In this review we apply this framework to datasets
+  from three pairs of retinal neuronal types that suggests different
+  pairs of neuronal types are organised in different ways.  This
+  suggests that the developmental mechanisms generating these patterns
+  are not universal, but depend on which pairs of cells are being
+  considered.  On the one hand, functional independence is the null
+  hypothesis that says there are no developmental interactions between
+  pairs cell types, whereas random labelling and functional dependence
+  are alternative hypotheses suggesting that developmental mechanisms
+  drive their bivariate patterning.}  In this review we use the phrase
+coined in \citet{Diggle1986-df} of ``bivariate spatial point
+patterns'' to refer to the spatial arrangement of two types of retinal
+neuron within the same sample window.
+
+
 
 
 <<w81s1-compute-mosaics,echo=FALSE,results='hide'>>=
@@ -429,14 +472,19 @@ independent of each other.
 \subsection*{Example two: evidence for random labelling}
 
 The framework by \citet{Diggle1986-df} allowed the \textit{random
-  labelling} hypothesis to be tested.  The random labelling hypothesis
-is simply that one homogeneous population of cells divides into
-two by simple random labelling: each cell is independently labelled as
-type 1 or type 2 with a fixed probability.  The random labelling
-hypothesis was originally rejected for the cholinergic amacrine cells
-\citep{Diggle1986-df,Diggle2006-be}.  However, in recent years, data
-consistent with random labelling has appeared in both ferret retina
-\citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.
+  labelling} hypothesis to be tested.  \myedit[R1.7]{The random
+  labelling hypothesis is simply that one homogeneous population of
+  cells is created with one exclusion zone constraint.  This population
+  then divides into two, without cells moving again, by simple random
+  labelling: each cell is independently labelled as type 1 or type 2
+  with a fixed probability.  There is therefore only one exclusion
+  zone constraint in random labelling, compared to two (usually
+  different) exclusion zones constraints when creating cells using
+  functional independence.}  The random labelling hypothesis was
+  originally rejected for the cholinergic amacrine cells
+  \citep{Diggle1986-df,Diggle2006-be}.  However, in recent years, data
+  consistent with random labelling has appeared in both ferret retina
+  \citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.
 
 For example, in the ferret retina, dopaminergic amacrine neurons are
 found in two separate layers of the retina, one set in the inner
@@ -456,10 +504,13 @@ five in Figure~\ref{fig:fthmaps}; the remaining examples in
 Figure~\ref{fig:fthmaps} are five examples of random relabelling of
 the data.)  This is confirmed by calculating the \Lcross function for
 the experimental data and 99 realisations of random labelling.  The
-\Lcross function for the data falls within the envelope formed by the
-99 simulations (Figure~\ref{fig:fthk12}).  From this, we can conclude
-that although the cell bodies of dopaminergic amacrine cells occupy
-two distinct layers, both layers of cells should be considered
+\Lcross function for the data \myedit[R1.6]{mostly}remains within the
+envelope formed by the 99 simulations (Figure~\ref{fig:fthk12}).
+\myedit[R1.6]{(There is a modest departure of the data from the
+  envelope at about 100--150\,\um which might indicate the parameters
+  could be further tuned to improve the fit.)}  From this, we can
+conclude that although the cell bodies of dopaminergic amacrine cells
+occupy two distinct layers, both layers of cells should be considered
 together as a single type of neuron.
 
 <<fth-init,echo=FALSE>>=
@@ -682,16 +733,17 @@ computations that take a long time to complete.  Another technical
 problem is how to ensure that another user has a compatible
 environment for running your software.  Running the same code in
 different environments may well produce different results or even fail
-to run.  \textbf{An early attempt to solve this problem was the use of virtual
-machines to package all the data and code relating to the project such
-that others could re-run the analysis \cite{ENCODE2012}.  More
-recently,} the Docker system provides a convenient way for the entire
-computing environment relating to a project to be efficiently captured
-and then run.  Docker runs on all major operating systems and provides
-lightweight linux virtual machines and hence a convenient way of
-getting software to run on different platforms.  For example, once
-Docker is installed, the entire environment required to generate this
-paper can be downloaded and initialised using the command:
+to run.  \myedit[R3.1]{An early attempt to solve this problem
+  was the use of virtual machines to package all the data and code
+  relating to the project such that others could re-run the analysis
+  \cite{ENCODE2012}.  More recently,} the Docker system provides a
+convenient way for the entire computing environment relating to a
+project to be efficiently captured and then run.  Docker runs on all
+major operating systems and provides lightweight linux virtual
+machines and hence a convenient way of getting software to run on
+different platforms.  For example, once Docker is installed, the
+entire environment required to generate this paper can be downloaded
+and initialised using the command:
 
 
 \begin{verbatim}
