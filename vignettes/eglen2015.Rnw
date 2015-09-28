@@ -154,16 +154,24 @@ the brain for further processing.  See \citet{Wassle2004-lt} for an
 overview of this processing.  Estimates vary, but there are thought to
 be at least 60 types of retinal neuron \citep{Masland2012-gm} that
 perform unique computations to transform the visual scene into a
-neural code.  The cell body of each type of neuron typically is
-located in just one of the three nuclear layers
-(Figure~\ref{fig:layers}).  Although the cell body of a retinal neuron
-has a three dimensional position $(x, y, z)$ we can often disregard
-$z$ for two reasons.  First, once we know the type of a neuron, its
-$z$ value is fairly well determined.  Second, the range of $z$
-\citep[given by retinal thickness, about 0.2\,mm;][]{Ferguson2013-ks}
-is much smaller than the range of $x$ and $y$
-\citep[4--5\,mm][]{Sterratt2013-oq} Therefore in this review, we will
-treat neuron positions as two-dimensional.
+neural code.  \myedit[R2.1]{The computations performed by each neuron
+  depend critically upon who it receives inputs from; to a first
+  approximation, retinal neurons communicate with other neurons that
+  are close by in adjacent neuronal layers.  The spacing of retinal
+  neurons therefore influences the computations performed within the
+  retina.  Furthermore, retinal neurons of a given type are usually
+  distributed across the retina to ensure that all regions of the
+  visual scene can be efficiently processed.}
+
+The cell body of each type of neuron typically is located in just one
+of the three nuclear layers (Figure~\ref{fig:layers}).  Although the
+cell body of a retinal neuron has a three dimensional position
+$(x, y, z)$ we can often disregard $z$ for two reasons.  First, once
+we know the type of a neuron, its $z$ value is fairly well determined.
+Second, the range of $z$ \citep[given by retinal thickness, about
+0.2\,mm;][]{Ferguson2013-ks} is much smaller than the range of $x$ and
+$y$ \citep[4--5\,mm][]{Sterratt2013-oq} Therefore in this review, we
+will treat neuron positions as two-dimensional.
 
 \begin{figure}
   \centering
@@ -299,7 +307,14 @@ are some distance \dmin away from all previously positioned cells.
 The larger the value of \dmin the bigger the exclusion zone
 surrounding each cell.  \dmin is the only free parameter of the model,
 and is often varied from cell to cell by sampling values from a Normal
-distribution.
+distribution.  \myedit[R2.4]{In this model, we treat the neuron as
+  simply a point in space which represents the centre of the soma.
+  Although adult neurons have extensive dendritic and axonal
+  arborisations that define a complex morphology, our simplification
+  of regarding the neuron as a point is appropriate as the cellular
+  spacing occurs early enough in development, when axons and dendrites
+  are relatively sparse, if present at all \citep{Reese1999-kc}.}
+
 
 
 To test whether the \dmin model accounts for the data, we need a
@@ -753,15 +768,19 @@ docker run -d -p 8787:8787 sje30/eglen2015
 
 
 Once this is complete, which typically takes a few minutes the first
-time it is run, the user can open a web browser to run R locally
-and then view the PDF or edit and regenerate this article.  Given that
-the R environment is open source, the support for R in docker is
-fairly mature \citep{Boettiger2014-sk}.  Further details on running
-the docker system with R are given at
+time it is run, the user can open a web browser to run R locally and
+then view the PDF or edit and regenerate this article.  Given that the
+R environment is open source, the support for R in docker is fairly
+mature \citep{Boettiger2014-sk}.  Further details on running the
+docker system with R are given at
 \url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
 The biggest restriction to Docker for reproducible research is that
 the required software must be open source (which excludes environments
-such as Matlab which are popular in Neuroscience).
+such as Matlab which are popular in Neuroscience).  \myedit[R2.6]{An
+  additional concern is that both Github and Docker are private
+  services, and public infrastructure might be preferred for long-term
+  availability of valuable scientific resources.}
+  
 
 Although the concept of reproducible research documents is fairly new
 in most mainstream journals, I hope we will see more people choosing
