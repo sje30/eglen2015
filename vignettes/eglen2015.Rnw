@@ -179,8 +179,9 @@ treat neuron positions as two-dimensional.
     cell (A) and retinal ganglion cell (RGC).  If a slice is taken
     through one layer, e.g. GCL, we can observe the spatial regularity
     of neurons within one layer (Figure~\ref{fig:univ}).  This figure
-    adapted from Figure 1 of \citet{Eglen2012}.  \textbf{TODO: seek
-    permission}}
+    adapted from Figure 1 of \citet{Eglen2012}.}
+  %% SJE: I checked with Editor of CSN book, who suggested this
+  %% wording after a minor change (in this case, addition of colour).
   \label{fig:layers}
   %%\register{fn1}{layersfile}
 \end{figure}
