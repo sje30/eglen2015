@@ -2,6 +2,7 @@
 ## 2015-02-07
 ## Analyse and model beta maps.
 ## This script should run by itself.
+## R CMD BATCH betamaps.R
 
 ## If a chunk does not have a name, then if there is an empty chunkname
 ## read in, it will be included! (Bad explanation).  Giving the preamble above
@@ -26,6 +27,18 @@ rgc.cols = c("#d40000", "#008000")
 require(sjedmin)
 require(sjedist)
 library(spatstat)
+
+require(splancs)
+window.to.poly = function(window) {
+  bboxx(bbox(matrix(window,2,2)))  
+}
+
+
+lhat = function(pts, steps) {
+  poly = window.to.poly(rgc.w)
+  k = khat(pts, poly, steps)
+  cbind(steps, sqrt(k/pi))
+}
 
 ## TODO attach("~/mosaics/data/bivariate_mosaics.Rda")
 
@@ -411,8 +424,31 @@ dev.off()
 ## ---- compute-univariate-betamap
 pts = rgc.on
 n1 = nrow(pts)
-univ.sim = pipp.lookup(rgc.w, pts, n1=n1, h = h11.y, d=h11.x)
-            
+
+steps = seq(from=0, to=200)             # max distance for L function.
+nreps = 99
+univ.sims = replicate(nreps, simplify=FALSE,
+                      pipp.lookup(rgc.w, pts, n1=n1, h = h11.y, d=h11.x))
+##univ.sim = pipp.lookup(rgc.w, pts, n1=n1, h = h11.y, d=h11.x)
+univ.sim = univ.sims[[1]]
+## check that they all look okay by plotting.
+## lapply(univ.sims, plot)
+
+## Find the min and max of all L function.
+ls = sapply(univ.sims, function(sim) {
+  lhat(cbind(sim$x, sim$y), steps)[,2]
+})
+univ.l.min = apply(ls, 1, min)
+univ.l.max = apply(ls, 1, max)
+
+
+if (FALSE) {
+  ## simple check of the L functions
+  plot(steps, ls[,1], type='l', col='blue')
+  for (i in 2:nreps) lines(steps, ls[,i])
+  lines(steps, univ.l.min, col='green')
+  lines(steps, univ.l.max, col='green')
+}
 
 ## ---- plot-univariate-betamap
 pdf(file='beta_univ.pdf', width=6.5, height=4)
@@ -441,29 +477,20 @@ dev.off()
 
 
 ## ---- khat-univariate-betamap
-require(splancs)
-window.to.poly = function(window) {
-  bboxx(bbox(matrix(window,2,2)))  
-}
 
 
-lhat = function(pts, steps) {
-  poly = window.to.poly(rgc.w)
-  k = khat(pts, poly, steps)
-  cbind(steps, sqrt(k/pi))
-}
-
-steps = seq(from=0, to=200)
 
 pdf(file='khat-univbeta.pdf', width=4, height=4)
 par(mgp=c(2,0.8,0), mar=c(3.25,3.25,0.5, 0.5))
 plot(lhat(rgc.on, steps), type='l',las=1, bty='n', asp=1, col='red',xlab='')
 title(xlab=expression(paste("distance (", mu, "m)")),
       ylab='L')
-lines(lhat(cbind(univ.sim$x, univ.sim$y), steps), lty=3, col='blue')
+lines(steps, ls[,1], lty=3, col='blue')
+lines(steps, univ.l.min, lty=1, col='blue')
+lines(steps, univ.l.max, lty=1, col='blue')
 segments(0, 0, max(steps), max(steps), lty=2)
 legend(x=0, y=200, ##'topleft',
-       legend=c('data', 'model', 'CSR'),
-       col=c('red', 'blue', 'black'),
-       lty=c(1, 3, 2))
+       legend=c('data', 'model', 'envelope', 'CSR'),
+       col=   c('red',  'blue',  'blue',     'black'),
+       lty=   c(1,      3,       1,          2))
 dev.off()
