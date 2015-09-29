@@ -1,6 +1,10 @@
 % Response to reviewers
 % Bivariate spatial point patterns . . . by S. J. Eglen
 
+
+
+
+
 Dear Christophe,
 
 We thank you and the reviewers for the positive comments on the 
@@ -17,19 +21,23 @@ Yours faithfully,
 
 Stephen
 
+2015-09-29
+
 
 ## Reviewer 1
 
 > 1.1) eq. 2: correct equation is $\sqrt{K_{12}/\pi}$
-Corrected.
+
+Corrected \rpref{R1.1}.
 
 
 > 1.2) Fig. 3: I wonder why there is no confidence interval. It will gives
 > an estimate of d_\mbox{min}.
 
-I have no added confidence intervals to Figure 3, together with an
-explanation of how they were generated in the legend.  The confidence
-intervals are then described further in the text.
+I have added confidence intervals to Figure 3, together with an
+explanation of how they were generated in the legend \rpref{R1.2b}.
+The confidence intervals are described further in the text
+\rpref{R1.2a}.
 
 > 1.3) Choice of d_\mbox{min} is questionnable. You mainly described an
 > hard-core process (or Strauss process). You may find the set of
@@ -58,15 +66,14 @@ colours.
 
 > 1.5) Why do you present the results for functional independence ?
 
-I have expanded on the reasons for the three examples (page 4) and
-explain functional independence is the "null hypothesis" for no
-interactions, to be compared against cases when interactions must
-exist.
+I have expanded on the reasons for the three examples and explain
+functional independence is the "null hypothesis" for no interactions,
+to be compared against cases when interactions must exist \rpref{R1.5}.
 
 > 1.6) According to Fig. 6 you reject random for distances between 100
 > and 150. Please discuss.
 
-I have added a note to this point in the text (page 6).  However, the
+I have added a note to this point in the text \rpref{R1.6}.  However, the
 departure from the envelope is very small and could also be driven
 simply be small amounts of noise in the original data.  In my
 experience, these deviations are relatively minor.
@@ -74,7 +81,7 @@ experience, these deviations are relatively minor.
 > 1.7) In order to avoid confusion among readers, please precise
 > difference between independence and random labelling.
 
-I have clarified this on page 5.
+I have clarified this \rpref{R1.7}.
 
 > 1.8) Fig. 7: By simulating CSR, you may construct confidence
 > interval.
@@ -104,13 +111,14 @@ Thank you.
 > from the fact that the retina does unique computations to (x,y,z)
 > positions, and doesn’t explain why we should care about the latter.
 
-I have added text to the first paragraph of the introduction (page 2)
-to address this point.
+I have added text to the first paragraph of the introduction
+to address this point \rpref{R2.1}.
 
 > 2.2) The title is a bit too general considering the paper’s
 > contents. I’d replace “in the visual system” with “in the retina”,
 > since no other structure is mentioned.
-Corrected.
+
+Corrected \rpref{R2.2}.
 
 
 > 2.3) Confidence bands are missing from fig 3 and fig 7B.
@@ -124,7 +132,8 @@ for Fig 7B.
 > objects, but whole neurons aren’t. Dendrites and axons need to
 > be packed in there as well, doesn’t that constrain where somas
 > can be?
-I have added a comment (page 3) to this effect.
+
+I have added a comment to this effect \rpref{R2.4}.
 
 > 2.5) I’m not sure to what extent this belongs in a review paper, but
 > second-order statistics such as Ripley’s K function become much
@@ -157,10 +166,10 @@ this review.  I have however added a small comment to note this point
 
 ## Other additions
 
-These are extra changes that I have made to the manuscript.
+I have made one extra change to the manuscript:
 
 > 3.1) I have included a mention of the ENCODE consortium (2012)
 > project which was a prominent early example of using a virtual machine
-> to package code and data for reuse.
+> to package code and data for reuse \rpref{R3.1}.
 
 \rule{\textwidth}{1pt}
