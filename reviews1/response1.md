@@ -7,15 +7,15 @@
 
 Dear Christophe,
 
-We thank you and the reviewers for the positive comments on the 
+I thank you and the reviewers for the positive comments on the 
 manuscript.
 
 
 Please see below for my response to each reviewer.  Comments from
 each reviewer are numbered and indented below.  Changes made to the
 manuscript are highlighted in Olive Green and annotated in the manuscript
-with the corresponding number.  e.g. R2.5 refers to point 5 of referee
-2.
+with the corresponding number.  e.g. R2.5 refers to point 5 of
+referee\ 2.
 
 Yours faithfully,
 
@@ -26,35 +26,37 @@ Stephen
 
 ## Reviewer 1
 
-> 1.1) eq. 2: correct equation is $\sqrt{K_{12}/\pi}$
+> \defr{R1.1} eq. 2: correct equation is $\sqrt{K_{12}/\pi}$
 
-Corrected \rpref{R1.1}.
+Corrected \lastref.
 
 
-> 1.2) Fig. 3: I wonder why there is no confidence interval. It will gives
-> an estimate of d_\mbox{min}.
+> \defr{R1.2} Fig. 3: I wonder why there is no confidence interval. It
+> will gives an estimate of d_\mbox{min}.
 
 I have added confidence intervals to Figure 3, together with an
 explanation of how they were generated in the legend \rpref{R1.2b}.
 The confidence intervals are described further in the text
 \rpref{R1.2a}.
 
-> 1.3) Choice of d_\mbox{min} is questionnable. You mainly described an
+
+
+> \defr{R1.3} Choice of d_\mbox{min} is questionnable. You mainly described an
 > hard-core process (or Strauss process). You may find the set of
 > d, the exclusion distance compatible with your data. Compatible
 > means that the process does not go out the confidence interval
 > (at 5% level for example).
 
 The dmin algorithm has both a hard-core and soft-core acceptance
-region, similar in spirit to alternatives like Strauss processes.  We
+region, similar in spirit to alternatives like Strauss processes.  I
 use it here simply as it is most familiar within the field of retinal
-mosaics.  We do not however that changing models mightimprove the fit
-slightly.
+mosaics.  I do note however that changing models might improve the fit
+slightly (page \arabic{lastr}).
 
 
 
 
-> 1.4) Fig 4 since we mostly print inblack and white, I personnaly
+> \defr{R1.4} Fig 4 since we mostly print inblack and white, I personnaly
 > prefer different symbols than different colors.
 
 I have used colour consistently throughout the paper to refer to
@@ -64,26 +66,27 @@ sensitivity of the cell types.  So, if possible, I'd like to keep the
 colours.
 
 
-> 1.5) Why do you present the results for functional independence ?
+> \defr{R1.5} Why do you present the results for functional
+> independence ?
 
 I have expanded on the reasons for the three examples and explain
 functional independence is the "null hypothesis" for no interactions,
-to be compared against cases when interactions must exist \rpref{R1.5}.
+to be compared against cases when interactions must exist \lastref.
 
-> 1.6) According to Fig. 6 you reject random for distances between 100
+> \defr{R1.6} According to Fig. 6 you reject random for distances between 100
 > and 150. Please discuss.
 
-I have added a note to this point in the text \rpref{R1.6}.  However, the
+I have added a note to this point in the text \lastref.  However, the
 departure from the envelope is very small and could also be driven
 simply be small amounts of noise in the original data.  In my
 experience, these deviations are relatively minor.
 
-> 1.7) In order to avoid confusion among readers, please precise
+> \defr{R1.7} In order to avoid confusion among readers, please precise
 > difference between independence and random labelling.
 
-I have clarified this \rpref{R1.7}.
+I have clarified this \lastref.
 
-> 1.8) Fig. 7: By simulating CSR, you may construct confidence
+> \defr{R1.8} Fig. 7: By simulating CSR, you may construct confidence
 > interval.
 
 In Figure 7B, there is no model to simulate CSR, and hence to
@@ -97,7 +100,7 @@ data can become neighbours in the simulated data.
 
 
 
-> 1.9) You may be interested to read paper like Illian, J., Benson,
+> \defr{R1.9} You may be interested to read paper like Illian, J., Benson,
 > E., Crawford, J., & Staines, H. (2006). Principal component analysis
 > for spatial point processes—assessing the appropriateness of the
 > approach in an ecological context. In Case studies in spatial point
@@ -107,35 +110,35 @@ Thank you.
 
 ## Reviewer 2
 
-> 2.1) The introduction needs more background. As it is the text jumps
+> \defr{R2.1} The introduction needs more background. As it is the text jumps
 > from the fact that the retina does unique computations to (x,y,z)
 > positions, and doesn’t explain why we should care about the latter.
 
 I have added text to the first paragraph of the introduction
-to address this point \rpref{R2.1}.
+to address this point \lastref.
 
-> 2.2) The title is a bit too general considering the paper’s
+> \defr{R2.2} The title is a bit too general considering the paper’s
 > contents. I’d replace “in the visual system” with “in the retina”,
 > since no other structure is mentioned.
 
-Corrected \rpref{R2.2}.
+Corrected \lastref.
 
 
-> 2.3) Confidence bands are missing from fig 3 and fig 7B.
+> \defr{R2.3} Confidence bands are missing from fig 3 and fig 7B.
 
 I have added them (see R1.3) for Figure 3.  See my response to R1.8
 for Fig 7B.
 
-> 2.4) I know very little about how the retina develops, but maybe the
+> \defr{R2.4} I know very little about how the retina develops, but maybe the
 > author could explain why complete spatial randomness would be a
 > reasonable null model? Somas are to a good approximation 2D
 > objects, but whole neurons aren’t. Dendrites and axons need to
 > be packed in there as well, doesn’t that constrain where somas
 > can be?
 
-I have added a comment to this effect \rpref{R2.4}.
+I have added a comment to this effect \lastref.
 
-> 2.5) I’m not sure to what extent this belongs in a review paper, but
+> \defr{R2.5} I’m not sure to what extent this belongs in a review paper, but
 > second-order statistics such as Ripley’s K function become much
 > harder to use when you can’t assume a uniform intensity function.
 > Does uniform density really holds in the retinal mosaics the author
@@ -153,7 +156,7 @@ expected: cells in the centre tend to be at higher density than the
 periphery).
 
 
-> 2.6) I appreciated that the author put an entire R package on github
+> \defr{R2.6} I appreciated that the author put an entire R package on github
 > for easy distribution, and docker sounds extremely useful. My only
 > worry is that we rely on private companies (github, docker) that
 > might stop providing free services any time. Perhaps reproducibility
@@ -162,14 +165,14 @@ periphery).
 
 Again I agree with this comment but feel it may be too specific for
 this review.  I have however added a small comment to note this point
-(page 8).
+\lastref.
 
 ## Other additions
 
 I have made one extra change to the manuscript:
 
-> 3.1) I have included a mention of the ENCODE consortium (2012)
+> \defr{R3.1} I have included a mention of the ENCODE consortium (2012)
 > project which was a prominent early example of using a virtual machine
-> to package code and data for reuse \rpref{R3.1}.
+> to package code and data for reuse \lastref.
 
 \rule{\textwidth}{1pt}
