@@ -1,8 +1,8 @@
 # Introduction
 
 This is the home for a review article by Stephen Eglen (2015).  The
-article is currently titled "Bivariate spatial point patterns in the
-visual system: A reproducible review" and is hopefully of relevance to
+article is currently titled *Bivariate spatial point patterns in the
+retina: A reproducible review* and is hopefully of relevance to
 the computational neuroscience and spatial statistics communities.
 
 This package contains all the material needed to regenerate the
