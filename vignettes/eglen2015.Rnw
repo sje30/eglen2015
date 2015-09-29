@@ -754,7 +754,7 @@ different environments may well produce different results or even fail
 to run.  \myedit[R3.1]{An early attempt to solve this problem
   was the use of virtual machines to package all the data and code
   relating to the project such that others could re-run the analysis
-  \cite{ENCODE2012}.  More recently,} the Docker system provides a
+  \citep{ENCODE2012}.  More recently,} the Docker system provides a
 convenient way for the entire computing environment relating to a
 project to be efficiently captured and then run.  Docker runs on all
 major operating systems and provides lightweight linux virtual
