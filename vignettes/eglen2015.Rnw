@@ -36,7 +36,9 @@
 %%\providecommand{\myedit}[1]{{\color{OliveGreen} #1}}
 \usepackage{marginnote}
 \newcommand{\points}[1]{% Print points in margin
-  \leavevmode\marginnote{\makebox[\marginparwidth][r]{#1}}\ignorespaces}
+  \label{#1}
+  \leavevmode\marginnote{\makebox[\marginparwidth][r]
+{\normalsize \color{OliveGreen} #1}}\ignorespaces}
 
 \usepackage{xparse}
 \DeclareDocumentCommand \myedit { o m } {%
@@ -300,18 +302,17 @@ cell fate \citep{Takesue1998-eg}, lateral migration of neurons
 To check that the global patterns of retinal mosaics can emerge from
 simple local exclusion zones, we can build models whereby cells are
 positioned subject to such local rules only.  The simplest of these
-models is called the \textit{exclusion zone} model, or the
-\textit{\dmin model} \citep{Eglen2012}.  In this model, cells are
-added one-by-one into the array at random locations as long as they
-are some distance \dmin away from all previously positioned cells.
-The larger the value of \dmin the bigger the exclusion zone
-surrounding each cell.  \dmin is the only free parameter of the model,
-and is often varied from cell to cell by sampling values from a Normal
-distribution.  \myedit[R2.4]{In this model, we treat the neuron as
-  simply a point in space which represents the centre of the soma.
-  Although adult neurons have extensive dendritic and axonal
-  arborisations that define a complex morphology, our simplification
-  of regarding the neuron as a point is appropriate as the cellular
+models is called the \textit{exclusion zone} model, or the \dmin model
+\citep{Eglen2012}.  In this model, cells are added one-by-one into the
+array at random locations as long as they are some distance \dmin away
+from all previously positioned cells.  The larger the value of \dmin
+the bigger the exclusion zone surrounding each cell.  \dmin is the
+only free parameter of the model, and is often varied from cell to
+cell by sampling values from a Normal distribution.  \myedit[R2.4]{In
+  this model, we treat the neuron as simply a point in space which
+  represents the centre of the soma.  Although adult neurons have
+  extensive dendritic and axonal arborisations, our simplification of
+  regarding the neuron as a point is appropriate as the cellular
   spacing occurs early enough in development, when axons and dendrites
   are relatively sparse, if present at all \citep{Reese1999-kc}.}
 
@@ -327,13 +328,14 @@ model from different initial conditions, then we say that the model
 fits the data.  More formally, empirical p values can be computed to
 compare model and data \citep{Diggle1986-df}.  In
 Figure~\ref{fig:univk} there is a good qualitative match
-\myedit[R1.2,R1.3]{given that the data fall mostly within the bounds of the
+\myedit[R1.2a]{given that the data fall mostly within the bounds of the
   confidence intervals.  There is a minor excursion of the data
   outside the confidence intervals around 130--150\,\um however which
   suggests the fit is not perfect.  Further tuning of the parameters,
   or switching to an alternative model with combined hard-core and
   soft-core exclusion zones \citep{Diggle2002-db}, might improve the
-  fit slightly.}
+  fit slightly.}\points{R1.3}
+
 
 Given that the \dmin model is a  phenomenological model, it suggests
 only that local exclusion zones are sufficient to recreate global
@@ -357,7 +359,7 @@ neuronal types.
   \fbox{\includegraphics{khat-univbeta.pdf}}
   \caption{Evidence for local exclusion zones in retinal mosaics.  The
     solid red curve shows the \L function for the mosaic shown in
-    Figure~\ref{fig:univ}A.  \myedit[R1.2]{The dotted blue curve is
+    Figure~\ref{fig:univ}A.  \myedit[R1.2b]{The dotted blue curve is
       the corresponding \L function for the model output in
       Figure~\ref{fig:univ}B; the solid blue curves are the confidence
       intervals from the model estimated by finding the range of L
@@ -391,7 +393,7 @@ ago. \myedit[R1.5]{In this review we apply this framework to datasets
   pairs of neuronal types are organised in different ways.  This
   suggests that the developmental mechanisms generating these patterns
   are not universal, but depend on which pairs of cells are being
-  considered.  On the one hand, functional independence is the null
+  considered.  Functional independence is the null
   hypothesis that says there are no developmental interactions between
   pairs cell types, whereas random labelling and functional dependence
   are alternative hypotheses suggesting that developmental mechanisms
@@ -434,7 +436,7 @@ between neurons of the same type, called \textit{homotypic
 types can help understand the developmental mechanisms that create
 neural circuits.
 
-The simplest situation is that of \textit{Statistical independence}
+The simplest situation is that of \textit{statistical independence}
 between two spatial point patterns, which means that the spatial
 location of one type of neurons is completely unaffected by the
 spatial location of another type of neurons.  Statistical independence
@@ -520,7 +522,7 @@ five in Figure~\ref{fig:fthmaps}; the remaining examples in
 Figure~\ref{fig:fthmaps} are five examples of random relabelling of
 the data.)  This is confirmed by calculating the \Lcross function for
 the experimental data and 99 realisations of random labelling.  The
-\Lcross function for the data \myedit[R1.6]{mostly}remains within the
+\Lcross function for the data \myedit{mostly}remains within the
 envelope formed by the 99 simulations (Figure~\ref{fig:fthk12}).
 \myedit[R1.6]{(There is a modest departure of the data from the
   envelope at about 100--150\,\um which might indicate the parameters
