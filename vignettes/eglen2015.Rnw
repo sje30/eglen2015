@@ -362,7 +362,7 @@ neuronal types.
     Figure~\ref{fig:univ}A.  \myedit[R1.2b]{The dotted blue curve is
       the corresponding \L function for the model output in
       Figure~\ref{fig:univ}B; the solid blue curves are the confidence
-      intervals from the model estimated by finding the range of L
+      intervals from the model estimated by finding the range of \L
       functions from 99 simulations with fixed parameters but
       different initial conditions.}  The dotted black line is the
     expectation for the \L function assuming complete spatial
