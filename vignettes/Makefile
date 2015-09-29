@@ -11,12 +11,10 @@ eglen2015.pdf: eglen2015.Rnw eglen2015.bib
 PDF1 := $(wildcard *.pdf)
 PDF     := $(filter-out layers_csn3.pdf, $(PDF1))
 
-test:
-	echo $(PDF)
 
-.PHONY: clean
+.PHONY: cleanall
 
-clean:
+cleanall:
 	rm -f $(PDF)
 	latexmk -c
 	rm -f *.fff *.ttt figchunks.csv eglen2015.tex
