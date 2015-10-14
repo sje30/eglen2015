@@ -62,7 +62,7 @@
 
 \onehalfspacing
 
-\title{Bivariate spatial point patterns in the \myedit[R2.2]{retina}:\\a reproducible review}
+\title{Bivariate spatial point patterns in the retina:\\a reproducible review}
 
 \author{Stephen J. Eglen\\
 Cambridge Computational Biology Institute\\
@@ -156,14 +156,14 @@ the brain for further processing.  See \citet{Wassle2004-lt} for an
 overview of this processing.  Estimates vary, but there are thought to
 be at least 60 types of retinal neuron \citep{Masland2012-gm} that
 perform unique computations to transform the visual scene into a
-neural code.  \myedit[R2.1]{The computations performed by each neuron
-  depend critically upon who it receives inputs from; to a first
-  approximation, retinal neurons communicate with other neurons that
-  are close by in adjacent neuronal layers.  The spacing of retinal
-  neurons therefore influences the computations performed within the
-  retina.  Furthermore, retinal neurons of a given type are usually
-  distributed across the retina to ensure that all regions of the
-  visual scene can be efficiently processed.}
+neural code.  The computations performed by each neuron depend
+critically upon who it receives inputs from; to a first approximation,
+retinal neurons communicate with other neurons that are close by in
+adjacent neuronal layers.  The spacing of retinal neurons therefore
+influences the computations performed within the retina.  Furthermore,
+retinal neurons of a given type are usually distributed across the
+retina to ensure that all regions of the visual scene can be
+efficiently processed.
 
 The cell body of each type of neuron typically is located in just one
 of the three nuclear layers (Figure~\ref{fig:layers}).  Although the
@@ -251,11 +251,9 @@ bivariate \K and \L functions as
   \sum_{i=1}^{n_1} \sum_{j=1}^{n_2}
   w(i,j)^{-1} I ( || \vx_{1i} - \vx_{2j} || \leq t)
   \\
-  L_{12}(t) &= \myedit{\sqrt{K_{12}(t) / \pi}}
+  L_{12}(t) &= \sqrt{K_{12}(t) / \pi}
 \end{align}
 %%
-\points{R1.1}%% Can't get it within environment, so just show in Green
-             %% after. Mathnote removes the (2) equation label.
 The weighting factor $w(i,j)$ is a normalisation term to account for
 edge effects.  It is defined as the fraction of circumference of the
 circle centred at $\vx_{1i}$ and with radius $|| \vx_{1i} -
@@ -308,13 +306,13 @@ array at random locations as long as they are some distance \dmin away
 from all previously positioned cells.  The larger the value of \dmin
 the bigger the exclusion zone surrounding each cell.  \dmin is the
 only free parameter of the model, and is often varied from cell to
-cell by sampling values from a Normal distribution.  \myedit[R2.4]{In
-  this model, we treat the neuron as simply a point in space which
-  represents the centre of the soma.  Although adult neurons have
-  extensive dendritic and axonal arborisations, our simplification of
-  regarding the neuron as a point is appropriate as the cellular
-  spacing occurs early enough in development, when axons and dendrites
-  are relatively sparse, if present at all \citep{Reese1999-kc}.}
+cell by sampling values from a Normal distribution.  In this model, we
+treat the neuron as simply a point in space which represents the
+centre of the soma.  Although adult neurons have extensive dendritic
+and axonal arborisations, our simplification of regarding the neuron
+as a point is appropriate as the cellular spacing occurs early enough
+in development, when axons and dendrites are relatively sparse, if
+present at all \citep{Reese1999-kc}.
 
 
 
@@ -327,14 +325,13 @@ within the envelope of the \L functions from multiple runs of the
 model from different initial conditions, then we say that the model
 fits the data.  More formally, empirical p values can be computed to
 compare model and data \citep{Diggle1986-df}.  In
-Figure~\ref{fig:univk} there is a good qualitative match
-\myedit[R1.2a]{given that the data fall mostly within the bounds of the
-  confidence intervals.  There is a minor excursion of the data
-  outside the confidence intervals around 130--150\,\um however which
-  suggests the fit is not perfect.  Further tuning of the parameters,
-  or switching to an alternative model with combined hard-core and
-  soft-core exclusion zones \citep{Diggle2002-db}, might improve the
-  fit slightly.}\points{R1.3}
+Figure~\ref{fig:univk} there is a good qualitative match given that
+the data fall mostly within the bounds of the confidence intervals.
+There is a minor excursion of the data outside the confidence
+intervals around 130--150\,\um however which suggests the fit is not
+perfect.  Further tuning of the parameters, or switching to an
+alternative model with combined hard-core and soft-core exclusion
+zones \citep{Diggle2002-db}, might improve the fit slightly.
 
 
 Given that the \dmin model is a  phenomenological model, it suggests
@@ -359,12 +356,12 @@ neuronal types.
   \fbox{\includegraphics{khat-univbeta.pdf}}
   \caption{Evidence for local exclusion zones in retinal mosaics.  The
     solid red curve shows the \L function for the mosaic shown in
-    Figure~\ref{fig:univ}A.  \myedit[R1.2b]{The dotted blue curve is
+    Figure~\ref{fig:univ}A.  The dotted blue curve is
       the corresponding \L function for the model output in
       Figure~\ref{fig:univ}B; the solid blue curves are the confidence
       intervals from the model estimated by finding the range of \L
       functions from 99 simulations with fixed parameters but
-      different initial conditions.}  The dotted black line is the
+      different initial conditions.  The dotted black line is the
     expectation for the \L function assuming complete spatial
     randomness (CSR). \label{fig:univk} }
   \register{khat-univariate-betamap}{betamaps.R}
@@ -388,19 +385,19 @@ on exclusion zones (to be described later).  How do we decide what
 structure might be present in the data, and whether the model is a
 good fit for the data?  \citet{Diggle1986-df} established a
 quantitative framework to examine these questions nearly thirty years
-ago. \myedit[R1.5]{In this review we apply this framework to datasets
-  from three pairs of retinal neuronal types that suggests different
-  pairs of neuronal types are organised in different ways.  This
-  suggests that the developmental mechanisms generating these patterns
-  are not universal, but depend on which pairs of cells are being
-  considered.  Functional independence is the null
-  hypothesis that says there are no developmental interactions between
-  pairs cell types, whereas random labelling and functional dependence
-  are alternative hypotheses suggesting that developmental mechanisms
-  drive their bivariate patterning.}  In this review we use the phrase
-coined in \citet{Diggle1986-df} of ``bivariate spatial point
-patterns'' to refer to the spatial arrangement of two types of retinal
-neuron within the same sample window.
+ago. In this review we apply this framework to datasets from three
+pairs of retinal neuronal types that suggests different pairs of
+neuronal types are organised in different ways.  This suggests that
+the developmental mechanisms generating these patterns are not
+universal, but depend on which pairs of cells are being considered.
+Functional independence is the null hypothesis that says there are no
+developmental interactions between pairs cell types, whereas random
+labelling and functional dependence are alternative hypotheses
+suggesting that developmental mechanisms drive their bivariate
+patterning.  In this review we use the phrase coined in
+\citet{Diggle1986-df} of ``bivariate spatial point patterns'' to refer
+to the spatial arrangement of two types of retinal neuron within the
+same sample window.
 
 
 
@@ -490,19 +487,19 @@ independent of each other.
 \subsection*{Example two: evidence for random labelling}
 
 The framework by \citet{Diggle1986-df} allowed the \textit{random
-  labelling} hypothesis to be tested.  \myedit[R1.7]{The random
-  labelling hypothesis is simply that one homogeneous population of
-  cells is created with one exclusion zone constraint.  This population
-  then divides into two, without cells moving again, by simple random
-  labelling: each cell is independently labelled as type 1 or type 2
-  with a fixed probability.  There is therefore only one exclusion
-  zone constraint in random labelling, compared to two (usually
-  different) exclusion zones constraints when creating cells using
-  functional independence.}  The random labelling hypothesis was
-  originally rejected for the cholinergic amacrine cells
-  \citep{Diggle1986-df,Diggle2006-be}.  However, in recent years, data
-  consistent with random labelling has appeared in both ferret retina
-  \citep{Eglen2003-dc} and in Drosophila \citep{Bell2007-507}.
+  labelling} hypothesis to be tested.  The random labelling hypothesis
+is simply that one homogeneous population of cells is created with one
+exclusion zone constraint.  This population then divides into two,
+without cells moving again, by simple random labelling: each cell is
+independently labelled as type 1 or type 2 with a fixed probability.
+There is therefore only one exclusion zone constraint in random
+labelling, compared to two (usually different) exclusion zones
+constraints when creating cells using functional independence.  The
+random labelling hypothesis was originally rejected for the
+cholinergic amacrine cells \citep{Diggle1986-df,Diggle2006-be}.
+However, in recent years, data consistent with random labelling has
+appeared in both ferret retina \citep{Eglen2003-dc} and in Drosophila
+\citep{Bell2007-507}.
 
 For example, in the ferret retina, dopaminergic amacrine neurons are
 found in two separate layers of the retina, one set in the inner
@@ -522,14 +519,13 @@ five in Figure~\ref{fig:fthmaps}; the remaining examples in
 Figure~\ref{fig:fthmaps} are five examples of random relabelling of
 the data.)  This is confirmed by calculating the \Lcross function for
 the experimental data and 99 realisations of random labelling.  The
-\Lcross function for the data \myedit{mostly}remains within the
-envelope formed by the 99 simulations (Figure~\ref{fig:fthk12}).
-\myedit[R1.6]{(There is a modest departure of the data from the
-  envelope at about 100--150\,\um which might indicate the parameters
-  could be further tuned to improve the fit.)}  From this, we can
-conclude that although the cell bodies of dopaminergic amacrine cells
-occupy two distinct layers, both layers of cells should be considered
-together as a single type of neuron.
+\Lcross function for the data mostly remains within the envelope
+formed by the 99 simulations (Figure~\ref{fig:fthk12}).  (There is a
+modest departure of the data from the envelope at about 100--150\,\um
+which might indicate the parameters could be further tuned to improve
+the fit.)  From this, we can conclude that although the cell bodies of
+dopaminergic amacrine cells occupy two distinct layers, both layers of
+cells should be considered together as a single type of neuron.
 
 <<fth-init,echo=FALSE>>=
 @
@@ -751,17 +747,16 @@ computations that take a long time to complete.  Another technical
 problem is how to ensure that another user has a compatible
 environment for running your software.  Running the same code in
 different environments may well produce different results or even fail
-to run.  \myedit[R3.1]{An early attempt to solve this problem
-  was the use of virtual machines to package all the data and code
-  relating to the project such that others could re-run the analysis
-  \citep{ENCODE2012}.  More recently,} the Docker system provides a
-convenient way for the entire computing environment relating to a
-project to be efficiently captured and then run.  Docker runs on all
-major operating systems and provides lightweight linux virtual
-machines and hence a convenient way of getting software to run on
-different platforms.  For example, once Docker is installed, the
-entire environment required to generate this paper can be downloaded
-and initialised using the command:
+to run.  An early attempt to solve this problem was the use of virtual
+machines to package all the data and code relating to the project such
+that others could re-run the analysis \citep{ENCODE2012}.  More
+recently, the Docker system provides a convenient way for the entire
+computing environment relating to a project to be efficiently captured
+and then run.  Docker runs on all major operating systems and provides
+lightweight linux virtual machines and hence a convenient way of
+getting software to run on different platforms.  For example, once
+Docker is installed, the entire environment required to generate this
+paper can be downloaded and initialised using the command:
 
 
 \begin{verbatim}
@@ -778,10 +773,10 @@ docker system with R are given at
 \url{https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image}.
 The biggest restriction to Docker for reproducible research is that
 the required software must be open source (which excludes environments
-such as Matlab which are popular in Neuroscience).  \myedit[R2.6]{An
-  additional concern is that both Github and Docker are private
-  services, and public infrastructure might be preferred for long-term
-  availability of valuable scientific resources.}
+such as Matlab which are popular in Neuroscience).  An additional
+concern is that both Github and Docker are private services, and
+public infrastructure might be preferred for long-term availability of
+valuable scientific resources.
   
 
 Although the concept of reproducible research documents is fairly new
