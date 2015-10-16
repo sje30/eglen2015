@@ -27,7 +27,7 @@
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \providecommand*{\ap}[1]{\ensuremath{^\mathrm{#1}}}
 \usepackage{url}
-\usepackage[nolists]{endfloat}
+%%\usepackage[nolists]{endfloat}
 \usepackage[authoryear]{natbib}
 
 
