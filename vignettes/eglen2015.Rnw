@@ -4,17 +4,31 @@
 %\VignetteEngine{knitr::knitr}
 % Tell Rstudio this is a knitr document
 % !Rnw weave = knitr
-\documentclass{article}
+\documentclass[soumission]{jsfds}
+\usepackage[latin1]{inputenc}
+% If you are using utf8 encoding, please note that jsfds.sty and jsfds.cls have
+% be converted into utf8 encoding as well
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{amsmath,amsthm}
+\usepackage{dtklogos}
+\usepackage{url}
+\usepackage{natbib}
+
 \usepackage{mathpazo,booktabs,upgreek}
 \renewcommand{\sfdefault}{lmss}
 \renewcommand{\ttdefault}{lmtt}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper,left=2cm,right=4cm,top=2cm,bottom=2cm]{geometry}
-\usepackage{setspace}
+%%\usepackage{setspace}
 \usepackage{listings}
 \usepackage{verbatim,hyperref,datatool}
+\nonstopmode
+\usepackage{xspace}
 
-\usepackage{xspace,amsmath}
+\startlocaldefs
 \newcommand{\um}{\ensuremath{\upmu \text{m}}\xspace}
 \newcommand{\Lcross}{\ensuremath{L_{12}}\xspace}
 \newcommand{\dmin}{d\ped{min}\xspace}
@@ -26,67 +40,41 @@
 \renewcommand{\L}{\ensuremath{L}\xspace}
 \providecommand*{\ped}[1]{\ensuremath{_\mathrm{#1}}}
 \providecommand*{\ap}[1]{\ensuremath{^\mathrm{#1}}}
-\usepackage{url}
 %%\usepackage[nolists]{endfloat}
-\usepackage[authoryear]{natbib}
-
-
-%% Code for handling edits.
-\definecolor{OliveGreen}{rgb}{0,0.6,0}
-%%\providecommand{\myedit}[1]{{\color{OliveGreen} #1}}
-\usepackage{marginnote}
-\newcommand{\points}[1]{% Print points in margin
-  \label{#1}
-  \leavevmode\marginnote{\makebox[\marginparwidth][r]
-{\normalsize \color{OliveGreen} #1}}\ignorespaces}
-
-\usepackage{xparse}
-\DeclareDocumentCommand \myedit { o m } {%
-  \IfNoValueF {#1} {\points{#1}}
-  {\color{OliveGreen} #2}
-}
-%% marginnote does not work in all math environments, bah!
-%% so use this one:
-%% Source http://tex.stackexchange.com/questions/63012/using-marginnote-inside-a-math-environment-in-tufte-book
-\def\mathnote#1{%
-  \tag*{\rlap{\hspace\marginparsep\smash{\parbox[t]{\marginparwidth}{%
-  {\color{OliveGreen} #1}}}}}
-}
-
-
-
-
+%%\usepackage[authoryear]{natbib}
 \newwrite\figfile
+\endlocaldefs
+
+\setmainlanguagefrench
+\firstpage{1} % à régler par l'éditeur
 
 \begin{document}
 
-\onehalfspacing
+\begin{frontmatter}
 
-\title{Bivariate spatial point patterns in the retina:\\a reproducible review}
+\titre{Bivariate spatial point patterns in the retina:\\a reproducible review}
 
-\author{Stephen J. Eglen\\
-Cambridge Computational Biology Institute\\
-Department of Applied Mathematics and Theoretical Physics\\
-University of Cambridge\\
-CB3 OWA\\
-United Kingdom}
-\date{\today}
+  \begin{InfosAuteurs}
+    \auteur{%
+      \prenom{Stephen J.} 
+      \nom{Eglen}%
+      \thanksref{t1}%
+      \contact[label=e1]{sje30@cam.ac.uk}%
+    }
+    \affiliation[t1]{
+      Cambridge Computational Biology Institute\\
+      Department of Applied Mathematics and Theoretical Physics\\
+      University of Cambridge\\
+      CB3 OWA\\
+      United Kingdom
+      \printcontact{e1}%
+    }
+  \end{InfosAuteurs}
+  \begin{abstract}
+    French abstract.
+  \end{abstract}
 
-\maketitle
-
-
-%% These lines are used to setup a CSV file for storing the name of the
-%% code chunk and its file of origin.  This is then used to generate
-%% Table 1.
-\immediate\openout\figfile=figchunks.csv
-\immediate\write\figfile{Figure,Chunk,Filename}
-\newcommand{\register}[2]{\immediate\write\figfile{\arabic{figure},#1,#2}}
-%% \register{chunk}{filename} will register the current figure with the
-%% chunk and filename.  It simply adds a row to the \figfile
-%% (figchunks.csv).  Once all figures have been generated, the .csv file
-%% is closed and then included into a table using the `datatools' package.
-
-\begin{abstract}
+  \begin{altabstract}
   In this article I present a reproducible review of recent research
   to investigate the spatial positioning of neurons in the nervous
   system.  In particular, I focus on the relative spatial positioning
@@ -104,8 +92,37 @@ United Kingdom}
   all the data and computer code are integrated into the manuscript so
   that others can repeat the analysis presented here.  I close the
   review with a discussion of this concept.
+  \end{altabstract}
 
-\end{abstract}
+  \begin{motscles}
+    \mot{mode d'emploi}%
+    \mot{classe du J-SFdS}%
+  \end{motscles}
+
+  \begin{motsclesalter}
+    \mot{users guide}
+    \mot{J-SFdS document class}
+  \end{motsclesalter}
+  
+  \begin{AMSclass}
+    \kwd{35L05}
+    \kwd{35L70}
+  \end{AMSclass}
+ 
+\end{frontmatter}
+
+
+%% These lines are used to setup a CSV file for storing the name of the
+%% code chunk and its file of origin.  This is then used to generate
+%% Table 1.
+\immediate\openout\figfile=figchunks.csv
+\immediate\write\figfile{Figure,Chunk,Filename}
+\newcommand{\register}[2]{\immediate\write\figfile{\arabic{figure},#1,#2}}
+%% \register{chunk}{filename} will register the current figure with the
+%% chunk and filename.  It simply adds a row to the \figfile
+%% (figchunks.csv).  Once all figures have been generated, the .csv file
+%% is closed and then included into a table using the `datatools' package.
+
 
 <<setup-knitr,eval=TRUE,echo=FALSE,results='hide',message=FALSE>>=
 require(knitr)
@@ -832,7 +849,7 @@ Thanks to Ben Marwick and Sarah Mount for help with Docker testing and
 comments on the paper.
 
 
-\bibliographystyle{jneurosci} \bibliography{eglen2015}
+\bibliography{eglen2015}
 
 
 %% \clearpage
