@@ -16,7 +16,7 @@ PDF     := $(filter-out layers_csn3.pdf, $(PDF1))
 
 cleanall:
 	rm -f $(PDF)
+	rm -f *.fff *.ttt figchunks.csv eglen2015.tex eglen2015.bbl
 	latexmk -c
-	rm -f *.fff *.ttt figchunks.csv eglen2015.tex
 
 
