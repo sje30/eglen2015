@@ -46,7 +46,7 @@
 \endlocaldefs
 
 \setmainlanguagefrench
-\firstpage{1} % à régler par l'éditeur
+\firstpage{1} 
 
 \begin{document}
 
@@ -71,7 +71,27 @@
     }
   \end{InfosAuteurs}
   \begin{abstract}
-    French abstract.
+    Cette revue pr\'{e}sente des r\'{e}sultats r\'{e}cents sur la
+    position de neurones de diff\'{e}rents types tout en mettant en
+    application les principes de la \guillemotleft recherche
+    reproductible \guillemotright. Une attention particuli\`{e}re est
+    port\'{e}e aux positions relatives de diff\'{e}rents types
+    cellulaires de la r\'{e}tine. Trois hypoth\`{e}ses explicatives de
+    l'agencement de deux types de neurones sont consid\'{e}r\'{e}es :
+    les cellules des diff\'{e}rents types sont positionn\'{e}es
+    ind\'{e}pendamment les unes des autres ; les cellules d'un seul
+    type se voient affect\'{e}es al\'{e}atoirement deux labels
+    diff\'{e}rents cr\'{e}ant ainsi deux populations li\'{e}es ; des
+    interactions entre les cellules de diff\'{e}rents types
+    g\'{e}n\`{e}rent les d\'{e}pendances spatiales. L'application des
+    techniques de statistique spatiale \`{a} l'\'{e}tude de ces trois
+    hypoth\`{e}ses est bri\`{e}vement expos\'{e}e. Ce travail est de
+    surcro\^{i}t un exemple de \guillemotleft recherche reproductible
+    \guillemotright car l'ensemble des programmes (informatiques)
+    ainsi que l'ensemble des donn\'{e}es sont int\'{e}gr\'{e}s au
+    manuscrit ce qui permet \`{a} tout lecteur de reproduire l'analyse
+    propos\'{e}e. La revue se conclut par une discussion du concept de
+    \guillemotleft recherche reproductible \guillemotright.
   \end{abstract}
 
   \begin{altabstract}
@@ -110,11 +130,12 @@
     \mot{computational neuroscience}
   \end{motsclesalter}
   
+  %% http://www.ams.org/msc/msc2010.html
   \begin{AMSclass}
-    \kwd{62H11}
-    \kwd{68U20}
-    \kwd{92C15}
-    \kwd{92C20}
+    \kwd{62H11} % spatial statistics
+    \kwd{68U20} % simulation
+    \kwd{92C15} % developmental biology, pattern formation
+    \kwd{92C20} % neural biology
   \end{AMSclass}
  
 \end{frontmatter}
