@@ -9,3 +9,6 @@ RUN Rscript -e 'file.copy(system.file("doc/README.R", package="eglen2015"), "/ho
 
 ## To rebuild:
 ## docker build -t sje30/eglen2015 https://raw.githubusercontent.com/sje30/eglen2015/master/Dockerfile
+
+## texlive-bibtex-extra is required for the breakcites.sty package
+## which in turn is needed by the JSFDS package.
