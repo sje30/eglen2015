@@ -95,18 +95,26 @@
   \end{altabstract}
 
   \begin{motscles}
-    \mot{mode d'emploi}%
-    \mot{classe du J-SFdS}%
+    \mot{1}%
+    \mot{2}%
+    \mot{3}%
+    \mot{4}%
+    \mot{5}%
   \end{motscles}
 
   \begin{motsclesalter}
-    \mot{users guide}
-    \mot{J-SFdS document class}
+    \mot{retinal mosaics}
+    \mot{spatial statistics}
+    \mot{reproducible research}
+    \mot{mathematical modelling}
+    \mot{computational neuroscience}
   \end{motsclesalter}
   
   \begin{AMSclass}
-    \kwd{35L05}
-    \kwd{35L70}
+    \kwd{62H11}
+    \kwd{68U20}
+    \kwd{92C15}
+    \kwd{92C20}
   \end{AMSclass}
  
 \end{frontmatter}
