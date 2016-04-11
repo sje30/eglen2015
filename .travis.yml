@@ -6,6 +6,6 @@ services:
   - docker
 
 before_install:
-  - docker build -t carlad/sinatra .
+  - docker build -t sje30/eglen2015 .
 
 ## https://docs.travis-ci.com/user/docker/
