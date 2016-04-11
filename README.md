@@ -1,5 +1,7 @@
 # Introduction
 
+[![Build Status](https://travis-ci.org/sje30/eglen2015.svg?branch=master)](https://travis-ci.org/sje30/eglen2015)
+
 This is the home for a review article by Stephen Eglen (2015).  The
 article is currently titled *Bivariate spatial point patterns in the
 retina: A reproducible review* and is hopefully of relevance to
