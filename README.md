@@ -51,7 +51,12 @@ to check the status of this Docker package.)
 Then visit the web page to start R (username and password are "rstudio"):
 
     http://localhost:8787/        ## linux
-    http://192.168.59.103:8787/   ## mac, windows users
+    http://192.168.99.100:8787/   ## mac, windows users
+
+The IP address for mac/windows may vary; you can check it by running
+the command:
+
+	docker-machine ip default
 
 In the File pane (bottom right), you can click on the file `README.R`
 to get started.  In the R Console (bottom left), you can view the
