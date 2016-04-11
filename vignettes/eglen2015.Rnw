@@ -13,7 +13,7 @@
 
 
 \usepackage{amsmath,amsthm}
-\usepackage{dtklogos}
+%%\usepackage{dtklogos}
 \usepackage{url}
 \usepackage{natbib}
 
