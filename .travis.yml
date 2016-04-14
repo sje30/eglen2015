@@ -1,6 +1,6 @@
 sudo: required
 
-language: r
+language: bash
 
 services:
   - docker
@@ -8,6 +8,11 @@ services:
 before_install:
   - docker build -t sje30/eglen2015 .
 
-## https://docs.travis-ci.com/user/docker/
+
 
 script: true
+
+
+## https://docs.travis-ci.com/user/docker/
+## Setting language to bash may be quicker than using r for language
+
