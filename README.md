@@ -2,10 +2,14 @@
 
 [![Build Status](https://travis-ci.org/sje30/eglen2015.svg?branch=master)](https://travis-ci.org/sje30/eglen2015)
 
-This is the home for a review article by Stephen Eglen (2015).  The
-article is currently titled *Bivariate spatial point patterns in the
-retina: A reproducible review* and is hopefully of relevance to
-the computational neuroscience and spatial statistics communities.
+
+
+This is the home page for the following review:
+
+Eglen SJ (2016) Bivariate spatial point patterns in the retina: a
+reproducible review. Journal de la Société Française de Statistique
+157:33–48.
+[PDF](http://journal-sfds.fr/index.php/J-SFdS/article/view/518/490)
 
 This package contains all the material needed to regenerate the
 article for itself.  Some key parts of the package are:
