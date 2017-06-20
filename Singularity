@@ -1,12 +1,10 @@
 bootstrap:docker
-From:rocker/hadleyverse
+From:rocker/verse
 
 %post
 # Stephen Eglen <sje30@cam.ac.uk>
 apt-get update \
-
-	&& apt-get install -t unstable -y --no-install-recommends
-	texlive-bibtex-extra
+	&& apt-get install -y --no-install-recommends 	texlive-bibtex-extra lmodern
 Rscript -e 'install.packages(c("splancs", "spatstat", "knitr",
 "xtable"))'
 Rscript -e 'install.packages(c("sjedmin", "sjedrp",
