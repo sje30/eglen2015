@@ -1,4 +1,4 @@
-FROM rocker/hadleyverse
+FROM rocker/tidyverse
 MAINTAINER Stephen Eglen <sje30@cam.ac.uk>
 RUN apt-get update -y && apt-get install -t unstable -y --no-install-recommends texlive-bibtex-extra
 RUN Rscript -e 'install.packages(c("splancs", "spatstat", "knitr", "xtable"))'
