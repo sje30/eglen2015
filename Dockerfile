@@ -6,6 +6,8 @@ RUN Rscript -e 'install.packages(c("sjedmin", "sjedrp", "sjevor","sjedist"), typ
 #RUN Rscript -e 'devtools::install_github("sje30/eglen2015",build_vignettes=TRUE)'
 #RUN Rscript -e 'file.copy(system.file("doc/README.R", package="eglen2015"), "/home/rstudio/README.R")'
 
+
+USER rstudio
 ENV PROJ /home/rstudio/eglen2015
 RUN mkdir $PROJ
 WORKDIR $PROJ
