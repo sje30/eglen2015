@@ -15,6 +15,8 @@ RUN git clone https://github.com/sje30/eglen2015
 WORKDIR $PROJ/eglen2015
 RUN make install
 
+USER root
+
 
 
 
