@@ -62,11 +62,16 @@ the command:
 
 	docker-machine ip default
 
-In the File pane (bottom right), you can click on the file `README.R`
-to get started.  In the R Console (bottom left), you can view the
-vignette (in PDF form) with `vignette("eglen2015")`.  You can edit the
-source of the paper with the command `eglen2015:::edit()` or re-build
-it from source with the command `tools::buildVignettes("eglen2015")`.
+Once you have logged in, you can then do the following commands to
+recompile the document:
+
+    setwd("eglen2015/eglen2015/vignettes/")
+	source("run.R")
+
+Then examine the `vignettes` folder and you should see
+`eglen2015.pdf`.
+
+
 Thanks to the [Rocker](https://github.com/rocker-org) team for the
 R-based docker images, on which this work is based.
 
