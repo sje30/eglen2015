@@ -9,3 +9,4 @@ Description: Vignette of the reproducible review
 URL: http://github.com/sje30/eglen2015
 VignetteBuilder: knitr
 License: MIT
+RoxygenNote: 6.0.1
