@@ -22,6 +22,9 @@ USER root
 
 ## To rebuild:
 ## docker build -t sje30/eglen2015 https://raw.githubusercontent.com/sje30/eglen2015/master/Dockerfile
+## or to rebuild locally
+## docker build -t sje30/eglen2015 .
+
 
 ## texlive-bibtex-extra is required for the breakcites.sty package
 ## which in turn is needed by the JSFDS package.
