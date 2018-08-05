@@ -1,3 +1,3 @@
 install:
-	Rscript -e 'devtools::build()'
+	Rscript -e 'devtools::install(build_vignettes=TRUE)'
 
