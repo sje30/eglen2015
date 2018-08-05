@@ -6,7 +6,7 @@ RUN Rscript -e 'install.packages(c("splancs", "spatstat", "knitr", "xtable"))'
 RUN Rscript -e 'install.packages(c("sjedmin", "sjedrp", "sjevor","sjedist"), type="source", contriburl="http://damtp.cam.ac.uk/user/eglen/r/")'
 
 
-RUN pwd
+## RUN Rscript -e 'devtools::install_github("sje30/eglen2015")'
 USER rstudio
 ENV PROJ /home/rstudio/
 WORKDIR $PROJ
@@ -43,4 +43,15 @@ RUN make install
 
 ## I'm also not quite sure why I need to have the "USER root" line...
 ## and so I need to check why this is?  By default it seems that rstudio
-## should have write access to the /opt/tinytex area, but i
+## should have write access to the /opt/tinytex area, but see error below when running as rstudio user
+
+
+
+
+## lmgr search --file --global '/helvet.sty'
+## Trying to automatically install missing LaTeX packages...
+## tlmgr install psnfss
+## tlmgr: package repository http://mirror.utexas.edu/ctan/systems/texlive/tlnet (not verified: gpg unavailable)
+## [1/1, ??:??/??:??] install: psnfss [12k]
+## copy /opt/TinyTeX/tlpkg/texlive.tlpdb.tmp to /opt/TinyTeX/tlpkg/texlive.tlpdb failed: Operation not permitted at /opt/TinyTeX/tlpkg/TeXLive/TLPDB.pm line 628.
+## tlmgr update --self
