@@ -27,7 +27,7 @@ This R package depends on a few other packages, from CRAN and my
 personal library.  The following sequence should install everything
 you need:
 
-    Rscript -e 'install.packages(c("splancs", "spatstat", "devtools", "knitr", "xtable"))'
+    Rscript -e 'install.packages(c("splancs", "spatstat", "devtools", "knitr", "xtable", "tinytex"))'
     Rscript -e 'install.packages(c("sjedmin", "sjedrp", "sjevor","sjedist"), type="source", contriburl="http://damtp.cam.ac.uk/user/eglen/r/")'
     Rscript -e 'devtools::install_github("sje30/eglen2015",build_vignettes=TRUE)'
 The last line should load this package.  Once it is installed, you can
@@ -65,8 +65,8 @@ the command:
 Once you have logged in, you can then do the following commands to
 recompile the document:
 
-    setwd("eglen2015/eglen2015/vignettes/")
-	source("run.R")
+    setwd("eglen2015/vignettes/")
+    source("run.R")
 
 Then examine the `vignettes` folder and you should see
 `eglen2015.pdf`.
