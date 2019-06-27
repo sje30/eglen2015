@@ -9,7 +9,7 @@ This is the home page for the following review:
 Eglen SJ (2016) Bivariate spatial point patterns in the retina: a
 reproducible review. Journal de la Société Française de Statistique
 157:33–48.
-[PDF](http://journal-sfds.fr/index.php/J-SFdS/article/view/518/490)
+[PDF](http://journal-sfds.fr/article/view/518)
 
 This package contains all the material needed to regenerate the
 article for itself.  Some key parts of the package are:
