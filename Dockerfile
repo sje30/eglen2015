@@ -1,7 +1,5 @@
-FROM rocker/verse
-MAINTAINER Stephen Eglen <sje30@cam.ac.uk>
-## RUN apt-get update -y && apt-get install -y  texlive-base
-## texlive-bibtex-extra lmodern
+FROM rocker/verse:3.6.3
+LABEL maintainer = "Stephen Eglen <sje30@cam.ac.uk>"
 RUN Rscript -e 'install.packages(c("splancs", "spatstat", "knitr", "xtable"))'
 RUN Rscript -e 'install.packages(c("sjedmin", "sjedrp", "sjevor","sjedist"), type="source", contriburl="http://damtp.cam.ac.uk/user/eglen/r/")'
 
