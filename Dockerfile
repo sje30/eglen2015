@@ -12,12 +12,8 @@ ENV PROJ /home/rstudio/
 WORKDIR $PROJ
 RUN git clone https://github.com/sje30/eglen2015
 WORKDIR $PROJ/eglen2015
-USER root
+## USER root
 RUN make install
-
-
-
-
 
 
 ## To rebuild:
