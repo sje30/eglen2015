@@ -1,3 +1,10 @@
+## Dockerfile for the following paper:
+##
+## Bivariate spatial point patterns in the retina: a reproducible
+## review. Journal de la Société Française de Statistique 157:33–48.
+##
+## Home page for project: <http://github.com/sje30/eglen2015>
+
 FROM rocker/verse:3.6.3
 LABEL maintainer = "Stephen Eglen <sje30@cam.ac.uk>"
 RUN Rscript -e 'install.packages(c("splancs", "spatstat", "knitr", "xtable"))'
@@ -10,42 +17,29 @@ ENV PROJ /home/rstudio/
 WORKDIR $PROJ
 RUN git clone https://github.com/sje30/eglen2015
 WORKDIR $PROJ/eglen2015
-## USER root
 RUN make install
 
 
-## To rebuild:
-## docker build -t sje30/eglen2015 https://raw.githubusercontent.com/sje30/eglen2015/master/Dockerfile
-## or to rebuild locally
+## --- Building ---
 ## docker build -t sje30/eglen2015 .
 
-## may need to run as if we get permission errors in the Dockerfile...
-## docker run -d -p 8787:8787 -e ROOT=TRUE sje30/eglen2015
+## --- Linting ---
+## To lint this file (also as "make dockerfile-lint"):
+## docker run --rm -i hadolint/hadolint < Dockerfile
 
-
-## texlive-bibtex-extra is required for the breakcites.sty package
-## which in turn is needed by the JSFDS package.
-
-## 2018-08-05
-## Since writing the Dockerfile in 2016, rocker/verse has switched to
-## using the new "tinytex" package for installing latex packages on
-## the fly.  On the plus-side, it means that I don't need to tweak
-## with the latex to get extra packages.  Another bonus is that when
-## running e.g. knit2pdf() if there are latex style files missing,
-## they are automatically downloaded by R .  The downside is that the
-## downloading of the style files takes a few minutes...
-
-## I'm also not quite sure why I need to have the "USER root" line...
-## and so I need to check why this is?  By default it seems that rstudio
-## should have write access to the /opt/tinytex area, but see error below when running as rstudio user
+## --- Running ---
+## This dockerfile is on dockerhub, so the following should "just work":
+## docker run --rm -p 8787:8787 -e PASSWORD=simple sje30/eglen2015
+##
+## If you are on linux, you can then visit http://localhost:8787
+##
+## On windows and mac, you first need to find the IP address which is given by:
+## docker-machine ip
+## and should be something like 192.168.99.100
+## from there you can open http://192.168.99.100:8787
+##
+## To login, the username is "rstudio" and the password is "simple"
 
 
 
 
-## lmgr search --file --global '/helvet.sty'
-## Trying to automatically install missing LaTeX packages...
-## tlmgr install psnfss
-## tlmgr: package repository http://mirror.utexas.edu/ctan/systems/texlive/tlnet (not verified: gpg unavailable)
-## [1/1, ??:??/??:??] install: psnfss [12k]
-## copy /opt/TinyTeX/tlpkg/texlive.tlpdb.tmp to /opt/TinyTeX/tlpkg/texlive.tlpdb failed: Operation not permitted at /opt/TinyTeX/tlpkg/TeXLive/TLPDB.pm line 628.
-## tlmgr update --self
